@@ -1,0 +1,160 @@
+name: top-cs-figure
+version: 4.1.0
+description: "Corpus-calibrated Python-first router for CS paper figure rendering, export, and visual QA."
+always_load:
+  - ../_shared/core/evidence-discipline.md
+  - ../_shared/core/claim-evidence-boundary.md
+  - ../_shared/core/terminology-ledger.md
+  - static/core/stance.md
+  - static/core/workflow.md
+  - static/core/output-format.md
+axes:
+  venue:
+    detect: "Use the target venue named by the user or identifiable from the manuscript/template. Otherwise use generic."
+    values:
+      www: [../_shared/venues/www.md, static/fragments/venue-style/www.md]
+      iclr: [../_shared/venues/iclr.md, static/fragments/venue-style/iclr.md]
+      icml: [../_shared/venues/icml.md, static/fragments/venue-style/icml.md]
+      generic: [../_shared/venues/generic.md, static/fragments/venue-style/generic.md]
+    default: generic
+    multi: false
+  paper_type:
+    detect: "Classify the central contribution because figure evidence differs by contribution type."
+    values:
+      empirical: ../_shared/paper-types/empirical.md
+      algorithmic: ../_shared/paper-types/algorithmic.md
+      theoretical: ../_shared/paper-types/theoretical.md
+      systems: ../_shared/paper-types/systems.md
+      dataset-benchmark: ../_shared/paper-types/dataset-benchmark.md
+    default: empirical
+    multi: false
+  visual_family:
+    detect: "Choose the dominant visual grammar required by the figure claim; use multiple figures rather than one overloaded family when necessary."
+    values:
+      comparison: static/fragments/visual-family/comparison.md
+      trend-scaling: static/fragments/visual-family/trend-scaling.md
+      matrix-heatmap: static/fragments/visual-family/matrix-heatmap.md
+      embedding-scatter: static/fragments/visual-family/embedding-scatter.md
+      network: static/fragments/visual-family/network.md
+      method-schematic: static/fragments/visual-family/method-schematic.md
+      distribution-uncertainty: static/fragments/visual-family/distribution-uncertainty.md
+      tradeoff-frontier: static/fragments/visual-family/tradeoff-frontier.md
+      calibration-reliability: static/fragments/visual-family/calibration-reliability.md
+      ranking-critical-difference: static/fragments/visual-family/ranking-critical-difference.md
+      qualitative-image-plate: static/fragments/visual-family/qualitative-image-plate.md
+      forest-interval: static/fragments/visual-family/forest-interval.md
+      composition-stacked: static/fragments/visual-family/composition-stacked.md
+      paired-change: static/fragments/visual-family/paired-change.md
+      polar-summary: static/fragments/visual-family/polar-summary.md
+    default: comparison
+    multi: false
+runtime_parameters:
+  figure_task:
+    values: [create, revise, audit, export-bundle, layout-mockup]
+    default: create
+  data_state:
+    values: [available, partial, planned, missing, unverified]
+    default: partial
+  output_target:
+    values: [draft, paper-figure, camera-ready, slide]
+    default: paper-figure
+  figure_handoff:
+    values: [none, consume, update]
+    default: none
+references:
+  on_demand:
+    - condition: "consuming or updating a shared top-cs figure brief"
+      path: ../_shared/references/figure-handoff.md
+    - condition: "converting a request into claim, panel map, data boundary, metric direction, and export contract"
+      path: references/figure-contract.md
+    - condition: "creating or revising Python/matplotlib figure code"
+      path: references/python-workflow.md
+    - condition: "choosing CS chart grammar, baseline ordering, metric scaling, or visual encodings"
+      path: references/cs-chart-patterns.md
+    - condition: "needs corpus-derived venue visual style, confidence labels, or evidence gaps"
+      path: references/corpus-visual-style.md
+    - condition: "needs palette semantics, color slots, or venue-calibrated default colors"
+      path: references/palette-policy.md
+    - condition: "selecting semantic, categorical, ordered, sequential, diverging, or dark-overlay palette profiles"
+      path: references/palette-profiles.md
+    - condition: "auditing color contrast, grayscale order, OKLab distance, or color-vision distinguishability"
+      path: references/color-accessibility.md
+    - condition: "needs hero/subordinate panel design, figure geometry, or layout archetype selection"
+      path: references/layout-archetypes.md
+    - condition: "needs executable YAML/CSV render specs or repeatable plotting from data"
+      path: references/spec-driven-rendering.md
+    - condition: "showing uncertainty, seed runs, confidence intervals, critical difference, or statistical annotations"
+      path: references/statistics-and-uncertainty.md
+    - condition: "choosing a multi-panel figure archetype, hero panel, or evidence sequence"
+      path: references/figure-archetypes-and-recipes.md
+    - condition: "checking grayscale readability, font size, clipping, DPI, or editable-text export"
+      path: references/accessibility-and-export.md
+    - condition: "auditing a figure revision, comparing bundles, or creating a reproducibility record"
+      path: references/revision-audit.md
+    - condition: "assembling user-supplied qualitative images, scale bars, or visual evidence panels"
+      path: references/qualitative-image-integrity.md
+    - condition: "tracking source data hashes, derived style evidence, or unresolved inputs"
+      path: references/figure-provenance.md
+    - condition: "checking caption, manuscript callout, labels, terminology, and expected observation"
+      path: references/caption-callout-alignment.md
+    - condition: "before final delivery, export bundle creation, camera-ready work, or visual audit"
+      path: references/visual-qa.md
+    - condition: "needs venue-specific figure QA and style caveats"
+      path: references/venue-qa.md
+    - condition: "needs rule authority, external-workflow boundary, or source provenance"
+      path: references/source-basis.md
+    - condition: "needs perceptual hierarchy, encoding priority, or final-size design decisions"
+      path: references/design-theory.md
+    - condition: "selecting among chart families or variants from an evidence question"
+      path: references/chart-taxonomy.md
+    - condition: "implementing or extending renderer, transforms, outputs, or CLI behavior"
+      path: references/rendering-api.md
+    - condition: "working with raw runs, declared transforms, aggregation, bootstrap, pairing, or significance"
+      path: references/data-statistics-contract.md
+    - condition: "performing structured geometry, export, accessibility, or caption QA"
+      path: references/qa-contract.md
+    - condition: "building a method schematic with lanes, groups, ports, shapes, or routed edges"
+      path: references/schematic-grammar.md
+    - condition: "designing shared guides, direct labels, annotations, or caption obligations"
+      path: references/legend-annotation-conventions.md
+    - condition: "needs an end-to-end worked production or revision workflow"
+      path: references/tutorials.md
+    - condition: "choosing a synthetic atlas or multi-panel gallery as a visual grammar reference"
+      path: references/atlas-and-gallery.md
+    - condition: "diagnosing a rejected, misleading, unreadable, or regressed figure"
+      path: references/failure-gallery.md
+    - condition: "running public synthetic evals or aggregate-only private real-figure regressions"
+      path: references/regression-evaluation.md
+output_contract: "figure contract, generated/updated files, caption and manuscript-callout notes, visual QA, unresolved inputs"
+reference_routes:
+  figure-handoff: [../_shared/references/figure-handoff.md, ../_shared/contracts/figure-brief.schema.yaml]
+  figure-contract: [references/figure-contract.md, ../_shared/contracts/figure-render-spec.schema.yaml]
+  python-workflow: [references/python-workflow.md, scripts/cs_figure_style.py]
+  spec-rendering: [references/spec-driven-rendering.md, scripts/render_from_figure_spec.py, ../_shared/contracts/figure-render-spec.schema.yaml]
+  statistics: [references/statistics-and-uncertainty.md]
+  archetypes: [references/figure-archetypes-and-recipes.md]
+  accessibility: [references/accessibility-and-export.md, scripts/check_figure_bundle.py]
+  revision-audit: [references/revision-audit.md, scripts/audit_figure_spec.py]
+  image-integrity: [references/qualitative-image-integrity.md]
+  provenance: [references/figure-provenance.md, scripts/audit_figure_spec.py]
+  patterns: [references/cs-chart-patterns.md]
+  visual-style: [references/corpus-visual-style.md, ../../evidence/derived/visual-style-source-manifest.yaml, ../../evidence/derived/visual-style-rules.yaml, ../../evidence/derived/visual-style-stats.json, ../_shared/contracts/visual-style-record.schema.yaml]
+  palette-policy: [references/palette-policy.md]
+  palette-profiles: [references/palette-profiles.md, scripts/cs_figure_style.py]
+  color-accessibility: [references/color-accessibility.md, scripts/check_figure_bundle.py]
+  layout-archetypes: [references/layout-archetypes.md]
+  caption: [references/caption-callout-alignment.md]
+  visual-qa: [references/visual-qa.md, scripts/check_figure_bundle.py]
+  venue-qa: [references/venue-qa.md]
+  source-basis: [references/source-basis.md, ../_shared/rule-provenance.yaml]
+  design-theory: [references/design-theory.md]
+  chart-taxonomy: [references/chart-taxonomy.md]
+  rendering-api: [references/rendering-api.md, scripts/render_from_figure_spec.py]
+  data-statistics: [references/data-statistics-contract.md, scripts/top_cs_figure_core/data.py, scripts/top_cs_figure_core/statistics.py]
+  qa-contract: [references/qa-contract.md, scripts/check_figure_bundle.py]
+  schematic-grammar: [references/schematic-grammar.md]
+  guide-conventions: [references/legend-annotation-conventions.md]
+  tutorials: [references/tutorials.md]
+  atlas-gallery: [references/atlas-and-gallery.md, assets/generated-manifest.yaml]
+  failure-gallery: [references/failure-gallery.md]
+  regression-evaluation: [references/regression-evaluation.md, scripts/run_figure_evals.py, scripts/run_private_figure_regressions.py, ../_shared/contracts/figure-regression-suite.schema.yaml]

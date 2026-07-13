@@ -1,0 +1,263 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "top-cs-paper-skills/figure-render-spec.schema.yaml"
+title: Top CS figure render specification
+description: Closed v3 execution contract with explicit migration support for v1 and v2 inputs.
+type: object
+required: [figure_id, claim_ids, venue, visual_family, data_sources, panel_map, encodings, metric_direction, output_base, export_formats, evidence_status]
+properties:
+  spec_version: {type: integer, enum: [1, 2, 3], default: 3}
+  figure_id: {type: string, minLength: 1}
+  claim_ids: {type: array, minItems: 1, items: {type: string, minLength: 1}, uniqueItems: true}
+  venue: {enum: [www, iclr, icml, generic]}
+  visual_family: {$ref: "#/$defs/visualFamily"}
+  data_sources:
+    type: array
+    minItems: 1
+    items:
+      oneOf:
+        - {type: string, minLength: 1}
+        - {$ref: "#/$defs/source"}
+  panel_map:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required: [panel_id, job]
+      properties:
+        panel_id: {type: string, minLength: 1}
+        job: {type: string, minLength: 1}
+        source: {type: [string, "null"]}
+      additionalProperties: false
+  encodings: {type: object, additionalProperties: {type: [string, number, boolean, "null"]}}
+  metric_direction: {$ref: "#/$defs/metricDirection"}
+  output_base: {type: string, minLength: 1}
+  export_formats: {type: array, minItems: 1, uniqueItems: true, items: {enum: [svg, pdf, png, tif, tiff]}}
+  evidence_status: {enum: [available, partial, planned, missing, unverified]}
+  caption: {type: [string, "null"]}
+  manuscript_callout: {type: [string, "null"]}
+  style:
+    type: object
+    properties:
+      palette: {type: [string, "null"]}
+      palette_profile:
+        type: object
+        properties:
+          mode: {enum: [generic, venue-derived, custom]}
+          family: {enum: [semantic, categorical, ordered, sequential, diverging, dark-overlay]}
+          series_count: {type: integer, minimum: 2, maximum: 8}
+          background: {type: string, pattern: '^#[0-9A-Fa-f]{6}$'}
+          emphasis_role: {enum: [ours, strong_baseline, baseline, ablation, secondary, positive, negative]}
+          colors:
+            type: array
+            minItems: 2
+            maxItems: 8
+            items: {type: string, pattern: '^#[0-9A-Fa-f]{6}$'}
+        additionalProperties: false
+      width_mm: {type: [number, "null"], exclusiveMinimum: 0}
+      height_mm: {type: [number, "null"], exclusiveMinimum: 0}
+      size: {enum: [single, single_tall, double, double_tall, teaser, null]}
+    additionalProperties: false
+  layout:
+    type: object
+    required: [kind]
+    properties:
+      kind: {enum: [mosaic, grid]}
+      mosaic: {oneOf: [{type: string}, {type: array, items: {type: string}}]}
+      rows: {type: integer, minimum: 1}
+      columns: {type: integer, minimum: 1}
+      width_ratios: {type: array, items: {type: number, exclusiveMinimum: 0}}
+      height_ratios: {type: array, items: {type: number, exclusiveMinimum: 0}}
+      hero_panel: {type: [string, "null"]}
+    additionalProperties: false
+  panels: {type: array, minItems: 1, items: {$ref: "#/$defs/panel"}}
+  data_provenance:
+    type: object
+    properties:
+      data_hashes: {type: object, additionalProperties: {type: string, pattern: "^[0-9a-f]{64}$"}}
+      aggregation: {type: [string, "null"]}
+      seed_column: {type: [string, "null"]}
+      paired_id_column: {type: [string, "null"]}
+      missing_value_policy: {enum: [reject, drop, not-applicable]}
+      unresolved_inputs: {type: array, items: {type: string}}
+    additionalProperties: false
+  shared_guides:
+    type: object
+    properties:
+      metric_direction_note: {type: [string, "null"]}
+      legend: {enum: [shared, local, none]}
+      colorbar: {enum: [shared, local, none]}
+    additionalProperties: false
+  accessibility:
+    type: object
+    properties:
+      minimum_text_pt: {type: number, minimum: 6}
+      minimum_line_width_pt: {type: number, minimum: 0.6}
+      redundant_encoding: {type: boolean}
+      grayscale_required: {type: boolean}
+      cvd_modes: {type: array, items: {enum: [protan, deutan, tritan]}, uniqueItems: true}
+    additionalProperties: false
+  reproducibility:
+    type: object
+    required: [seed]
+    properties:
+      seed: {type: integer}
+      environment_capture: {type: boolean}
+      write_plotted_data: {type: boolean}
+    additionalProperties: false
+  output:
+    type: object
+    properties:
+      camera_ready: {type: boolean}
+      dpi: {type: integer, minimum: 72}
+    additionalProperties: false
+additionalProperties: false
+$defs:
+  visualFamily:
+    enum: [comparison, trend-scaling, matrix-heatmap, embedding-scatter, network, method-schematic, distribution-uncertainty, tradeoff-frontier, calibration-reliability, ranking-critical-difference, qualitative-image-plate, forest-interval, composition-stacked, paired-change, polar-summary]
+  metricDirection: {enum: [higher-is-better, lower-is-better, mixed, not-applicable]}
+  source:
+    type: object
+    required: [id, path, format, expected_sha256, columns]
+    properties:
+      id: {type: string, pattern: "^[A-Za-z][A-Za-z0-9_-]*$"}
+      path: {type: string, minLength: 1}
+      format: {enum: [csv]}
+      expected_sha256: {type: [string, "null"], pattern: "^[0-9a-f]{64}$"}
+      columns: {type: array, minItems: 1, uniqueItems: true, items: {type: string}}
+    additionalProperties: false
+  transform:
+    type: object
+    required: [kind]
+    properties:
+      kind: {enum: [filter, sort, group, aggregate, normalize, baseline-delta, rank]}
+      column: {type: string}
+      equals: {}
+      in: {type: array}
+      by: {oneOf: [{type: string}, {type: array, items: {type: string}}]}
+      descending: {type: boolean}
+      group_by: {type: array, items: {type: string}}
+      metrics: {type: object}
+      method: {enum: [minmax, zscore]}
+      output: {type: string}
+      baseline_column: {type: string}
+      direction: {enum: [higher-is-better, lower-is-better]}
+    additionalProperties: false
+  uncertainty:
+    type: object
+    required: [kind]
+    properties:
+      kind: {enum: [none, sd, se, ci, interval, bootstrap-ci]}
+      confidence: {type: number, exclusiveMinimum: 0.5, exclusiveMaximum: 1}
+      bootstrap_samples: {type: integer, minimum: 100, default: 2000}
+      seed: {type: integer}
+    additionalProperties: false
+  statistics:
+    type: object
+    properties:
+      estimator: {enum: [mean, median, not-applicable]}
+      aggregation: {enum: [mean, median, not-applicable]}
+      uncertainty: {$ref: "#/$defs/uncertainty"}
+      missing: {enum: [reject, drop, not-applicable]}
+      paired_id: {type: [string, "null"]}
+      bins: {type: integer, minimum: 2}
+      critical_difference: {type: number, exclusiveMinimum: 0}
+      significance:
+        type: object
+        required: [source_column, test_name, adjustment]
+        properties:
+          source_column: {type: string}
+          test_name: {type: string}
+          adjustment: {type: string}
+        additionalProperties: false
+    additionalProperties: false
+  axisScale:
+    type: object
+    properties:
+      type: {enum: [linear, log, symlog, categorical]}
+      limits: {type: array, minItems: 2, maxItems: 2, items: {type: number}}
+      label: {type: string}
+      unit: {type: [string, "null"]}
+    additionalProperties: false
+  annotation:
+    type: object
+    required: [kind]
+    properties:
+      kind: {enum: [vline, hline, text]}
+      value: {type: number}
+      x: {type: number}
+      y: {type: number}
+      text: {type: string}
+      color: {type: string}
+      linestyle: {type: string}
+      linewidth: {type: number, minimum: 0.6}
+      fontsize: {type: number, minimum: 6}
+      axes_fraction: {type: boolean}
+      ha: {type: string}
+      va: {type: string}
+    additionalProperties: false
+  node:
+    type: object
+    required: [id, label, x, y]
+    properties:
+      id: {type: string}
+      label: {type: string}
+      x: {type: number, minimum: 0, maximum: 1}
+      y: {type: number, minimum: 0, maximum: 1}
+      width: {type: number, exclusiveMinimum: 0}
+      height: {type: number, exclusiveMinimum: 0}
+      kind: {enum: [input, process, data, output]}
+      shape: {enum: [box, pill, circle]}
+      shape_label: {type: [string, "null"]}
+      ports: {type: array, uniqueItems: true, items: {enum: [left, right, top, bottom]}}
+    additionalProperties: false
+  edge:
+    type: object
+    required: [from, to]
+    properties:
+      from: {type: string}
+      to: {type: string}
+      label: {type: [string, "null"]}
+      routing: {enum: [straight, orthogonal]}
+      from_port: {type: [string, "null"]}
+      to_port: {type: [string, "null"]}
+    additionalProperties: false
+  panel:
+    type: object
+    required: [panel_id, visual_family]
+    properties:
+      panel_id: {type: string, minLength: 1}
+      visual_family: {$ref: "#/$defs/visualFamily"}
+      variant: {type: string, minLength: 1}
+      source_id: {type: [string, "null"]}
+      data_source: {type: [string, "null"]}
+      encodings: {type: object, additionalProperties: {type: [string, number, boolean, "null"]}}
+      transforms: {type: array, items: {$ref: "#/$defs/transform"}}
+      statistics: {$ref: "#/$defs/statistics"}
+      scales:
+        type: object
+        properties: {x: {$ref: "#/$defs/axisScale"}, y: {$ref: "#/$defs/axisScale"}}
+        additionalProperties: false
+      annotations: {type: array, items: {$ref: "#/$defs/annotation"}}
+      semantic_roles: {type: object, additionalProperties: {type: string}}
+      palette_profile:
+        type: object
+        properties:
+          mode: {enum: [generic, venue-derived, custom]}
+          family: {enum: [semantic, categorical, ordered, sequential, diverging, dark-overlay]}
+          series_count: {type: integer, minimum: 2, maximum: 8}
+          background: {type: string, pattern: '^#[0-9A-Fa-f]{6}$'}
+          emphasis_role: {enum: [ours, strong_baseline, baseline, ablation, secondary, positive, negative]}
+          colors: {type: array, minItems: 2, maxItems: 8, items: {type: string, pattern: '^#[0-9A-Fa-f]{6}$'}}
+        additionalProperties: false
+      legend: {enum: [local, shared, none]}
+      colorbar_group: {type: [string, "null"]}
+      title: {type: [string, "null"]}
+      metric_direction: {$ref: "#/$defs/metricDirection"}
+      caption_obligations: {type: array, items: {oneOf: [{type: string}, {type: object, required: [token], properties: {token: {type: string}, reason: {type: string}}, additionalProperties: false}]}}
+      accessibility: {type: object}
+      nodes: {type: array, items: {$ref: "#/$defs/node"}}
+      edges: {type: array, items: {$ref: "#/$defs/edge"}}
+      groups: {type: array, items: {type: object}}
+      lanes: {type: array, items: {type: object}}
+      columns: {type: integer, minimum: 1}
+    additionalProperties: false

@@ -1,0 +1,13 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{longtable,booktabs,array}
+\begin{document}
+\section*{Verified Revision Ledger}
+\begin{longtable}{p{0.08\linewidth}p{0.22\linewidth}p{0.18\linewidth}p{0.18\linewidth}p{0.12\linewidth}p{0.12\linewidth}}
+\toprule
+ID & Action & Old location & New location & Evidence & Status \\
+\midrule
+[R1.1] & [ACTION] & [OLD] & [NEW] & [DIFF/EXCERPT] & [STATUS] \\
+\bottomrule
+\end{longtable}
+\end{document}

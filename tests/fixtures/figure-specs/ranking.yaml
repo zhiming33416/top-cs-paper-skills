@@ -1,0 +1,20 @@
+spec_version: 2
+figure_id: Figure R1
+claim_ids: [C-R1]
+venue: generic
+visual_family: ranking-critical-difference
+data_sources: [ranking.csv]
+panel_map: [{panel_id: a, job: average ranking}]
+encodings: {method: method, rank: rank}
+metric_direction: lower-is-better
+output_base: ranking
+export_formats: [svg, pdf, png]
+evidence_status: available
+layout: {kind: grid, rows: 1, columns: 1}
+panels:
+  - panel_id: a
+    visual_family: ranking-critical-difference
+    data_source: ranking.csv
+    encodings: {method: method, rank: rank}
+    statistics: {critical_difference: 0.9}
+    semantic_roles: {Base: baseline, Ablation: ablation, Ours: ours}

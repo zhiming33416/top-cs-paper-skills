@@ -1,0 +1,301 @@
+schema_version: 3
+generated: '2026-07-13'
+promotion_thresholds:
+  promoted: 10
+  preliminary: 3
+  target_per_venue: 30
+rules:
+  www:
+    status: promoted
+    style_status: promoted
+    eligible_sources: 30
+    palette_status: usable
+    anchor_status: usable
+    profile_status: usable
+    palette_fallback_reason: null
+    palette_candidates:
+    - '#2070B0'
+    - '#D02030'
+    - '#9060C0'
+    - '#90B080'
+    palette_candidate_support:
+    - hex: '#2070B0'
+      color_family: 7
+      source_count: 23
+      representative_source_count: 8
+      source_share: 0.767
+      figure_color_count: 92932
+      hue: 0.574
+      chroma: 0.818
+      contrast_on_white: 5.242
+    - hex: '#D02030'
+      color_family: 0
+      source_count: 19
+      representative_source_count: 5
+      source_share: 0.633
+      figure_color_count: 28213
+      hue: 0.985
+      chroma: 0.846
+      contrast_on_white: 5.342
+    - hex: '#9060C0'
+      color_family: 9
+      source_count: 14
+      representative_source_count: 5
+      source_share: 0.467
+      figure_color_count: 3085
+      hue: 0.75
+      chroma: 0.5
+      contrast_on_white: 4.545
+    - hex: '#90B080'
+      color_family: 3
+      source_count: 8
+      representative_source_count: 2
+      source_share: 0.267
+      figure_color_count: 314
+      hue: 0.278
+      chroma: 0.273
+      contrast_on_white: 2.412
+    palette_profiles:
+      semantic:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 24
+        bootstrap_retention: 0.855
+        leave_one_out_jaccard: 0.833
+      categorical:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 24
+        bootstrap_retention: 0.855
+        leave_one_out_jaccard: 0.833
+      ordered:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 24
+        bootstrap_retention: 0.855
+        leave_one_out_jaccard: 0.833
+      sequential:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 24
+        bootstrap_retention: 0.855
+        leave_one_out_jaccard: 0.833
+      diverging:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 24
+        bootstrap_retention: 0.855
+        leave_one_out_jaccard: 0.833
+      dark-overlay:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 24
+        bootstrap_retention: 0.855
+        leave_one_out_jaccard: 0.833
+    layout_archetypes:
+    - quantitative-grid
+    - mixed
+    - image-heavy
+    - sparse-theoretical
+    guidance: Use as corpus-calibrated defaults only after promotion threshold is
+      met.
+  iclr:
+    status: promoted
+    style_status: promoted
+    eligible_sources: 30
+    palette_status: usable
+    anchor_status: usable
+    profile_status: usable
+    palette_fallback_reason: null
+    palette_candidates:
+    - '#2070B0'
+    - '#FF8010'
+    - '#50A030'
+    - '#9060C0'
+    palette_candidate_support:
+    - hex: '#2070B0'
+      color_family: 7
+      source_count: 21
+      representative_source_count: 6
+      source_share: 0.7
+      figure_color_count: 42830
+      hue: 0.574
+      chroma: 0.818
+      contrast_on_white: 5.242
+    - hex: '#FF8010'
+      color_family: 1
+      source_count: 20
+      representative_source_count: 4
+      source_share: 0.667
+      figure_color_count: 2448
+      hue: 0.078
+      chroma: 0.937
+      contrast_on_white: 2.516
+    - hex: '#50A030'
+      color_family: 3
+      source_count: 11
+      representative_source_count: 1
+      source_share: 0.367
+      figure_color_count: 209
+      hue: 0.286
+      chroma: 0.7
+      contrast_on_white: 3.275
+    - hex: '#9060C0'
+      color_family: 9
+      source_count: 9
+      representative_source_count: 3
+      source_share: 0.3
+      figure_color_count: 8538
+      hue: 0.75
+      chroma: 0.5
+      contrast_on_white: 4.545
+    palette_profiles:
+      semantic:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 22
+        bootstrap_retention: 0.782
+        leave_one_out_jaccard: 0.974
+      categorical:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 22
+        bootstrap_retention: 0.782
+        leave_one_out_jaccard: 0.974
+      ordered:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 22
+        bootstrap_retention: 0.782
+        leave_one_out_jaccard: 0.974
+      sequential:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 22
+        bootstrap_retention: 0.782
+        leave_one_out_jaccard: 0.974
+      diverging:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 22
+        bootstrap_retention: 0.782
+        leave_one_out_jaccard: 0.974
+      dark-overlay:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 22
+        bootstrap_retention: 0.782
+        leave_one_out_jaccard: 0.974
+    layout_archetypes:
+    - quantitative-grid
+    - image-heavy
+    - mixed
+    - schematic-led-composite
+    guidance: Use as corpus-calibrated defaults only after promotion threshold is
+      met.
+  icml:
+    status: promoted
+    style_status: promoted
+    eligible_sources: 30
+    palette_status: usable
+    anchor_status: usable
+    profile_status: usable
+    palette_fallback_reason: null
+    palette_candidates:
+    - '#2070B0'
+    - '#FF0000'
+    - '#30A030'
+    - '#E070C0'
+    - '#9060C0'
+    palette_candidate_support:
+    - hex: '#2070B0'
+      color_family: 7
+      source_count: 22
+      representative_source_count: 11
+      source_share: 0.733
+      figure_color_count: 1919
+      hue: 0.574
+      chroma: 0.818
+      contrast_on_white: 5.242
+    - hex: '#FF0000'
+      color_family: 0
+      source_count: 20
+      representative_source_count: 6
+      source_share: 0.667
+      figure_color_count: 10370
+      hue: 0.0
+      chroma: 1.0
+      contrast_on_white: 3.998
+    - hex: '#30A030'
+      color_family: 4
+      source_count: 14
+      representative_source_count: 8
+      source_share: 0.467
+      figure_color_count: 3415
+      hue: 0.333
+      chroma: 0.7
+      contrast_on_white: 3.389
+    - hex: '#E070C0'
+      color_family: 11
+      source_count: 8
+      representative_source_count: 4
+      source_share: 0.267
+      figure_color_count: 567
+      hue: 0.881
+      chroma: 0.5
+      contrast_on_white: 2.897
+    - hex: '#9060C0'
+      color_family: 9
+      source_count: 8
+      representative_source_count: 6
+      source_share: 0.267
+      figure_color_count: 564
+      hue: 0.75
+      chroma: 0.5
+      contrast_on_white: 4.545
+    palette_profiles:
+      semantic:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 24
+        bootstrap_retention: 0.75
+        leave_one_out_jaccard: 0.869
+      categorical:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 24
+        bootstrap_retention: 0.75
+        leave_one_out_jaccard: 0.869
+      ordered:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 24
+        bootstrap_retention: 0.75
+        leave_one_out_jaccard: 0.869
+      sequential:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 24
+        bootstrap_retention: 0.75
+        leave_one_out_jaccard: 0.869
+      diverging:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 24
+        bootstrap_retention: 0.75
+        leave_one_out_jaccard: 0.869
+      dark-overlay:
+        status: usable
+        provenance: constructed-from-observed-anchors
+        source_count: 24
+        bootstrap_retention: 0.75
+        leave_one_out_jaccard: 0.869
+    layout_archetypes:
+    - quantitative-grid
+    - mixed
+    - image-heavy
+    - sparse-theoretical
+    guidance: Use as corpus-calibrated defaults only after promotion threshold is
+      met.
+boundary: Visual-style evidence is aggregate-only and must not be presented as official
+  venue policy or acceptance advice.

@@ -1,0 +1,102 @@
+name: top-cs-reviewer
+version: 2.3.0
+description: "Venue-specific conservative review workflow; only venue is a content axis."
+always_load:
+  - ../_shared/core/evidence-discipline.md
+  - ../_shared/core/claim-evidence-boundary.md
+  - ../_shared/core/anonymity.md
+  - ../_shared/core/reproducibility.md
+  - ../_shared/core/reader-workflow.md
+  - static/core/stance.md
+  - static/core/workflow.md
+  - static/core/output-format.md
+axes:
+  venue:
+    detect: "Use the target venue named by the user or identifiable from a verified template; otherwise use generic."
+    values:
+      www: static/fragments/venue/www.md
+      iclr: static/fragments/venue/iclr.md
+      icml: static/fragments/venue/icml.md
+      generic: static/fragments/venue/generic.md
+    default: generic
+    multi: false
+runtime_parameters:
+  manuscript_scope:
+    values: [full-paper, section-only, figures-results, abstract-only]
+    default: full-paper
+  review_mode:
+    values: [readiness-audit, reviewer-report, claim-audit, compliance-audit]
+    default: readiness-audit
+  paper_type:
+    values: [empirical, algorithmic, theoretical, systems, dataset-benchmark]
+    default: empirical
+  artifact_scope:
+    values: [manuscript-only, manuscript-supplement, latex-project, figures-results]
+    default: manuscript-only
+  evidence_state:
+    values: [complete, partial, sparse]
+    default: partial
+  submission_stage:
+    values: [draft, pre-submission, post-review, camera-ready]
+    default: pre-submission
+  citation_verification:
+    values: [off, metadata]
+    default: off
+  figure_handoff:
+    values: [none, audit]
+    default: none
+references:
+  on_demand:
+    - condition: "needs bibliographic metadata verification or citation-integrity findings"
+      path: ../_shared/references/citation-verification.md
+    - condition: "needs figure-to-claim coverage, caption, or interpretation audit"
+      path: ../_shared/references/figure-handoff.md
+    - condition: "needs the current official review form and supplement boundary"
+      path: references/official-review-forms.md
+    - condition: "needs contribution-type-specific technical and evidence checks"
+      path: references/paper-type-audits.md
+    - condition: "needs prompt-injection, confidentiality, or identity-leak checks"
+      path: references/integrity-and-confidentiality.md
+    - condition: "needs historical public-review concern patterns or examples of decision-relevant critique"
+      path: references/historical-review-patterns.md
+    - condition: "needs a detailed claim-to-evidence audit"
+      path: references/claim-audit.md
+    - condition: "needs issue severity classification"
+      path: references/severity-rubric.md
+    - condition: "needs venue-aware review axes and axis-specific questions"
+      path: references/review-axes.md
+    - condition: "needs blocking/major/minor boundary examples or confidence calibration"
+      path: references/severity-calibration.md
+    - condition: "needs claim-dependent gates for a CS subdomain"
+      path: references/subdomain-audits.md
+    - condition: "needs a complete synthetic anchored-review example"
+      path: references/report-example.md
+    - condition: "needs final groundedness and fairness QA"
+      path: references/qa-checklist.md
+    - condition: "needs a traceable issue schema, confidence label, or fixability assessment"
+      path: references/issue-contract.md
+    - condition: "reviews a partial manuscript or has missing figures, supplement, code, or results"
+      path: references/partial-manuscript-protocol.md
+    - condition: "needs machine-readable venue limits"
+      path: ../_shared/venue-policies.yaml
+    - condition: "needs rule authority, source provenance, or historical-review boundaries"
+      path: references/source-basis.md
+output_contract: "summary, strengths, anchored issues, venue-specific audit, prioritized risks, decision-relevant questions, revision plan"
+reference_routes:
+  citation-verification: [../_shared/references/citation-verification.md, ../_shared/contracts/citation-record.schema.yaml, ../_shared/scripts/verify_citations.py]
+  figure-handoff: [../_shared/references/figure-handoff.md, ../_shared/contracts/figure-brief.schema.yaml]
+  full-section-corpus: [../_shared/references/full-section-corpus-patterns.md]
+  official-policy: [references/official-review-forms.md, ../_shared/venue-policies.yaml]
+  paper-type-audit: [references/paper-type-audits.md]
+  integrity: [references/integrity-and-confidentiality.md]
+  history: [references/historical-review-patterns.md]
+  claim-audit: [references/claim-audit.md]
+  severity: [references/severity-rubric.md]
+  review-axes: [references/review-axes.md]
+  severity-calibration: [references/severity-calibration.md]
+  subdomain-audit: [references/subdomain-audits.md]
+  report-example: [references/report-example.md]
+  qa: [references/qa-checklist.md]
+  source-basis: [references/source-basis.md, ../_shared/rule-provenance.yaml]
+  issue-contract: [references/issue-contract.md]
+  partial-manuscript: [references/partial-manuscript-protocol.md]

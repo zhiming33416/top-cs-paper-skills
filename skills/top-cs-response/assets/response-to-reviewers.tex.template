@@ -1,0 +1,20 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\newcommand{\ReviewerComment}[1]{\par\noindent\textbf{Reviewer comment}\par\emph{#1}\par}
+\newcommand{\AuthorResponse}[1]{\par\noindent\textbf{Response}\par #1\par}
+\newcommand{\RevisedText}[1]{\par\noindent\textbf{Revised manuscript text}\par\textit{#1}\par}
+\begin{document}
+\section*{Response to the Editor and Reviewers}
+
+\section*{Editor instructions}
+\ReviewerComment{[E.1 FULL INSTRUCTION]}
+\AuthorResponse{[DIRECT ANSWER, EVIDENCE, ACTION, LOCATION, BOUNDARY]}
+
+\clearpage
+\section*{Reviewer 1}
+\ReviewerComment{[R1.1 FULL COMMENT]}
+\AuthorResponse{[DIRECT ANSWER, EVIDENCE, ACTION, LOCATION, BOUNDARY]}
+\RevisedText{[VERIFIED EXCERPT OR LOCATION NEEDED]}
+
+\end{document}

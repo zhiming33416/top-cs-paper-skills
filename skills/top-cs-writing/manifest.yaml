@@ -1,0 +1,131 @@
+name: top-cs-writing
+version: 2.3.0
+description: "Multi-axis static/dynamic router for evidence-grounded conference-paper drafting."
+always_load:
+  - ../_shared/core/evidence-discipline.md
+  - ../_shared/core/claim-evidence-boundary.md
+  - ../_shared/core/anonymity.md
+  - ../_shared/core/argument-graph.md
+  - ../_shared/core/terminology-ledger.md
+  - ../_shared/core/reader-workflow.md
+  - static/core/stance.md
+  - static/core/workflow.md
+  - static/core/output-format.md
+axes:
+  venue:
+    detect: "Use an explicitly named venue or verified template. Otherwise use generic."
+    values:
+      www: ../_shared/venues/www.md
+      iclr: ../_shared/venues/iclr.md
+      icml: ../_shared/venues/icml.md
+      generic: ../_shared/venues/generic.md
+    default: generic
+    multi: false
+  paper_type:
+    detect: "Classify the central contribution, not the implementation technology."
+    values:
+      empirical: ../_shared/paper-types/empirical.md
+      algorithmic: ../_shared/paper-types/algorithmic.md
+      theoretical: ../_shared/paper-types/theoretical.md
+      systems: ../_shared/paper-types/systems.md
+      dataset-benchmark: ../_shared/paper-types/dataset-benchmark.md
+    default: empirical
+    multi: false
+  section:
+    detect: "Load every explicitly requested manuscript section; ask only when ambiguity changes the deliverable."
+    values:
+      title: static/fragments/section/title.md
+      abstract: static/fragments/section/abstract.md
+      introduction: static/fragments/section/introduction.md
+      related-work: static/fragments/section/related-work.md
+      method: static/fragments/section/method.md
+      experiments: static/fragments/section/experiments.md
+      discussion: static/fragments/section/discussion.md
+      limitations: static/fragments/section/limitations.md
+      conclusion: static/fragments/section/conclusion.md
+    multi: true
+  language:
+    detect: "Use zh-to-en for Chinese, mixed, or Chinese-structured notes; otherwise use en."
+    values:
+      en: static/fragments/language/en.md
+      zh-to-en: static/fragments/language/zh-to-en.md
+    default: en
+    multi: false
+runtime_parameters:
+  artifact_scope:
+    values: [notes, section, full-manuscript, latex-project]
+    default: notes
+  evidence_state:
+    values: [complete, partial, sparse]
+    default: partial
+  submission_stage:
+    values: [draft, pre-submission, discussion-revision, camera-ready]
+    default: draft
+  citation_verification:
+    values: [off, metadata]
+    default: off
+  figure_handoff:
+    values: [none, plan]
+    default: none
+references:
+  on_demand:
+    - condition: "needs functional section moves, topic-sentence scaffolding, or optional introduction-twice revision"
+      path: ../_shared/references/rhetorical-moves.md
+    - condition: "needs bibliographic metadata verification or citation-state discipline"
+      path: ../_shared/references/citation-verification.md
+    - condition: "needs a figure-to-claim plan or top-cs-figure handoff"
+      path: ../_shared/references/figure-handoff.md
+    - condition: "needs full-paper argument graph or cross-section claim consistency"
+      path: references/full-paper-coherence.md
+    - condition: "needs figure, table, citation, or appendix planning"
+      path: references/figures-citations-appendix.md
+    - condition: "needs contribution-type-specific evidence architecture"
+      path: references/paper-type-overlays.md
+    - condition: "needs venue-calibrated section structure or cross-venue accepted-paper patterns"
+      path: references/venue-corpus-patterns.md
+    - condition: "needs paragraph-level flow diagnosis"
+      path: references/paragraph-flow.md
+    - condition: "needs a concrete output example or template"
+      path: references/examples.md
+    - condition: "needs paragraph-by-paragraph section planning or section-specific diagnostics"
+      path: references/section-playbooks.md
+    - condition: "drafting or rebuilding an abstract with alternative argument shapes"
+      path: references/abstract-guide.md
+    - condition: "drafting or rebuilding an introduction, gap, challenge, or contribution framing"
+      path: references/introduction-guide.md
+    - condition: "drafting or rebuilding method overview, modules, objectives, algorithms, or implementation details"
+      path: references/method-guide.md
+    - condition: "planning or drafting experiments, baselines, ablations, robustness, efficiency, or failure analysis"
+      path: references/experiments-guide.md
+    - condition: "needs adversarial self-review before returning a long draft"
+      path: references/self-review.md
+    - condition: "needs iterative revision after author feedback or an alignment check before a long draft"
+      path: references/alignment-and-revision.md
+    - condition: "needs a rejection-risk or readiness audit before drafting"
+      path: references/rejection-risks.md
+    - condition: "needs current machine-readable venue limits"
+      path: ../_shared/venue-policies.yaml
+    - condition: "needs rule authority, source provenance, or corpus-versus-implementation boundaries"
+      path: references/source-basis.md
+output_contract: "route, argument graph, claim-evidence table, outline, English draft, artifact plan, missing inputs"
+reference_routes:
+  rhetorical-moves: [../_shared/references/rhetorical-moves.md]
+  citation-verification: [../_shared/references/citation-verification.md, ../_shared/contracts/citation-record.schema.yaml, ../_shared/scripts/verify_citations.py]
+  figure-handoff: [../_shared/references/figure-handoff.md, ../_shared/contracts/figure-brief.schema.yaml]
+  full-section-corpus: [../_shared/references/full-section-corpus-patterns.md]
+  full-paper: [references/full-paper-coherence.md]
+  figures: [references/figures-citations-appendix.md]
+  paper-type: [references/paper-type-overlays.md]
+  venue-corpus: [references/venue-corpus-patterns.md]
+  paragraph-flow: [references/paragraph-flow.md]
+  examples: [references/examples.md]
+  section-playbooks: [references/section-playbooks.md]
+  abstract-guide: [references/abstract-guide.md]
+  introduction-guide: [references/introduction-guide.md]
+  method-guide: [references/method-guide.md]
+  experiments-guide: [references/experiments-guide.md]
+  self-review: [references/self-review.md]
+  alignment: [references/alignment-and-revision.md]
+  rejection-risk: [references/rejection-risks.md]
+  official-policy: [../_shared/venue-policies.yaml]
+  source-basis: [references/source-basis.md, ../_shared/rule-provenance.yaml]

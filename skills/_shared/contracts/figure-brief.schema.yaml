@@ -1,0 +1,36 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "top-cs-paper-skills/figure-brief.schema.yaml"
+title: Figure handoff brief
+type: object
+required: [figure_id, claim_ids, research_question, purpose, data_sources, panels, encoding_requirements, expected_observation, caption_draft, evidence_status]
+properties:
+  figure_id: {type: string, minLength: 1}
+  claim_ids:
+    type: array
+    minItems: 1
+    items: {type: string}
+  research_question: {type: string, minLength: 1}
+  purpose: {enum: [evidence, method-overview, comparison, mechanism, failure-analysis, taxonomy, deployment]}
+  data_sources:
+    type: array
+    items: {type: string}
+  panels:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required: [panel_id, job]
+      properties:
+        panel_id: {type: string}
+        job: {type: string}
+        source: {type: [string, "null"]}
+  encoding_requirements:
+    type: array
+    items: {type: string}
+  expected_observation: {type: string}
+  caption_draft: {type: string}
+  evidence_status: {enum: [available, partial, planned, missing, unverified]}
+  manuscript_callout: {type: [string, "null"]}
+  venue_constraints: {type: array, items: {type: string}}
+additionalProperties: true
+

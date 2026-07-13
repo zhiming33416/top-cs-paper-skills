@@ -1,0 +1,24 @@
+schema_version: 3
+purpose: "Shared routing vocabulary and invariants. Each skill manifest activates only the axes appropriate to that task."
+common_values:
+  venue: [www, iclr, icml, generic]
+  year: [2026]
+  paper_type: [empirical, algorithmic, theoretical, systems, dataset-benchmark]
+  section: [title, abstract, introduction, related-work, method, experiments, discussion, limitations, conclusion]
+  language: [en, zh-to-en]
+  artifact_scope: [notes, passage, section, full-manuscript, latex-project, manuscript-only, manuscript-supplement, reviews-only, reviews-manuscript, reviews-diff, complete-package]
+  revision_mode: [light-edit, structural-revision, compression, zh-to-en, response-only, response-and-ledger, verify-revision]
+  evidence_state: [complete, partial, sparse]
+  submission_stage: [draft, pre-submission, initial-rebuttal, discussion, discussion-revision, post-review, post-decision, camera-ready]
+invariants:
+  - "Honor an explicitly named venue; infer a venue only from a verified template or explicit context."
+  - "Use generic for unsupported venue/year combinations and request current official guidance."
+  - "Treat mixed Chinese-English author material as zh-to-en."
+  - "Select paper type from the central contribution, not from implementation technology."
+  - "State detected routing values before substantive work."
+activation:
+  top-cs-writing: [venue, paper_type, section, language]
+  top-cs-polishing: [venue, paper_type, section, language]
+  top-cs-reviewer: [venue]
+  top-cs-response: []
+note: "Runtime parameters do not create content axes. top-cs-response remains a linear state machine."

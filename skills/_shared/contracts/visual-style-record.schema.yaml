@@ -1,0 +1,74 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "top-cs-paper-skills/visual-style-record.schema.yaml"
+title: Visual style record
+type: object
+required: [source_id, source_hash, venue, eligibility, page_count_sampled, feature_counts, color_clusters, palette_signatures, layout_archetypes, confidence]
+properties:
+  source_id: {type: string, minLength: 1}
+  source_hash: {type: string, minLength: 1}
+  venue: {enum: [www, iclr, icml, generic, unknown]}
+  eligibility: {enum: [style-evidence, comparison-only, holdout, excluded]}
+  page_count_sampled: {type: integer, minimum: 0}
+  feature_counts:
+    type: object
+    required: [drawings, images, figure_captions, tables, pages_with_color]
+    properties:
+      drawings: {type: integer, minimum: 0}
+      images: {type: integer, minimum: 0}
+      figure_captions: {type: integer, minimum: 0}
+      tables: {type: integer, minimum: 0}
+      pages_with_color: {type: integer, minimum: 0}
+  page_geometry_modes:
+    type: array
+    items:
+      type: object
+      required: [geometry, count]
+      properties:
+        geometry: {type: string}
+        count: {type: integer, minimum: 0}
+  text_size_summary:
+    type: object
+    properties:
+      min: {type: [number, "null"]}
+      median: {type: [number, "null"]}
+      max: {type: [number, "null"]}
+  color_clusters:
+    type: array
+    items:
+      type: object
+      required: [hex, count, source]
+      properties:
+        hex: {type: string}
+        count: {type: integer, minimum: 0}
+        source: {enum: [vector, raster]}
+  layout_archetypes:
+    type: array
+    items: {enum: [quantitative-grid, schematic-led-composite, image-heavy, sparse-theoretical, mixed]}
+  confidence: {enum: [high, medium, low, insufficient]}
+  notes:
+    type: array
+    items: {type: string}
+  palette_signatures:
+    type: array
+    items:
+      type: object
+      required: [color_families, dominant_colors, background, colored_sample_share, visual_context, drawing_count, image_count]
+      properties:
+        color_families: {type: array, items: {type: integer, minimum: 0, maximum: 11}, uniqueItems: true}
+        dominant_colors:
+          type: array
+          items:
+            type: object
+            required: [hex, color_family, sample_share]
+            properties:
+              hex: {type: string, pattern: '^#[0-9A-Fa-f]{6}$'}
+              color_family: {type: integer, minimum: 0, maximum: 11}
+              sample_share: {type: number, minimum: 0, maximum: 1}
+            additionalProperties: false
+        background: {enum: [light, mid, dark, unknown]}
+        colored_sample_share: {type: number, minimum: 0, maximum: 1}
+        visual_context: {enum: [quantitative, image-heavy, matrix-or-dense-quantitative, schematic-or-mixed]}
+        drawing_count: {type: integer, minimum: 0}
+        image_count: {type: integer, minimum: 0}
+      additionalProperties: false
+additionalProperties: false

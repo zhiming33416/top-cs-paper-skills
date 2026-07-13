@@ -1,0 +1,543 @@
+{
+  "schema_version": 3,
+  "generated": "2026-07-13",
+  "venues": {
+    "www": {
+      "eligible_sources": 30,
+      "coverage": {
+        "target_sources": 30,
+        "manifest_sources": 30,
+        "extracted_records": 30,
+        "eligible_count": 30,
+        "holdout_count": 0,
+        "download_failures": 0,
+        "track_mix": {
+          "Research": 30
+        },
+        "collection_status": {
+          "existing": 30
+        },
+        "palette_stability": {
+          "top_share": 0.435,
+          "unique": 169
+        },
+        "palette_source_prevalence": [
+          {
+            "hex": "#2070B0",
+            "color_family": 7,
+            "source_count": 23,
+            "representative_source_count": 8,
+            "source_share": 0.767,
+            "figure_color_count": 92932,
+            "hue": 0.574,
+            "chroma": 0.818,
+            "contrast_on_white": 5.242
+          },
+          {
+            "hex": "#D02030",
+            "color_family": 0,
+            "source_count": 19,
+            "representative_source_count": 5,
+            "source_share": 0.633,
+            "figure_color_count": 28213,
+            "hue": 0.985,
+            "chroma": 0.846,
+            "contrast_on_white": 5.342
+          },
+          {
+            "hex": "#9060C0",
+            "color_family": 9,
+            "source_count": 14,
+            "representative_source_count": 5,
+            "source_share": 0.467,
+            "figure_color_count": 3085,
+            "hue": 0.75,
+            "chroma": 0.5,
+            "contrast_on_white": 4.545
+          },
+          {
+            "hex": "#90B080",
+            "color_family": 3,
+            "source_count": 8,
+            "representative_source_count": 2,
+            "source_share": 0.267,
+            "figure_color_count": 314,
+            "hue": 0.278,
+            "chroma": 0.273,
+            "contrast_on_white": 2.412
+          }
+        ],
+        "minimum_palette_source_support": 8,
+        "palette_status": "usable",
+        "anchor_status": "usable",
+        "profile_status": "usable",
+        "profile_stability": {
+          "source_count": 24,
+          "cooccurrence_pairs": [
+            {
+              "families": [
+                1,
+                7
+              ],
+              "source_count": 15,
+              "source_share": 0.625
+            },
+            {
+              "families": [
+                0,
+                7
+              ],
+              "source_count": 12,
+              "source_share": 0.5
+            },
+            {
+              "families": [
+                0,
+                1
+              ],
+              "source_count": 11,
+              "source_share": 0.458
+            },
+            {
+              "families": [
+                3,
+                7
+              ],
+              "source_count": 10,
+              "source_share": 0.417
+            },
+            {
+              "families": [
+                1,
+                3
+              ],
+              "source_count": 9,
+              "source_share": 0.375
+            }
+          ],
+          "bootstrap_retention": 0.855,
+          "leave_one_out_jaccard": 0.833
+        },
+        "palette_fallback_reason": null,
+        "layout_archetype_stability": {
+          "top_share": 0.542,
+          "unique": 4
+        }
+      },
+      "top_vector_colors": [
+        {
+          "hex": "#0070C0",
+          "count": 70235
+        },
+        {
+          "hex": "#D02030",
+          "count": 19620
+        },
+        {
+          "hex": "#2070B0",
+          "count": 16191
+        },
+        {
+          "hex": "#FF8010",
+          "count": 12644
+        },
+        {
+          "hex": "#30A030",
+          "count": 9504
+        },
+        {
+          "hex": "#403080",
+          "count": 8020
+        },
+        {
+          "hex": "#FF6040",
+          "count": 2661
+        },
+        {
+          "hex": "#306090",
+          "count": 2645
+        }
+      ],
+      "layout_archetypes": {
+        "quantitative-grid": 26,
+        "image-heavy": 7,
+        "mixed": 13,
+        "sparse-theoretical": 2
+      }
+    },
+    "iclr": {
+      "eligible_sources": 30,
+      "coverage": {
+        "target_sources": 30,
+        "manifest_sources": 30,
+        "extracted_records": 30,
+        "eligible_count": 30,
+        "holdout_count": 0,
+        "download_failures": 0,
+        "track_mix": {
+          "Poster": 30
+        },
+        "collection_status": {
+          "existing": 30
+        },
+        "palette_stability": {
+          "top_share": 0.548,
+          "unique": 169
+        },
+        "palette_source_prevalence": [
+          {
+            "hex": "#2070B0",
+            "color_family": 7,
+            "source_count": 21,
+            "representative_source_count": 6,
+            "source_share": 0.7,
+            "figure_color_count": 42830,
+            "hue": 0.574,
+            "chroma": 0.818,
+            "contrast_on_white": 5.242
+          },
+          {
+            "hex": "#FF8010",
+            "color_family": 1,
+            "source_count": 20,
+            "representative_source_count": 4,
+            "source_share": 0.667,
+            "figure_color_count": 2448,
+            "hue": 0.078,
+            "chroma": 0.937,
+            "contrast_on_white": 2.516
+          },
+          {
+            "hex": "#50A030",
+            "color_family": 3,
+            "source_count": 11,
+            "representative_source_count": 1,
+            "source_share": 0.367,
+            "figure_color_count": 209,
+            "hue": 0.286,
+            "chroma": 0.7,
+            "contrast_on_white": 3.275
+          },
+          {
+            "hex": "#9060C0",
+            "color_family": 9,
+            "source_count": 9,
+            "representative_source_count": 3,
+            "source_share": 0.3,
+            "figure_color_count": 8538,
+            "hue": 0.75,
+            "chroma": 0.5,
+            "contrast_on_white": 4.545
+          }
+        ],
+        "minimum_palette_source_support": 8,
+        "palette_status": "usable",
+        "anchor_status": "usable",
+        "profile_status": "usable",
+        "profile_stability": {
+          "source_count": 22,
+          "cooccurrence_pairs": [
+            {
+              "families": [
+                1,
+                7
+              ],
+              "source_count": 12,
+              "source_share": 0.545
+            },
+            {
+              "families": [
+                0,
+                7
+              ],
+              "source_count": 11,
+              "source_share": 0.5
+            },
+            {
+              "families": [
+                3,
+                7
+              ],
+              "source_count": 11,
+              "source_share": 0.5
+            },
+            {
+              "families": [
+                2,
+                7
+              ],
+              "source_count": 10,
+              "source_share": 0.455
+            },
+            {
+              "families": [
+                0,
+                1
+              ],
+              "source_count": 9,
+              "source_share": 0.409
+            },
+            {
+              "families": [
+                0,
+                3
+              ],
+              "source_count": 8,
+              "source_share": 0.364
+            },
+            {
+              "families": [
+                1,
+                3
+              ],
+              "source_count": 8,
+              "source_share": 0.364
+            }
+          ],
+          "bootstrap_retention": 0.782,
+          "leave_one_out_jaccard": 0.974
+        },
+        "palette_fallback_reason": null,
+        "layout_archetype_stability": {
+          "top_share": 0.519,
+          "unique": 4
+        }
+      },
+      "top_vector_colors": [
+        {
+          "hex": "#2070B0",
+          "count": 32612
+        },
+        {
+          "hex": "#70B0D0",
+          "count": 8383
+        },
+        {
+          "hex": "#9060C0",
+          "count": 8355
+        },
+        {
+          "hex": "#4070E0",
+          "count": 857
+        },
+        {
+          "hex": "#FF8010",
+          "count": 489
+        },
+        {
+          "hex": "#A050A0",
+          "count": 481
+        },
+        {
+          "hex": "#FF8000",
+          "count": 481
+        },
+        {
+          "hex": "#FFFF30",
+          "count": 481
+        }
+      ],
+      "layout_archetypes": {
+        "image-heavy": 12,
+        "quantitative-grid": 27,
+        "mixed": 12,
+        "schematic-led-composite": 1
+      }
+    },
+    "icml": {
+      "eligible_sources": 30,
+      "coverage": {
+        "target_sources": 30,
+        "manifest_sources": 30,
+        "extracted_records": 30,
+        "eligible_count": 30,
+        "holdout_count": 0,
+        "download_failures": 0,
+        "track_mix": {
+          "Regular": 5,
+          "Spotlight": 1,
+          "Poster": 24
+        },
+        "collection_status": {
+          "existing": 30
+        },
+        "palette_stability": {
+          "top_share": 0.275,
+          "unique": 157
+        },
+        "palette_source_prevalence": [
+          {
+            "hex": "#2070B0",
+            "color_family": 7,
+            "source_count": 22,
+            "representative_source_count": 11,
+            "source_share": 0.733,
+            "figure_color_count": 1919,
+            "hue": 0.574,
+            "chroma": 0.818,
+            "contrast_on_white": 5.242
+          },
+          {
+            "hex": "#FF0000",
+            "color_family": 0,
+            "source_count": 20,
+            "representative_source_count": 6,
+            "source_share": 0.667,
+            "figure_color_count": 10370,
+            "hue": 0.0,
+            "chroma": 1.0,
+            "contrast_on_white": 3.998
+          },
+          {
+            "hex": "#30A030",
+            "color_family": 4,
+            "source_count": 14,
+            "representative_source_count": 8,
+            "source_share": 0.467,
+            "figure_color_count": 3415,
+            "hue": 0.333,
+            "chroma": 0.7,
+            "contrast_on_white": 3.389
+          },
+          {
+            "hex": "#E070C0",
+            "color_family": 11,
+            "source_count": 8,
+            "representative_source_count": 4,
+            "source_share": 0.267,
+            "figure_color_count": 567,
+            "hue": 0.881,
+            "chroma": 0.5,
+            "contrast_on_white": 2.897
+          },
+          {
+            "hex": "#9060C0",
+            "color_family": 9,
+            "source_count": 8,
+            "representative_source_count": 6,
+            "source_share": 0.267,
+            "figure_color_count": 564,
+            "hue": 0.75,
+            "chroma": 0.5,
+            "contrast_on_white": 4.545
+          }
+        ],
+        "minimum_palette_source_support": 8,
+        "palette_status": "usable",
+        "anchor_status": "usable",
+        "profile_status": "usable",
+        "profile_stability": {
+          "source_count": 24,
+          "cooccurrence_pairs": [
+            {
+              "families": [
+                0,
+                7
+              ],
+              "source_count": 17,
+              "source_share": 0.708
+            },
+            {
+              "families": [
+                1,
+                7
+              ],
+              "source_count": 14,
+              "source_share": 0.583
+            },
+            {
+              "families": [
+                0,
+                1
+              ],
+              "source_count": 12,
+              "source_share": 0.5
+            },
+            {
+              "families": [
+                7,
+                8
+              ],
+              "source_count": 11,
+              "source_share": 0.458
+            },
+            {
+              "families": [
+                0,
+                8
+              ],
+              "source_count": 8,
+              "source_share": 0.333
+            },
+            {
+              "families": [
+                4,
+                7
+              ],
+              "source_count": 8,
+              "source_share": 0.333
+            },
+            {
+              "families": [
+                6,
+                7
+              ],
+              "source_count": 8,
+              "source_share": 0.333
+            }
+          ],
+          "bootstrap_retention": 0.75,
+          "leave_one_out_jaccard": 0.869
+        },
+        "palette_fallback_reason": null,
+        "layout_archetype_stability": {
+          "top_share": 0.542,
+          "unique": 5
+        }
+      },
+      "top_vector_colors": [
+        {
+          "hex": "#E02020",
+          "count": 6000
+        },
+        {
+          "hex": "#FF0000",
+          "count": 2669
+        },
+        {
+          "hex": "#0000FF",
+          "count": 2498
+        },
+        {
+          "hex": "#008000",
+          "count": 2248
+        },
+        {
+          "hex": "#2070B0",
+          "count": 1088
+        },
+        {
+          "hex": "#30A030",
+          "count": 996
+        },
+        {
+          "hex": "#FF8010",
+          "count": 792
+        },
+        {
+          "hex": "#D02030",
+          "count": 664
+        }
+      ],
+      "layout_archetypes": {
+        "quantitative-grid": 26,
+        "mixed": 14,
+        "image-heavy": 5,
+        "sparse-theoretical": 2,
+        "schematic-led-composite": 1
+      }
+    }
+  },
+  "records_total": 90,
+  "eligible_total": 90
+}

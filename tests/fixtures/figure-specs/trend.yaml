@@ -1,0 +1,14 @@
+figure_id: Figure T1
+claim_ids: [C2]
+venue: iclr
+visual_family: trend-scaling
+data_sources: [trend.csv]
+panel_map:
+  - {panel_id: a, job: latency scaling, source: trend.csv}
+encodings: {x: tokens, y: latency, series: method, xlabel: Tokens, ylabel: Latency ms}
+metric_direction: lower-is-better
+output_base: trend
+export_formats: [svg, pdf, png]
+evidence_status: available
+caption: "Figure T1. a, Latency scaling."
+manuscript_callout: "Figure T1 shows the scaling trend."

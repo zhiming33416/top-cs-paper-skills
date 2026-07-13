@@ -1,0 +1,78 @@
+spec_version: 3
+figure_id: Figure Grammar
+claim_ids: [C-grammar]
+venue: generic
+data_sources:
+  - id: grammar
+    path: interval-composition.csv
+    format: csv
+    expected_sha256: null
+    columns: [kind, label, estimate, lower, upper, x, segment, value, pair, condition, axis]
+panels:
+  - panel_id: a
+    visual_family: forest-interval
+    variant: interval
+    source_id: grammar
+    encodings: {label: label, estimate: estimate, lower: lower, upper: upper, "null": 0, x: estimate}
+    transforms: [{kind: filter, column: kind, equals: forest}]
+    statistics: {estimator: not-applicable, missing: not-applicable}
+    scales: {x: {type: linear}, y: {type: categorical}}
+    annotations: []
+    semantic_roles: {}
+    legend: none
+    metric_direction: higher-is-better
+    caption_obligations: [interval]
+  - panel_id: b
+    visual_family: composition-stacked
+    variant: normalized
+    source_id: grammar
+    encodings: {x: x, segment: segment, value: value}
+    transforms: [{kind: filter, column: kind, equals: composition}]
+    statistics: {estimator: not-applicable, missing: reject}
+    scales: {x: {type: categorical}, y: {type: linear}}
+    annotations: []
+    semantic_roles: {}
+    legend: shared
+    metric_direction: not-applicable
+    caption_obligations: [denominator]
+  - panel_id: c
+    visual_family: paired-change
+    variant: slope
+    source_id: grammar
+    encodings: {pair: pair, condition: condition, value: value}
+    transforms: [{kind: filter, column: kind, equals: paired}]
+    statistics: {estimator: not-applicable, missing: reject, paired_id: pair}
+    scales: {x: {type: categorical}, y: {type: linear}}
+    annotations: []
+    semantic_roles: {}
+    legend: none
+    metric_direction: higher-is-better
+    caption_obligations: [paired]
+  - panel_id: d
+    visual_family: polar-summary
+    variant: normalized
+    source_id: grammar
+    encodings: {axis: axis, value: value}
+    transforms: [{kind: filter, column: kind, equals: polar}]
+    statistics: {estimator: not-applicable, missing: reject}
+    scales: {}
+    annotations: []
+    semantic_roles: {}
+    legend: none
+    metric_direction: mixed
+    caption_obligations: [normalization]
+visual_family: forest-interval
+panel_map:
+  - {panel_id: a, job: estimates}
+  - {panel_id: b, job: composition}
+  - {panel_id: c, job: paired change}
+  - {panel_id: d, job: diagnostic summary}
+encodings: {}
+metric_direction: mixed
+layout: {kind: mosaic, mosaic: [ab, cd], hero_panel: a, width_ratios: [1.2, 1], height_ratios: [1, 1]}
+shared_guides: {legend: shared, metric_direction_note: mixed metrics; see axes}
+reproducibility: {seed: 0, environment_capture: true, write_plotted_data: true}
+accessibility: {minimum_text_pt: 6, minimum_line_width_pt: 0.6, redundant_encoding: true, grayscale_required: true, cvd_modes: [protan, deutan, tritan]}
+output_base: v4-grammar
+export_formats: [svg, pdf, png]
+evidence_status: available

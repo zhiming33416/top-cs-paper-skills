@@ -1,0 +1,39 @@
+spec_version: 3
+figure_id: Figure Bootstrap
+claim_ids: [C-bootstrap]
+venue: generic
+data_sources:
+  - id: runs
+    path: raw-runs.csv
+    format: csv
+    expected_sha256: null
+    columns: [task, method, seed, score]
+panels:
+  - panel_id: a
+    visual_family: comparison
+    variant: dot
+    source_id: runs
+    encodings: {x: task, y: estimate, raw_y: score, series: method}
+    transforms: []
+    statistics:
+      estimator: mean
+      uncertainty: {kind: bootstrap-ci, confidence: 0.95, bootstrap_samples: 500, seed: 19}
+      missing: reject
+    scales: {x: {type: categorical}, y: {type: linear, label: accuracy}}
+    annotations: []
+    semantic_roles: {Ours: ours, Base: baseline}
+    legend: shared
+    metric_direction: higher-is-better
+    caption_obligations: [mean, bootstrap, n]
+visual_family: comparison
+panel_map: [{panel_id: a, job: raw-run comparison, source: runs}]
+encodings: {}
+metric_direction: higher-is-better
+shared_guides: {legend: shared, metric_direction_note: higher is better}
+reproducibility: {seed: 19, environment_capture: true, write_plotted_data: true}
+accessibility: {minimum_text_pt: 6, minimum_line_width_pt: 0.6, redundant_encoding: true, grayscale_required: true, cvd_modes: [protan, deutan, tritan]}
+output_base: raw-bootstrap
+export_formats: [svg, pdf, png]
+evidence_status: available
+caption: "Figure Bootstrap. a, Mean accuracy with 95% bootstrap confidence intervals; n=3 seeds per task and method."
+manuscript_callout: "Figure Bootstrap compares mean accuracy and seed uncertainty across tasks."

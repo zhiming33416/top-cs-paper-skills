@@ -1,0 +1,13 @@
+task,method,seed,score
+Vision,Base,1,70
+Vision,Base,2,72
+Vision,Base,3,71
+Vision,Ours,1,78
+Vision,Ours,2,81
+Vision,Ours,3,80
+Text,Base,1,66
+Text,Base,2,68
+Text,Base,3,67
+Text,Ours,1,74
+Text,Ours,2,76
+Text,Ours,3,75

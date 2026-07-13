@@ -1,0 +1,14 @@
+figure_id: Figure H1
+claim_ids: [C3]
+venue: generic
+visual_family: matrix-heatmap
+data_sources: [heatmap.csv]
+panel_map:
+  - {panel_id: a, job: task by method matrix, source: heatmap.csv}
+encodings: {row: task, column: method, value: score}
+metric_direction: higher-is-better
+output_base: heatmap
+export_formats: [svg, pdf, png]
+evidence_status: available
+caption: "Figure H1. a, Task by method heatmap."
+manuscript_callout: "Figure H1 summarizes task-level scores."

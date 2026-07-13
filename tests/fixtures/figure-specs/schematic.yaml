@@ -1,0 +1,23 @@
+spec_version: 2
+figure_id: Figure S1
+claim_ids: [C-S1]
+venue: generic
+visual_family: method-schematic
+data_sources: [comparison.csv]
+panel_map: [{panel_id: a, job: declared method flow}]
+encodings: {}
+metric_direction: not-applicable
+output_base: schematic
+export_formats: [svg, pdf, png]
+evidence_status: partial
+layout: {kind: grid, rows: 1, columns: 1}
+panels:
+  - panel_id: a
+    visual_family: method-schematic
+    nodes:
+      - {id: input, label: Input graph, x: 0.15, y: 0.5, kind: input}
+      - {id: encoder, label: Graph encoder, x: 0.5, y: 0.5, kind: process}
+      - {id: output, label: Prediction head, x: 0.85, y: 0.5, kind: output}
+    edges:
+      - {from: input, to: encoder, label: node features}
+      - {from: encoder, to: output, label: embeddings}

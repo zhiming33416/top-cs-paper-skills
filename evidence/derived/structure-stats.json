@@ -1,0 +1,166 @@
+{
+  "schema_version": 2,
+  "unique_sources": 99,
+  "duplicate_groups": [
+    {
+      "sha256": "d8f91900f8f1582d5f7763c4bd5dd3e6f42ac5e2dbef63a5b1b78941320f3be1",
+      "canonical_source_id": "icml2026-d8f91900f8f1",
+      "occurrences": [
+        {
+          "track": "Oral",
+          "relative_path": "papers/ICML2026/verified_fulltext/Oral - Agent0-VL_ Exploring Self-Evolving Agent for Tool-Integrated Vision-Language Reasoning.pdf"
+        },
+        {
+          "track": "Spotlight",
+          "relative_path": "papers/ICML2026/verified_fulltext/Spotlight - Agent0-VL_ Exploring Self-Evolving Agent for Tool-Integrated Vision-Language Reasoning.pdf"
+        }
+      ]
+    }
+  ],
+  "primary_writing_evidence": 90,
+  "conferences": {
+    "ICLR2026": {
+      "unique_sources": 30,
+      "primary_sources": 30,
+      "target_primary_sources": 30,
+      "readiness_gap": 0,
+      "track_counts": {
+        "Oral": 6,
+        "Poster": 24
+      },
+      "page_median": 28.5,
+      "abstract_word_median": 219.0,
+      "heading_presence_in_primary": {
+        "abstract": 29,
+        "appendix": 10,
+        "background": 11,
+        "conclusion": 26,
+        "discussion": 1,
+        "experiments": 28,
+        "impact-statement": 1,
+        "introduction": 30,
+        "limitations": 4,
+        "method": 20,
+        "references": 30,
+        "related-work": 26,
+        "results": 7
+      },
+      "paper_type_candidates": {
+        "algorithmic": 21,
+        "dataset-benchmark": 6,
+        "systems": 2,
+        "theoretical": 1
+      },
+      "topic_tag_candidates": {
+        "agents-planning-control": 7,
+        "causal-statistical": 1,
+        "data-benchmark-evaluation": 2,
+        "generative-modeling": 1,
+        "language-reasoning": 6,
+        "recommendation-search": 1,
+        "representation-learning": 2,
+        "robustness-security": 2,
+        "scientific-ml": 4,
+        "theory-optimization": 1,
+        "vision-multimodal": 3
+      },
+      "human_labels_complete": false
+    },
+    "ICML2026": {
+      "unique_sources": 30,
+      "primary_sources": 30,
+      "target_primary_sources": 30,
+      "readiness_gap": 0,
+      "track_counts": {
+        "Oral": 3,
+        "Spotlight": 4,
+        "Regular": 24
+      },
+      "page_median": 26.0,
+      "abstract_word_median": 178.5,
+      "heading_presence_in_primary": {
+        "abstract": 30,
+        "appendix": 7,
+        "background": 10,
+        "conclusion": 26,
+        "discussion": 4,
+        "experiments": 21,
+        "impact-statement": 27,
+        "introduction": 30,
+        "limitations": 4,
+        "method": 17,
+        "references": 30,
+        "related-work": 25,
+        "results": 6
+      },
+      "paper_type_candidates": {
+        "algorithmic": 22,
+        "dataset-benchmark": 3,
+        "empirical": 1,
+        "systems": 3,
+        "theoretical": 1
+      },
+      "topic_tag_candidates": {
+        "agents-planning-control": 6,
+        "causal-statistical": 3,
+        "data-benchmark-evaluation": 1,
+        "generative-modeling": 1,
+        "graphs-networks": 1,
+        "language-reasoning": 7,
+        "representation-learning": 3,
+        "systems-efficiency": 2,
+        "theory-optimization": 3,
+        "vision-multimodal": 3
+      },
+      "human_labels_complete": false
+    },
+    "WWW2026": {
+      "unique_sources": 39,
+      "primary_sources": 30,
+      "target_primary_sources": 30,
+      "readiness_gap": 0,
+      "track_counts": {
+        "Industry": 3,
+        "Research": 30,
+        "Short": 3,
+        "Web4Good": 3
+      },
+      "page_median": 12,
+      "abstract_word_median": 313.5,
+      "heading_presence_in_primary": {
+        "abstract": 30,
+        "appendix": 3,
+        "background": 9,
+        "conclusion": 25,
+        "discussion": 2,
+        "experiments": 24,
+        "introduction": 29,
+        "method": 16,
+        "references": 30,
+        "related-work": 23,
+        "results": 7
+      },
+      "paper_type_candidates": {
+        "algorithmic": 13,
+        "dataset-benchmark": 3,
+        "empirical": 6,
+        "systems": 4,
+        "theoretical": 4
+      },
+      "topic_tag_candidates": {
+        "agents-planning-control": 3,
+        "data-benchmark-evaluation": 4,
+        "economics-social-web": 3,
+        "generative-modeling": 3,
+        "language-reasoning": 3,
+        "recommendation-search": 5,
+        "representation-learning": 1,
+        "robustness-security": 3,
+        "systems-efficiency": 2,
+        "theory-optimization": 1,
+        "vision-multimodal": 2
+      },
+      "human_labels_complete": false
+    }
+  }
+}

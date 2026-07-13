@@ -1,0 +1,5 @@
+task,method,score
+T1,Base,0.71
+T1,Ours,0.79
+T2,Base,0.64
+T2,Ours,0.73

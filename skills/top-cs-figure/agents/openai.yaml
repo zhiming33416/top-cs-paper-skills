@@ -1,0 +1,4 @@
+interface:
+  display_name: "Top CS Figure"
+  short_description: "Render paper figures and visual QA"
+  default_prompt: "Use $top-cs-figure to create or revise this CS paper figure from the figure brief, data, and manuscript callout."

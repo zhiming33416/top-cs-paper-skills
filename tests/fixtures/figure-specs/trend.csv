@@ -1,0 +1,7 @@
+tokens,method,latency
+128,Base,11.0
+256,Base,17.5
+512,Base,28.0
+128,Ours,8.0
+256,Ours,12.4
+512,Ours,19.6

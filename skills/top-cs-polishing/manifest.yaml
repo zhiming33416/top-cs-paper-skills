@@ -1,0 +1,126 @@
+name: top-cs-polishing
+version: 2.3.0
+description: "Multi-axis static/dynamic router for evidence-preserving manuscript revision."
+always_load:
+  - ../_shared/core/evidence-discipline.md
+  - ../_shared/core/claim-evidence-boundary.md
+  - ../_shared/core/terminology-ledger.md
+  - ../_shared/core/reader-workflow.md
+  - static/core/stance.md
+  - static/core/failure-modes.md
+  - static/core/output-format.md
+axes:
+  venue:
+    detect: "Use an explicitly named venue or verified template. Otherwise use generic."
+    values:
+      www: ../_shared/venues/www.md
+      iclr: ../_shared/venues/iclr.md
+      icml: ../_shared/venues/icml.md
+      generic: ../_shared/venues/generic.md
+    default: generic
+    multi: false
+  paper_type:
+    detect: "Classify the central contribution to calibrate terminology and evidence expectations."
+    values:
+      empirical: ../_shared/paper-types/empirical.md
+      algorithmic: ../_shared/paper-types/algorithmic.md
+      theoretical: ../_shared/paper-types/theoretical.md
+      systems: ../_shared/paper-types/systems.md
+      dataset-benchmark: ../_shared/paper-types/dataset-benchmark.md
+    default: empirical
+    multi: false
+  section:
+    detect: "Identify every section being revised; skip only for truly standalone prose."
+    values:
+      title: static/fragments/section/title.md
+      abstract: static/fragments/section/abstract.md
+      introduction: static/fragments/section/introduction.md
+      related-work: static/fragments/section/related-work.md
+      method: static/fragments/section/method.md
+      experiments: static/fragments/section/experiments.md
+      discussion: static/fragments/section/discussion.md
+      limitations: static/fragments/section/limitations.md
+      conclusion: static/fragments/section/conclusion.md
+    multi: true
+  language:
+    detect: "Use zh-to-en for Chinese or strongly Chinese-structured prose; otherwise use en."
+    values:
+      en: static/fragments/language/en.md
+      zh-to-en: static/fragments/language/zh-to-en.md
+    default: en
+    multi: false
+runtime_parameters:
+  artifact_scope:
+    values: [passage, section, full-manuscript, latex-project]
+    default: passage
+  revision_mode:
+    values: [light-edit, structural-revision, compression, zh-to-en]
+    default: structural-revision
+  evidence_state:
+    values: [complete, partial, sparse]
+    default: partial
+  submission_stage:
+    values: [draft, pre-submission, discussion-revision, camera-ready]
+    default: draft
+  citation_verification:
+    values: [off, metadata]
+    default: off
+  figure_handoff:
+    values: [none, audit]
+    default: none
+references:
+  on_demand:
+    - condition: "needs functional section-move diagnosis before sentence editing"
+      path: ../_shared/references/rhetorical-moves.md
+    - condition: "needs bibliographic metadata verification or citation-state discipline"
+      path: ../_shared/references/citation-verification.md
+    - condition: "needs caption, callout, label, or figure-to-claim alignment audit"
+      path: ../_shared/references/figure-handoff.md
+    - condition: "needs revision-mode boundaries or a change ledger"
+      path: references/revision-modes-and-ledger.md
+    - condition: "needs full-manuscript terminology and claim consistency"
+      path: references/cross-section-consistency.md
+    - condition: "needs corpus-calibrated section moves or venue placement conventions"
+      path: references/corpus-calibrated-moves.md
+    - condition: "needs section move orders or paragraph restructuring"
+      path: references/section-moves.md
+    - condition: "needs claim-strength, hedging, or overstatement calibration"
+      path: references/claim-strength.md
+    - condition: "needs LaTeX-preserving revision guidance"
+      path: references/latex-safety.md
+    - condition: "needs final revision QA"
+      path: references/qa-checklist.md
+    - condition: "needs sentence and paragraph failure diagnosis or conference-style guardrails"
+      path: references/style-diagnostics.md
+    - condition: "needs concrete before-and-after revision patterns"
+      path: references/before-after-examples.md
+    - condition: "needs evidence-calibrated verbs, transitions, comparison, limitation, or implication language"
+      path: references/phrase-families.md
+    - condition: "needs articles, agreement, tense, units, symbols, abbreviations, register, or sentence mechanics"
+      path: references/mechanics-and-register.md
+    - condition: "needs aggressive compression while preserving facts, citations, and claim boundaries"
+      path: references/compression-protocol.md
+    - condition: "needs LaTeX page-layout, float-placement, or rendered-page diagnosis"
+      path: references/latex-layout.md
+    - condition: "needs rule authority, source provenance, or corpus-versus-implementation boundaries"
+      path: references/source-basis.md
+output_contract: "revised prose, revision ledger, claim-strength changes, evidence warnings, verification status, unresolved inputs"
+reference_routes:
+  rhetorical-moves: [../_shared/references/rhetorical-moves.md]
+  citation-verification: [../_shared/references/citation-verification.md, ../_shared/contracts/citation-record.schema.yaml, ../_shared/scripts/verify_citations.py]
+  figure-handoff: [../_shared/references/figure-handoff.md, ../_shared/contracts/figure-brief.schema.yaml]
+  full-section-corpus: [../_shared/references/full-section-corpus-patterns.md]
+  full-paper: [references/cross-section-consistency.md]
+  revision-ledger: [references/revision-modes-and-ledger.md]
+  venue-corpus: [references/corpus-calibrated-moves.md]
+  section-structure: [references/section-moves.md]
+  claim-strength: [references/claim-strength.md]
+  latex: [references/latex-safety.md]
+  qa: [references/qa-checklist.md]
+  style-diagnostics: [references/style-diagnostics.md]
+  examples: [references/before-after-examples.md]
+  phrase-families: [references/phrase-families.md]
+  mechanics: [references/mechanics-and-register.md]
+  compression: [references/compression-protocol.md]
+  latex-layout: [references/latex-layout.md]
+  source-basis: [references/source-basis.md, ../_shared/rule-provenance.yaml]

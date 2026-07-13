@@ -1,0 +1,4 @@
+interface:
+  display_name: "Top CS Paper Writing"
+  short_description: "Draft evidence-grounded top-conference papers"
+  default_prompt: "Use $top-cs-writing to plan and draft this conference-paper section with a claim-evidence map and consistent terminology."

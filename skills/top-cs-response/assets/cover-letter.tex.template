@@ -1,0 +1,15 @@
+\documentclass[11pt]{letter}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+\begin{letter}{[EDITOR NAME]\\[VENUE OR JOURNAL]}
+\opening{Dear [EDITOR NAME],}
+
+Please find our revised manuscript, ``[MANUSCRIPT TITLE]'' ([MANUSCRIPT ID]).
+In this revision, we have [VERIFIED MAJOR CHANGE 1] and [VERIFIED MAJOR CHANGE 2].
+The accompanying response addresses every editor and reviewer item with stable identifiers and manuscript locations.
+
+[UNRESOLVED MATERIAL ISSUE OR REMOVE THIS PLACEHOLDER]
+
+\closing{Sincerely,\\[CORRESPONDING AUTHOR] on behalf of all authors}
+\end{letter}
+\end{document}

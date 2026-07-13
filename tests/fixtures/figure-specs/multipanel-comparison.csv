@@ -1,0 +1,5 @@
+dataset,method,score,lower,upper
+WebQA,Base,61,59,63
+WebQA,Ours,69,67,71
+GraphQA,Base,57,55,59
+GraphQA,Ours,66,64,68

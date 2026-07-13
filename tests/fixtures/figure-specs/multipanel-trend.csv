@@ -1,0 +1,7 @@
+step,method,score,lower,upper
+1,Base,42,40,44
+2,Base,49,47,51
+3,Base,55,53,57
+1,Ours,45,43,47
+2,Ours,57,55,59
+3,Ours,66,64,68

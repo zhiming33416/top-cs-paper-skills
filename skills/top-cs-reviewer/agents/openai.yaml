@@ -1,0 +1,4 @@
+interface:
+  display_name: "Top CS Paper Reviewer"
+  short_description: "Audit manuscripts against venue review criteria"
+  default_prompt: "Use $top-cs-reviewer to audit this paper with anchored issues, consequence-based severity, and a prioritized revision plan."

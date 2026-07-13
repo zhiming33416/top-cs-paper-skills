@@ -1,0 +1,12 @@
+schema_version: 1
+generated: '2026-07-09'
+target:
+  year: 2026
+  venues: [icml]
+  target_per_venue: 10
+source_policy:
+  public_only: true
+  raw_pdfs_outside_skill_repository: true
+  raw_text_retained: false
+  raw_images_retained: false
+sources: []

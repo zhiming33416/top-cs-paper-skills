@@ -1,0 +1,129 @@
+schema_version: 1
+collection_policy:
+  public_only: true
+  raw_files_outside_skill_repository: true
+  default_rate_limit_seconds: 2.0
+  user_agent: "top-cs-paper-skills-evidence-collector/1.0"
+sources:
+  - source_id: official-iclr2026-author
+    venue: iclr
+    year: 2026
+    category: author-response
+    url: https://iclr.cc/Conferences/2026/AuthorGuide
+    relative_path: sources/ICLR2026/guides/author-guide.html
+    license: official-public-webpage
+    version_status: current-2026
+  - source_id: official-iclr2026-reviewer
+    venue: iclr
+    year: 2026
+    category: reviewer
+    url: https://iclr.cc/Conferences/2026/ReviewerGuide
+    relative_path: sources/ICLR2026/guides/reviewer-guide.html
+    license: official-public-webpage
+    version_status: current-2026
+  - source_id: official-iclr2026-template
+    venue: iclr
+    year: 2026
+    category: latex-template
+    url: https://github.com/ICLR/Master-Template/raw/master/iclr2026.zip
+    relative_path: sources/ICLR2026/template/iclr2026.zip
+    license: official-public-template
+    version_status: current-2026
+  - source_id: official-icml2026-author
+    venue: icml
+    year: 2026
+    category: author
+    url: https://icml.cc/Conferences/2026/AuthorInstructions
+    relative_path: sources/ICML2026/guides/author-instructions.html
+    license: official-public-webpage
+    version_status: current-2026
+  - source_id: official-icml2026-reviewer
+    venue: icml
+    year: 2026
+    category: reviewer
+    url: https://icml.cc/Conferences/2026/ReviewerInstructions
+    relative_path: sources/ICML2026/guides/reviewer-instructions.html
+    license: official-public-webpage
+    version_status: current-2026
+  - source_id: official-icml2026-response
+    venue: icml
+    year: 2026
+    category: response
+    url: https://icml.cc/Conferences/2026/PeerReviewFAQ
+    relative_path: sources/ICML2026/guides/rebuttal-discussion-faq.html
+    license: official-public-webpage
+    version_status: current-2026
+  - source_id: official-icml2026-ethics
+    venue: icml
+    year: 2026
+    category: ethics-llm
+    url: https://icml.cc/Conferences/2026/ResearchEthics
+    relative_path: sources/ICML2026/guides/research-ethics.html
+    license: official-public-webpage
+    version_status: current-2026
+  - source_id: official-icml2026-peer-review-ethics
+    venue: icml
+    year: 2026
+    category: research-ethics
+    url: https://icml.cc/Conferences/2026/PeerReviewEthics
+    relative_path: sources/ICML2026/guides/peer-review-ethics.html
+    license: official-public-webpage
+    version_status: current-2026
+  - source_id: official-icml2026-llm-reviewing
+    venue: icml
+    year: 2026
+    category: ethics-llm
+    url: https://icml.cc/Conferences/2026/LLM-Policy
+    relative_path: sources/ICML2026/guides/llm-reviewing-policy.html
+    license: official-public-webpage
+    version_status: current-2026
+  - source_id: official-icml2026-template
+    venue: icml
+    year: 2026
+    category: latex-template
+    url: https://media.icml.cc/Conferences/ICML2026/Styles/icml2026.zip
+    relative_path: sources/ICML2026/template/icml2026.zip
+    license: official-public-template
+    version_status: current-2026
+  - source_id: official-icml2026-example-pdf
+    venue: icml
+    year: 2026
+    category: example-pdf
+    url: https://media.icml.cc/Conferences/ICML2026/Styles/example_paper.pdf
+    relative_path: sources/ICML2026/template/example_paper.pdf
+    license: official-public-template-example
+    version_status: current-2026
+  - source_id: official-icml2026-paper-checker
+    venue: icml
+    year: 2026
+    category: format-checker
+    url: https://papercheck.icml.cc/papercheck.html
+    relative_path: sources/ICML2026/guides/paper-checker.html
+    license: official-public-webpage
+    version_status: current-2026
+  - source_id: official-www2026-research
+    venue: www
+    year: 2026
+    category: author-response
+    url: https://www2026.thewebconf.org/calls/research-tracks.html
+    relative_path: sources/WWW2026/guides/research-author-rebuttal-guide.html
+    license: official-public-webpage
+    version_status: current-2026
+  - source_id: official-www2026-accepted-research
+    venue: www
+    year: 2026
+    category: accepted-title-index
+    url: https://www2026.thewebconf.org/accepted/research-tracks.html
+    relative_path: sources/WWW2026/accepted-research-tracks.html
+    license: official-public-webpage
+    version_status: current-2026
+  - source_id: openreview-public-flows
+    venue: iclr-icml
+    year: 2026
+    category: public-review-index
+    url: https://api2.openreview.net/notes
+    relative_path: sources/peer_review_public/openreview/README.json
+    license: verify-per-record-before-use
+    version_status: index-only-manual-query-required
+    collect: false
+    note: "Supply a venue invitation and public record query before collection; never download an unfiltered endpoint."

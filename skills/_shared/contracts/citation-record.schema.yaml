@@ -1,0 +1,34 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "top-cs-paper-skills/citation-record.schema.yaml"
+title: Citation record
+type: object
+required: [citation_key, bibliographic_status, claim_entailment_status, sources, conflicts]
+properties:
+  citation_key: {type: string, minLength: 1}
+  doi: {type: [string, "null"]}
+  arxiv_id: {type: [string, "null"]}
+  title: {type: [string, "null"]}
+  authors:
+    type: array
+    items: {type: string}
+  year: {type: [integer, "null"]}
+  bibliographic_status:
+    enum: [needed, candidate, verified, partial, conflicting, not-found, error]
+  claim_entailment_status:
+    enum: [not-checked, needs-source-text, supported, partial, contradicted, not-applicable]
+  sources:
+    type: array
+    items:
+      type: object
+      required: [name, status]
+      properties:
+        name: {enum: [crossref, arxiv, dblp]}
+        status: {enum: [matched, partial, conflicting, not-found, error, cached]}
+        identifier: {type: [string, "null"]}
+        url: {type: [string, "null"]}
+  conflicts:
+    type: array
+    items: {type: string}
+  checked_at: {type: [string, "null"]}
+additionalProperties: true
+

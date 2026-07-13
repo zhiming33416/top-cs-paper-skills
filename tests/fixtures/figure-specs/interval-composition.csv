@@ -1,0 +1,20 @@
+kind,label,estimate,lower,upper,x,segment,value,pair,condition,axis
+forest,Task A,0.18,0.08,0.28,,,,,,
+forest,Task B,0.31,0.19,0.43,,,,,,
+forest,Task C,0.09,-0.02,0.20,,,,,,
+composition,,,,,Model A,Compute,55,,,
+composition,,,,,Model A,Memory,30,,,
+composition,,,,,Model A,IO,15,,,
+composition,,,,,Model B,Compute,42,,,
+composition,,,,,Model B,Memory,38,,,
+composition,,,,,Model B,IO,20,,,
+paired,,,,,,,72,run1,before,
+paired,,,,,,,79,run1,after,
+paired,,,,,,,68,run2,before,
+paired,,,,,,,76,run2,after,
+paired,,,,,,,75,run3,before,
+paired,,,,,,,80,run3,after,
+polar,,,,,,,0.82,,,Accuracy
+polar,,,,,,,0.68,,,Robustness
+polar,,,,,,,0.74,,,Efficiency
+polar,,,,,,,0.61,,,Calibration

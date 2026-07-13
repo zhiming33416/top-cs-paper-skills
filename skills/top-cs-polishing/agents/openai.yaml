@@ -1,0 +1,4 @@
+interface:
+  display_name: "Top CS Paper Polishing"
+  short_description: "Revise prose and LaTeX without evidence drift"
+  default_prompt: "Use $top-cs-polishing to diagnose and revise this manuscript while preserving facts, claims, terminology, and LaTeX."

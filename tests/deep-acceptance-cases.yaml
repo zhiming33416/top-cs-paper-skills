@@ -1,0 +1,128 @@
+schema_version: 1
+description: "Source-backed behavior contracts. These complement keyword acceptance cases and require semantic/manual review."
+cases:
+  - id: deep-writing-abstract-fidelity
+    skill: top-cs-writing
+    source_file: fixtures/deep/writing-abstract.md
+    prompt: "Draft an ICLR abstract from these notes without inventing missing uncertainty."
+    required_placeholders: ["[DETAIL NEEDED]"]
+    semantic_contract:
+      required_sections: ["Central argument", "Claim-evidence-boundary table", "English draft"]
+      fact_invariants: ["GraphTune", "42.7%", "39.1%", "WebGraph-24"]
+      forbidden_claim_patterns: ["statistically significant", "state[- ]of[- ]the[- ]art", "first (method|framework)"]
+      preserve_from_source: [numbers, citations, labels]
+      required_table_columns:
+        - ["Claim", "Evidence", "Boundary", "Status"]
+    manual_rubric: [fact_fidelity, argument_structure, evidence_calibration, usability]
+
+  - id: deep-writing-targeted-revision
+    skill: top-cs-writing
+    source_file: fixtures/deep/writing-targeted-revision.md
+    prompt: "Correct only paragraph P2 and preserve approved paragraphs P1 and P3 verbatim."
+    semantic_contract:
+      required_sections: ["Changed region", "Preserved region", "Revised text"]
+      fact_invariants:
+        - "P1-LOCKED: Web-scale ranking requires models that remain reliable under temporal distribution shift."
+        - "P3-LOCKED: We evaluate the resulting system on three chronological splits."
+      forbidden_claim_patterns: ["P1-REWRITTEN", "P3-REWRITTEN", "causes temporal drift"]
+    manual_rubric: [targeted_edit_scope, logical_repair, preserved_voice, usability]
+
+  - id: deep-polishing-compression
+    skill: top-cs-polishing
+    source_file: fixtures/deep/polishing-compression.md
+    prompt: "Compress by at least one third while preserving every number, citation, label, comparator, and limitation."
+    semantic_contract:
+      required_sections: ["Diagnosis", "Revised text", "Revision ledger", "Verification status"]
+      fact_invariants: ["11.8 ms", "14.6 ms", "A100", "batch size 32", "English queries only"]
+      forbidden_claim_patterns: ["universally faster", "all queries", "causes the improvement"]
+      preserve_from_source: [numbers, citations, labels]
+      required_table_columns:
+        - ["Source item", "Location before", "Location after", "Status"]
+    manual_rubric: [fact_fidelity, compression_quality, claim_boundary, readability]
+
+  - id: deep-polishing-layout
+    skill: top-cs-polishing
+    source_file: fixtures/deep/polishing-layout.md
+    prompt: "Diagnose the float backlog and propose the smallest safe repair; do not claim compilation or visual success."
+    semantic_contract:
+      required_sections: ["Diagnosis", "Material changes", "Verification status"]
+      fact_invariants: ["Figure 4", "page 7", "figure*", "\\clearpage"]
+      forbidden_claim_patterns: ["compiled successfully", "visually verified", "reduce (all )?margins", "global negative.*vspace"]
+    manual_rubric: [diagnostic_specificity, latex_safety, minimality, verification_honesty]
+
+  - id: deep-reviewer-partial-scope
+    skill: top-cs-reviewer
+    source_file: fixtures/deep/reviewer-partial.md
+    prompt: "Review only the supplied abstract and state the assessment boundary."
+    semantic_contract:
+      required_sections: ["Review setup and assessment boundary", "Anchored issue ledger", "Not-assessable items and confidence limits"]
+      fact_invariants: ["64 tasks", "8 model families", "6.2%"]
+      forbidden_claim_patterns: ["experiments are missing from the paper", "the method is not reproducible", "accept score"]
+      preserve_from_source: [numbers]
+      required_table_columns:
+        - ["Anchor", "Threatened claim", "Consequence", "Confidence", "Fixability"]
+    manual_rubric: [scope_discipline, issue_grounding, severity_calibration, fairness]
+
+  - id: deep-reviewer-systems-efficiency
+    skill: top-cs-reviewer
+    source_file: fixtures/deep/reviewer-systems.md
+    prompt: "Audit the efficiency claim and produce one complete issue-contract row."
+    semantic_contract:
+      required_sections: ["Technical audit", "Anchored issue ledger", "Revision plan"]
+      fact_invariants: ["18 ms", "27 ms", "Table 3"]
+      forbidden_claim_patterns: ['definitely uses the same hardware', 'blocking[^\n]*without', 'please test more datasets']
+      preserve_from_source: [numbers]
+      required_table_columns:
+        - ["ID", "Anchor", "Threatened claim", "Consequence", "Severity", "Confidence", "Resolution", "Fixability"]
+    manual_rubric: [issue_contract_completeness, systems_reasoning, proportionality, actionability]
+
+  - id: deep-response-missing-results
+    skill: top-cs-response
+    source_file: fixtures/deep/response-missing-results.md
+    prompt: "Prepare a point-by-point draft while keeping the claimed validation experiment unverified."
+    required_placeholders: ["AUTHOR_INPUT_NEEDED", "[LOCATION NEEDED]"]
+    semantic_contract:
+      required_sections: ["Readiness", "Editor-instruction and reviewer issue matrix", "Point-by-point English response", "Unresolved items and risk flags"]
+      fact_invariants: ["GSE12345", "Figure 5", "R1.1"]
+      forbidden_claim_patterns: ['validation (confirmed|demonstrated|showed)', 'p\s*[<=>]', 'completed[^\n]*R1\.1']
+      required_claim_statuses: {"R1.1": "author-input-needed"}
+      required_table_columns:
+        - ["ID", "Action", "Status", "Evidence", "Location"]
+    manual_rubric: [factuality, traceability, response_usefulness, tone]
+
+  - id: deep-response-conference-guard
+    skill: top-cs-response
+    source_file: fixtures/deep/response-conference-guard.md
+    prompt: "Draft the ICML author response without claiming a revised-paper upload."
+    semantic_contract:
+      required_sections: ["Protocol and character budget", "Point-by-point English response", "Verified revision ledger"]
+      fact_invariants: ["R2.1", "Table 2", "planned"]
+      forbidden_claim_patterns: ["uploaded (a |the )?(marked |revised )?manuscript", "revision is completed", "6000 characters"]
+      required_claim_statuses: {"R2.1": "planned"}
+    manual_rubric: [protocol_compliance, status_accuracy, evidence_use, concision]
+
+  - id: deep-figure-brief-csv
+    skill: top-cs-figure
+    source_file: fixtures/deep/figure-brief-csv.md
+    prompt: "Use the supplied figure brief and CSV values to create Figure 3 without inventing statistics."
+    semantic_contract:
+      required_sections: ["Figure contract", "Generated/updated files", "Caption and manuscript-callout notes", "Visual QA", "Unresolved inputs"]
+      fact_invariants: ["Figure 3", "GraphTune", "79.3", "WebGraph-24", "\\label{fig:graphtune-main}"]
+      forbidden_claim_patterns: ["p\\s*[<=>]", "state[- ]of[- ]the[- ]art", "additional experiment completed", "generated with OpenRouter"]
+      preserve_from_source: [numbers, labels]
+      required_table_columns:
+        - ["Panel", "Job", "Evidence", "Status"]
+    manual_rubric: [data_fidelity, figure_contract, visual_qa_specificity, manuscript_alignment]
+
+  - id: deep-figure-script-audit
+    skill: top-cs-figure
+    source_file: fixtures/deep/figure-script-audit.md
+    prompt: "Audit this plotting script and specify the smallest changes needed for a paper-ready export bundle."
+    semantic_contract:
+      required_sections: ["Figure contract", "Generated/updated files", "Caption and manuscript-callout notes", "Visual QA", "Unresolved inputs"]
+      fact_invariants: ["Figure 2", "fig2.png", "12.4 ms", "batch size 16"]
+      forbidden_claim_patterns: ["rendered successfully", "converted to R", "uploaded", "camera-ready verified"]
+      preserve_from_source: [numbers]
+      required_table_columns:
+        - ["Issue", "Risk", "Fix", "Verification"]
+    manual_rubric: [script_diagnosis, export_boundary, fact_preservation, minimality]

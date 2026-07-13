@@ -1,0 +1,4 @@
+interface:
+  display_name: "Top CS Paper Response"
+  short_description: "Prepare verified rebuttals and revision packages"
+  default_prompt: "Use $top-cs-response to parse these reviews and prepare a verified point-by-point response or revision package."

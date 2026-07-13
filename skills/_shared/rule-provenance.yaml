@@ -1,0 +1,70 @@
+schema_version: 2
+purpose: "Classify every skill rule by authority and prevent implementation heuristics from being presented as empirical or official facts."
+labels:
+  official-policy:
+    meaning: "Binding or authoritative venue guidance for the named year and track."
+    precedence: 1
+    freshness_required: true
+  corpus-derived:
+    meaning: "A structural or behavioral pattern promoted from the indexed public corpus under repository thresholds."
+    precedence: 3
+    freshness_required: false
+  author-artifact:
+    meaning: "A fact visible in the manuscript, review, diff, figure, code, or note supplied by the user."
+    precedence: 2
+    freshness_required: false
+  conservative-implementation:
+    meaning: "A safety, traceability, or workflow choice adopted by this repository; not an empirical frequency claim."
+    precedence: 4
+    freshness_required: false
+  output-contract:
+    meaning: "A formatting or usability convention for deterministic deliverables; not a venue requirement."
+    precedence: 5
+    freshness_required: false
+  synthetic-example:
+    meaning: "An invented, non-confidential example used to demonstrate behavior; never evidence about publication outcomes."
+    precedence: 6
+    freshness_required: false
+  workflow-inspiration:
+    meaning: "An externally published workflow adapted as repository design input; never venue authority, corpus evidence, or evidence of acceptance benefit."
+    precedence: 7
+    freshness_required: false
+sources:
+  official-venue-policy:
+    label: official-policy
+    files: [venue-policies.yaml, venues/www.md, venues/iclr.md, venues/icml.md]
+  accepted-paper-structure:
+    label: corpus-derived
+    repository_files: [evidence/derived/rules.yaml, evidence/derived/full-section-rules.yaml, evidence/derived/structure-stats.json]
+    population: "90 accepted-title-verified public versions: 30 each for WWW Research, ICLR, and ICML."
+    boundary: "Supports promoted structural patterns only; not phrase imitation, causal claims about acceptance, or official format rules."
+  historical-review-behavior:
+    label: corpus-derived
+    repository_files: [evidence/derived/rules.yaml, evidence/derived/review-stats.json]
+    population: "25 public ICLR 2020-2023 review flows with 94 reviews and 32 discussion threads."
+    boundary: "Behavioral evidence only; not current WWW/ICML policy and below the venue-specific promotion target."
+  external-workflow-inspiration:
+    label: workflow-inspiration
+    projects:
+      - id: snl-paper-writing-skill
+        url: "https://github.com/SNL-UCSB/paper-writing-skill"
+        adapted_concepts: [functional-rhetorical-moves, topic-sentence-scaffold, figure-to-claim]
+      - id: hermes-research-paper-writing
+        url: "https://github.com/nousresearch/hermes-agent/tree/main/skills/research/research-paper-writing"
+        adapted_concepts: [claim-oriented-experiment-structure, staged-citation-verification]
+      - id: auto-research-rebuttal
+        url: "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep/tree/main/skills/rebuttal"
+        adapted_concepts: [issue-board, multi-round-state, adversarial-stress-test]
+      - id: openjudge-paper-review
+        url: "https://github.com/agentscope-ai/OpenJudge/tree/main/skills/paper-review"
+        adapted_concepts: [review-safety-stage, bibliographic-metadata-verification]
+      - id: nature-figure
+        url: "https://github.com/Yuan1z0825/nature-skills/tree/main/skills/nature-figure"
+        adapted_concepts: [short-router-static-fragments, figure-contract-before-plotting, export-qa-boundary]
+    boundary: "Concepts are independently re-expressed and implemented. No external wording, code, venue policy, score scale, or empirical acceptance claim is imported."
+invariants:
+  - "Official policy overrides corpus convention and implementation preference."
+  - "Author artifacts control scientific facts; corpus patterns control neither results nor novelty."
+  - "Every synthetic example must use placeholders or explicitly invented facts."
+  - "A conservative implementation rule must not claim frequency, acceptance benefit, or venue authority."
+  - "Workflow inspiration may shape procedure only; it cannot promote a hard or soft venue rule."

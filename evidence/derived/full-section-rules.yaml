@@ -1,0 +1,468 @@
+schema_version: 1
+generated: '2026-07-06'
+population_selector: eligibility=primary-writing-evidence
+population_source_ids:
+- iclr2026-76543f11aa8a
+- iclr2026-d777d8a33f9a
+- iclr2026-552f9264cfef
+- iclr2026-21bc969656ce
+- iclr2026-9ad2b8bc1239
+- iclr2026-24365928b673
+- iclr2026-642b377bbcce
+- iclr2026-3ec48982b3d2
+- iclr2026-c7f25646bf84
+- iclr2026-69596ada7104
+- iclr2026-9e5f710027b7
+- iclr2026-d2b8ca379377
+- iclr2026-e91b28b0e9e9
+- iclr2026-884a28a0febc
+- iclr2026-513b1cf56ef0
+- iclr2026-e9d03a027d92
+- iclr2026-d7856fa34f76
+- iclr2026-b43e47846932
+- iclr2026-10d0144d9ffc
+- iclr2026-0aac00293451
+- iclr2026-356636912b02
+- iclr2026-dbf2c35318a6
+- iclr2026-67b23491e037
+- iclr2026-071647c96de3
+- iclr2026-3698058099e9
+- iclr2026-38d946319db3
+- iclr2026-5c8000261028
+- iclr2026-49ce499b2161
+- iclr2026-ed0ab9db86a8
+- iclr2026-38dac74099fe
+- icml2026-f91e5112d3fe
+- icml2026-e9ff709d03ba
+- icml2026-d8f91900f8f1
+- icml2026-be0e4b12af8f
+- icml2026-14376bfa221f
+- icml2026-72b52feb2ac3
+- icml2026-33bae55e2896
+- icml2026-51d275fc8ee0
+- icml2026-11630aaab1d2
+- icml2026-2dea48f9d92c
+- icml2026-2458bfb6152c
+- icml2026-3f49f7df8372
+- icml2026-aa03a05d7867
+- icml2026-17bbbce059e8
+- icml2026-c2824fbf4380
+- icml2026-ed630829d635
+- icml2026-0c7f46ee0dd9
+- icml2026-b974f97035e8
+- icml2026-5beb9ff37ae6
+- icml2026-221df6bfd5d7
+- icml2026-5a93dd1a0789
+- icml2026-ade199256414
+- icml2026-51077dd28188
+- icml2026-2bbc465c3c6e
+- icml2026-f8aa0dc11b59
+- icml2026-309376b8ba71
+- icml2026-ffc89a81bf23
+- icml2026-7371891d54b3
+- icml2026-237846fe92a1
+- icml2026-8f4d6319d7aa
+- www2026-a827b277f985
+- www2026-d929ae1c81fd
+- www2026-fa1d1834d99c
+- www2026-ae0d724545e8
+- www2026-30cb56e35634
+- www2026-a1983e650afc
+- www2026-aef43db1e8e9
+- www2026-268e85e9988a
+- www2026-096eb549e03e
+- www2026-7a6addf90230
+- www2026-d6ec332ae80c
+- www2026-8aaa3d5fd9dc
+- www2026-518704dd351c
+- www2026-c81d8388d6a8
+- www2026-2dcd16764989
+- www2026-b976d381fdfd
+- www2026-fe849ada26b1
+- www2026-1b0974af9db7
+- www2026-90990d2d362e
+- www2026-5b30ab88b666
+- www2026-5f943f4d67e9
+- www2026-b9d50079dbe4
+- www2026-21b1c1ddf9db
+- www2026-e2e7922dc156
+- www2026-0a66a5c7689e
+- www2026-12be7d3da0d6
+- www2026-37b52e61aecb
+- www2026-a93039b87212
+- www2026-953448c3eaa9
+- www2026-185106be1740
+rules:
+- rule_id: cross-venue-method-structural-coverage
+  skills:
+  - top-cs-writing
+  - top-cs-polishing
+  - top-cs-reviewer
+  venue: cross-venue
+  section: method
+  source_type: accepted-title-verified-public-version
+  evidence_kind: deterministic-structural-aggregate
+  source_selector: eligibility=primary-writing-evidence AND structure.section_order
+    CONTAINS method
+  matched_source_ids:
+  - iclr2026-76543f11aa8a
+  - iclr2026-552f9264cfef
+  - iclr2026-21bc969656ce
+  - iclr2026-642b377bbcce
+  - iclr2026-3ec48982b3d2
+  - iclr2026-9e5f710027b7
+  - iclr2026-d2b8ca379377
+  - iclr2026-e91b28b0e9e9
+  - iclr2026-884a28a0febc
+  - iclr2026-513b1cf56ef0
+  - iclr2026-e9d03a027d92
+  - iclr2026-d7856fa34f76
+  - iclr2026-10d0144d9ffc
+  - iclr2026-0aac00293451
+  - iclr2026-dbf2c35318a6
+  - iclr2026-071647c96de3
+  - iclr2026-3698058099e9
+  - iclr2026-5c8000261028
+  - iclr2026-ed0ab9db86a8
+  - iclr2026-38dac74099fe
+  - icml2026-f91e5112d3fe
+  - icml2026-d8f91900f8f1
+  - icml2026-72b52feb2ac3
+  - icml2026-33bae55e2896
+  - icml2026-51d275fc8ee0
+  - icml2026-11630aaab1d2
+  - icml2026-2dea48f9d92c
+  - icml2026-2458bfb6152c
+  - icml2026-c2824fbf4380
+  - icml2026-0c7f46ee0dd9
+  - icml2026-5beb9ff37ae6
+  - icml2026-5a93dd1a0789
+  - icml2026-2bbc465c3c6e
+  - icml2026-309376b8ba71
+  - icml2026-ffc89a81bf23
+  - icml2026-7371891d54b3
+  - icml2026-8f4d6319d7aa
+  - www2026-a827b277f985
+  - www2026-d929ae1c81fd
+  - www2026-ae0d724545e8
+  - www2026-30cb56e35634
+  - www2026-096eb549e03e
+  - www2026-8aaa3d5fd9dc
+  - www2026-518704dd351c
+  - www2026-2dcd16764989
+  - www2026-fe849ada26b1
+  - www2026-1b0974af9db7
+  - www2026-90990d2d362e
+  - www2026-5f943f4d67e9
+  - www2026-b9d50079dbe4
+  - www2026-e2e7922dc156
+  - www2026-0a66a5c7689e
+  - www2026-12be7d3da0d6
+  matched_count: 53
+  population_count: 90
+  venue_counts:
+    ICLR2026:
+      matched: 20
+      population: 30
+    ICML2026:
+      matched: 17
+      population: 30
+    WWW2026:
+      matched: 16
+      population: 30
+  confidence: medium
+  last_verified: '2026-07-06'
+  statement: Method headings vary substantially; require the problem setting, assumptions,
+    mechanism, objective or procedure, and computational implications without forcing
+    a universal heading.
+  boundary: Heading detection supports placement flexibility only; content requirements
+    come from claim and reproducibility discipline.
+- rule_id: cross-venue-experiments-structural-coverage
+  skills:
+  - top-cs-writing
+  - top-cs-polishing
+  - top-cs-reviewer
+  venue: cross-venue
+  section: experiments
+  source_type: accepted-title-verified-public-version
+  evidence_kind: deterministic-structural-aggregate
+  source_selector: eligibility=primary-writing-evidence AND structure.section_order
+    CONTAINS experiments
+  matched_source_ids:
+  - iclr2026-76543f11aa8a
+  - iclr2026-d777d8a33f9a
+  - iclr2026-552f9264cfef
+  - iclr2026-9ad2b8bc1239
+  - iclr2026-24365928b673
+  - iclr2026-642b377bbcce
+  - iclr2026-3ec48982b3d2
+  - iclr2026-c7f25646bf84
+  - iclr2026-69596ada7104
+  - iclr2026-9e5f710027b7
+  - iclr2026-d2b8ca379377
+  - iclr2026-e91b28b0e9e9
+  - iclr2026-884a28a0febc
+  - iclr2026-513b1cf56ef0
+  - iclr2026-e9d03a027d92
+  - iclr2026-d7856fa34f76
+  - iclr2026-b43e47846932
+  - iclr2026-10d0144d9ffc
+  - iclr2026-0aac00293451
+  - iclr2026-356636912b02
+  - iclr2026-dbf2c35318a6
+  - iclr2026-071647c96de3
+  - iclr2026-3698058099e9
+  - iclr2026-38d946319db3
+  - iclr2026-5c8000261028
+  - iclr2026-49ce499b2161
+  - iclr2026-ed0ab9db86a8
+  - iclr2026-38dac74099fe
+  - icml2026-f91e5112d3fe
+  - icml2026-e9ff709d03ba
+  - icml2026-d8f91900f8f1
+  - icml2026-72b52feb2ac3
+  - icml2026-51d275fc8ee0
+  - icml2026-11630aaab1d2
+  - icml2026-2dea48f9d92c
+  - icml2026-2458bfb6152c
+  - icml2026-3f49f7df8372
+  - icml2026-aa03a05d7867
+  - icml2026-0c7f46ee0dd9
+  - icml2026-b974f97035e8
+  - icml2026-5beb9ff37ae6
+  - icml2026-221df6bfd5d7
+  - icml2026-5a93dd1a0789
+  - icml2026-ade199256414
+  - icml2026-2bbc465c3c6e
+  - icml2026-ffc89a81bf23
+  - icml2026-7371891d54b3
+  - icml2026-237846fe92a1
+  - icml2026-8f4d6319d7aa
+  - www2026-a827b277f985
+  - www2026-d929ae1c81fd
+  - www2026-ae0d724545e8
+  - www2026-30cb56e35634
+  - www2026-aef43db1e8e9
+  - www2026-268e85e9988a
+  - www2026-096eb549e03e
+  - www2026-7a6addf90230
+  - www2026-d6ec332ae80c
+  - www2026-8aaa3d5fd9dc
+  - www2026-c81d8388d6a8
+  - www2026-2dcd16764989
+  - www2026-b976d381fdfd
+  - www2026-fe849ada26b1
+  - www2026-1b0974af9db7
+  - www2026-90990d2d362e
+  - www2026-5f943f4d67e9
+  - www2026-b9d50079dbe4
+  - www2026-21b1c1ddf9db
+  - www2026-e2e7922dc156
+  - www2026-0a66a5c7689e
+  - www2026-12be7d3da0d6
+  - www2026-37b52e61aecb
+  - www2026-953448c3eaa9
+  matched_count: 73
+  population_count: 90
+  venue_counts:
+    ICLR2026:
+      matched: 28
+      population: 30
+    ICML2026:
+      matched: 21
+      population: 30
+    WWW2026:
+      matched: 24
+      population: 30
+  confidence: medium
+  last_verified: '2026-07-06'
+  statement: Experimental or evaluation sections are prevalent but not universal;
+    organize empirical evidence by research question, comparator, metric, result,
+    interpretation, and boundary when the paper makes empirical claims.
+  boundary: Do not impose an experiments section on a purely theoretical contribution;
+    audit the selected paper type first.
+- rule_id: cross-venue-discussion-structural-coverage
+  skills:
+  - top-cs-writing
+  - top-cs-polishing
+  - top-cs-reviewer
+  venue: cross-venue
+  section: discussion
+  source_type: accepted-title-verified-public-version
+  evidence_kind: deterministic-structural-aggregate
+  source_selector: eligibility=primary-writing-evidence AND structure.section_order
+    CONTAINS discussion
+  matched_source_ids:
+  - iclr2026-ed0ab9db86a8
+  - icml2026-33bae55e2896
+  - icml2026-11630aaab1d2
+  - icml2026-0c7f46ee0dd9
+  - icml2026-309376b8ba71
+  - www2026-d6ec332ae80c
+  - www2026-1b0974af9db7
+  matched_count: 7
+  population_count: 90
+  venue_counts:
+    ICLR2026:
+      matched: 1
+      population: 30
+    ICML2026:
+      matched: 4
+      population: 30
+    WWW2026:
+      matched: 2
+      population: 30
+  confidence: medium
+  last_verified: '2026-07-06'
+  statement: Dedicated discussion headings are uncommon, so interpretation may be
+    integrated with results; still separate observation, explanation, implication,
+    and uncertainty in the argument.
+  boundary: Low heading frequency does not justify omitting discussion of mechanisms,
+    negative evidence, or scope.
+- rule_id: cross-venue-limitations-structural-coverage
+  skills:
+  - top-cs-writing
+  - top-cs-polishing
+  - top-cs-reviewer
+  venue: cross-venue
+  section: limitations
+  source_type: accepted-title-verified-public-version
+  evidence_kind: deterministic-structural-aggregate
+  source_selector: eligibility=primary-writing-evidence AND structure.section_order
+    CONTAINS limitations
+  matched_source_ids:
+  - iclr2026-21bc969656ce
+  - iclr2026-642b377bbcce
+  - iclr2026-d2b8ca379377
+  - iclr2026-071647c96de3
+  - icml2026-11630aaab1d2
+  - icml2026-2dea48f9d92c
+  - icml2026-309376b8ba71
+  - icml2026-8f4d6319d7aa
+  matched_count: 8
+  population_count: 90
+  venue_counts:
+    ICLR2026:
+      matched: 4
+      population: 30
+    ICML2026:
+      matched: 4
+      population: 30
+    WWW2026:
+      matched: 0
+      population: 30
+  confidence: medium
+  last_verified: '2026-07-06'
+  statement: Dedicated limitations headings are uncommon in the public-version corpus;
+    make concrete claim boundaries explicit wherever the venue and argument require
+    them, regardless of heading choice.
+  boundary: Public-version heading frequency is not evidence that limitations are
+    optional or that a venue omits ethics requirements.
+- rule_id: cross-venue-conclusion-structural-coverage
+  skills:
+  - top-cs-writing
+  - top-cs-polishing
+  - top-cs-reviewer
+  venue: cross-venue
+  section: conclusion
+  source_type: accepted-title-verified-public-version
+  evidence_kind: deterministic-structural-aggregate
+  source_selector: eligibility=primary-writing-evidence AND structure.section_order
+    CONTAINS conclusion
+  matched_source_ids:
+  - iclr2026-76543f11aa8a
+  - iclr2026-552f9264cfef
+  - iclr2026-21bc969656ce
+  - iclr2026-9ad2b8bc1239
+  - iclr2026-24365928b673
+  - iclr2026-642b377bbcce
+  - iclr2026-3ec48982b3d2
+  - iclr2026-c7f25646bf84
+  - iclr2026-69596ada7104
+  - iclr2026-9e5f710027b7
+  - iclr2026-d2b8ca379377
+  - iclr2026-e91b28b0e9e9
+  - iclr2026-884a28a0febc
+  - iclr2026-513b1cf56ef0
+  - iclr2026-e9d03a027d92
+  - iclr2026-d7856fa34f76
+  - iclr2026-b43e47846932
+  - iclr2026-10d0144d9ffc
+  - iclr2026-0aac00293451
+  - iclr2026-356636912b02
+  - iclr2026-dbf2c35318a6
+  - iclr2026-071647c96de3
+  - iclr2026-3698058099e9
+  - iclr2026-38d946319db3
+  - iclr2026-49ce499b2161
+  - iclr2026-38dac74099fe
+  - icml2026-f91e5112d3fe
+  - icml2026-e9ff709d03ba
+  - icml2026-d8f91900f8f1
+  - icml2026-be0e4b12af8f
+  - icml2026-14376bfa221f
+  - icml2026-72b52feb2ac3
+  - icml2026-51d275fc8ee0
+  - icml2026-11630aaab1d2
+  - icml2026-2dea48f9d92c
+  - icml2026-2458bfb6152c
+  - icml2026-3f49f7df8372
+  - icml2026-aa03a05d7867
+  - icml2026-17bbbce059e8
+  - icml2026-ed630829d635
+  - icml2026-b974f97035e8
+  - icml2026-5beb9ff37ae6
+  - icml2026-221df6bfd5d7
+  - icml2026-5a93dd1a0789
+  - icml2026-ade199256414
+  - icml2026-51077dd28188
+  - icml2026-2bbc465c3c6e
+  - icml2026-f8aa0dc11b59
+  - icml2026-309376b8ba71
+  - icml2026-7371891d54b3
+  - icml2026-237846fe92a1
+  - icml2026-8f4d6319d7aa
+  - www2026-a827b277f985
+  - www2026-d929ae1c81fd
+  - www2026-fa1d1834d99c
+  - www2026-ae0d724545e8
+  - www2026-30cb56e35634
+  - www2026-aef43db1e8e9
+  - www2026-268e85e9988a
+  - www2026-096eb549e03e
+  - www2026-d6ec332ae80c
+  - www2026-8aaa3d5fd9dc
+  - www2026-518704dd351c
+  - www2026-c81d8388d6a8
+  - www2026-2dcd16764989
+  - www2026-fe849ada26b1
+  - www2026-1b0974af9db7
+  - www2026-90990d2d362e
+  - www2026-5b30ab88b666
+  - www2026-5f943f4d67e9
+  - www2026-b9d50079dbe4
+  - www2026-21b1c1ddf9db
+  - www2026-e2e7922dc156
+  - www2026-0a66a5c7689e
+  - www2026-12be7d3da0d6
+  - www2026-37b52e61aecb
+  - www2026-953448c3eaa9
+  matched_count: 77
+  population_count: 90
+  venue_counts:
+    ICLR2026:
+      matched: 26
+      population: 30
+    ICML2026:
+      matched: 26
+      population: 30
+    WWW2026:
+      matched: 25
+      population: 30
+  confidence: medium
+  last_verified: '2026-07-06'
+  statement: Conclusion sections are common but not universal; when present, synthesize
+    the supported contribution, decisive evidence, and boundary without introducing
+    new claims or citations.
+  boundary: A detected heading is structural evidence only and does not validate the
+    conclusion's claims.

@@ -1,0 +1,49 @@
+schema_version: 2
+last_verified: "2026-07-06"
+venues:
+  www:
+    year: 2026
+    expires_after: 2026
+    status: active
+    source: "https://www2026.thewebconf.org/calls/research-tracks.html"
+    template: "acmart sigconf, anonymous, review"
+    main_pages: 8
+    total_pages: 12
+    references_excluded_from_main: true
+    appendix_location: "after main text in the same PDF"
+    double_blind: true
+    first_page_web_relevance: true
+    reviewer_form_status: "not-public-or-not-collected"
+    response_protocol: "author rebuttal; do not assume interactive follow-up"
+  iclr:
+    year: 2026
+    expires_after: 2026
+    status: active
+    source: "https://iclr.cc/Conferences/2026/AuthorGuide"
+    template: "official ICLR 2026 LaTeX style"
+    main_pages: 9
+    discussion_main_pages: 10
+    references_excluded_from_main: true
+    appendix_location: "after bibliography or separate supplementary file"
+    double_blind: true
+    reproducibility_statement: "strongly encouraged"
+    ethics_statement: "recommended when relevant"
+    response_protocol: "public discussion comments and paper revisions allowed during the official discussion window"
+  icml:
+    year: 2026
+    expires_after: 2026
+    status: active
+    source: "https://icml.cc/Conferences/2026/AuthorInstructions"
+    template: "official ICML 2026 LaTeX style"
+    main_pages: 8
+    pdf_size_mb: 50
+    references_excluded_from_main: true
+    appendix_location: "after references in the same PDF"
+    double_blind: true
+    response_protocol: "one response per official review with limited follow-up; no revised-paper upload during author feedback"
+  generic:
+    year: null
+    expires_after: null
+    status: fallback
+    source: null
+    warning: "No venue-specific policy is asserted; verify the current official guide."

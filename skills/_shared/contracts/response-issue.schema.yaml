@@ -1,0 +1,33 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "top-cs-paper-skills/response-issue.schema.yaml"
+title: Response issue record
+type: object
+required: [issue_id, reviewer, round, raw_anchor, category, severity, threatened_claim, evidence, action, status, duplicate_of]
+properties:
+  issue_id: {type: string, pattern: "^[A-Z][A-Za-z0-9.-]*$"}
+  reviewer: {type: string}
+  round: {type: integer, minimum: 1, maximum: 3}
+  parent_issue: {type: [string, "null"]}
+  raw_anchor: {type: string}
+  category: {enum: [correctness, novelty, assumptions, theory, empirical-support, baseline, statistics, efficiency, reproducibility, clarity, scope, ethics, citation, figure, other]}
+  severity: {enum: [critical, major, minor]}
+  reviewer_priority: {enum: [pivotal, standard]}
+  threatened_claim: {type: [string, "null"]}
+  evidence:
+    type: array
+    items: {type: string}
+  action: {type: string}
+  status: {enum: [unresolved, evidence-needed, drafted, verified, planned, cannot-complete, author-input-needed]}
+  duplicate_of: {type: [string, "null"]}
+  history:
+    type: array
+    items:
+      type: object
+      required: [round, from, to, reason]
+      properties:
+        round: {type: integer, minimum: 1, maximum: 3}
+        from: {type: [string, "null"]}
+        to: {enum: [unresolved, evidence-needed, drafted, verified, planned, cannot-complete, author-input-needed]}
+        reason: {type: string}
+additionalProperties: true
+

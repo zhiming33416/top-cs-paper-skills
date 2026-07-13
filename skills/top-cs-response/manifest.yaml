@@ -1,0 +1,106 @@
+name: top-cs-response
+version: 2.3.0
+description: "Linear parameterized reviewer-response workflow with no large content axis."
+always_load:
+  - ../_shared/core/evidence-discipline.md
+  - ../_shared/core/anonymity.md
+  - static/core/stance.md
+  - static/core/workflow.md
+  - static/core/output-format.md
+runtime_parameters:
+  venue:
+    values: [www, iclr, icml, generic]
+    default: generic
+  task_mode:
+    values: [draft, audit, revise, triage-only, cover-letter, revision-package, latex-template, appeal-like]
+    default: draft
+  response_phase:
+    values: [initial-rebuttal, author-reviewer-discussion, reviewer-follow-up, meta-review-response, revision-letter, camera-ready]
+    default: initial-rebuttal
+  decision_type:
+    values: [minor-revision, major-revision, revise-and-resubmit, reject-with-transfer, unclear]
+    default: unclear
+  language:
+    values: [en, zh-to-en]
+    default: en
+  artifact_scope:
+    values: [reviews-only, reviews-manuscript, reviews-diff, complete-package]
+    default: reviews-only
+  revision_mode:
+    values: [response-only, response-and-ledger, verify-revision]
+    default: response-and-ledger
+  evidence_state:
+    values: [complete, partial, sparse]
+    default: partial
+  submission_stage:
+    values: [initial-rebuttal, discussion, post-decision, camera-ready]
+    default: initial-rebuttal
+  citation_verification:
+    values: [off, metadata]
+    default: off
+  figure_handoff:
+    values: [none, track]
+    default: none
+  stress_test:
+    values: [off, up-to-3-rounds]
+    default: off
+references:
+  on_demand:
+    - condition: "needs a stable cross-reviewer issue board or status-transition history"
+      path: references/issue-board-and-stress-test.md
+    - condition: "needs adversarial response stress testing"
+      path: references/issue-board-and-stress-test.md
+    - condition: "needs bibliographic metadata verification for a citation-related response"
+      path: ../_shared/references/citation-verification.md
+    - condition: "needs to track a requested figure change without rendering it"
+      path: ../_shared/references/figure-handoff.md
+    - condition: "needs per-review budgets, multi-round state, or venue protocol branching"
+      path: references/multi-round-protocol.md
+    - condition: "claims a manuscript change or supplies a submission/revision diff"
+      path: references/revision-verification.md
+    - condition: "needs historical public response/discussion behavior patterns"
+      path: references/historical-response-patterns.md
+    - condition: "before drafting, to identify mode, phase, minimum inputs, and readiness"
+      path: references/intake-and-routing.md
+    - condition: "needs venue-specific response or discussion protocol"
+      path: references/venue-protocols.md
+    - condition: "needs comment category and severity classification"
+      path: references/comment-taxonomy.md
+    - condition: "needs tracker action labels and status mapping"
+      path: references/action-mapping.md
+    - condition: "needs disagreement language or tone correction"
+      path: references/tone-and-stance.md
+    - condition: "needs impossible-experiment, conflicting-reviewer, statistical, or appeal handling"
+      path: references/difficult-cases.md
+    - condition: "before finalizing or auditing a response"
+      path: references/qa-checklist.md
+    - condition: "input contains a decision email, editor letter, deadline, manuscript ID, or required-file list"
+      path: references/editorial-email-intake.md
+    - condition: "needs a cover letter, complete revision package, marked-manuscript plan, or LaTeX deliverables"
+      path: references/response-package.md
+    - condition: "user supplies Chinese author notes or needs Chinese confirmation actions"
+      path: references/chinese-author-alignment.md
+    - condition: "needs concrete response patterns for common and difficult cases"
+      path: references/examples.md
+    - condition: "needs rule authority, source provenance, or historical-behavior boundaries"
+      path: references/source-basis.md
+output_contract: "issue matrix, protocol budget, response strategy, point-by-point English reply, verified revision ledger, unresolved items"
+reference_routes:
+  issue-board: [references/issue-board-and-stress-test.md, ../_shared/contracts/response-issue.schema.yaml]
+  response-stress-test: [references/issue-board-and-stress-test.md, ../_shared/contracts/response-issue.schema.yaml]
+  citation-verification: [../_shared/references/citation-verification.md, ../_shared/contracts/citation-record.schema.yaml, ../_shared/scripts/verify_citations.py]
+  figure-handoff: [../_shared/references/figure-handoff.md, ../_shared/contracts/figure-brief.schema.yaml]
+  venue-protocol: [references/multi-round-protocol.md, references/venue-protocols.md]
+  revision-verification: [references/revision-verification.md]
+  history: [references/historical-response-patterns.md]
+  intake: [references/intake-and-routing.md]
+  taxonomy: [references/comment-taxonomy.md]
+  action-mapping: [references/action-mapping.md]
+  tone: [references/tone-and-stance.md]
+  difficult-case: [references/difficult-cases.md]
+  qa: [references/qa-checklist.md]
+  editorial-email: [references/editorial-email-intake.md]
+  package: [references/response-package.md]
+  chinese-alignment: [references/chinese-author-alignment.md]
+  examples: [references/examples.md]
+  source-basis: [references/source-basis.md, ../_shared/rule-provenance.yaml]

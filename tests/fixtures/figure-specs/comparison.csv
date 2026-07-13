@@ -1,0 +1,5 @@
+dataset,method,score
+WebGraph,Base,71.2
+WebGraph,Ours,79.3
+SearchLog,Base,68.4
+SearchLog,Ours,74.1

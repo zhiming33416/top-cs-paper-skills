@@ -1,0 +1,321 @@
+schema_version: 2
+generated: "2026-07-06"
+
+scope:
+  supported:
+    - {venue: www, track: Research, year: 2026}
+    - {venue: iclr, track: Conference, year: 2026}
+    - {venue: icml, track: Main, year: 2026}
+    - {venue: generic, track: null, year: null}
+  unsupported_route: generic
+  unsupported_behavior: list-missing-policy-categories
+  future_policy_rule: "Add a year only after its official guides are public and a policy diff has been reviewed."
+
+storage_policy:
+  raw_public_material: external-corpus-only
+  raw_private_material: external-private-directory-only
+  skill_repository: source-indexes-statistics-paraphrased-rules-only
+  forbidden_in_skill_or_install: [paper-pdf, submission-text, review-text, rebuttal-text, response-text, private-artifact]
+  install_private_cases: false
+  corpus_index_contains_raw_text: false
+
+official_policy:
+  hard_rules_require_current_official_source: true
+  statuses: [collected, not-collected, not-public, unsupported]
+  required_categories:
+    - author-instructions-call-for-papers
+    - reviewer-guide
+    - review-form
+    - rebuttal-discussion-revision
+    - anonymity
+    - dual-submission
+    - research-ethics
+    - generative-ai
+    - supplement-appendix
+    - artifact-reproducibility
+    - latex-template
+    - example-pdf
+    - format-checker
+    - camera-ready-post-conference-revision
+  snapshot_policy:
+    hash_algorithm: sha256
+    manifest: evidence/derived/corpus-index.yaml
+    last_verified_field: last_verified
+    maximum_age_days: 30
+    compare_previous_snapshot: true
+    semantic_review_on_hash_change: true
+    expire_after_year: 2026
+  venues:
+    www:
+      year: 2026
+      track: Research
+      categories:
+        author-instructions-call-for-papers: {status: collected, source_ids: [official-www2026-research]}
+        reviewer-guide: {status: not-public, source_ids: [], fallback: author-side-criteria-only}
+        review-form: {status: not-public, source_ids: [], fallback: author-side-criteria-only}
+        rebuttal-discussion-revision: {status: collected, source_ids: [official-www2026-research]}
+        anonymity: {status: collected, source_ids: [official-www2026-research]}
+        dual-submission: {status: collected, source_ids: [official-www2026-research]}
+        research-ethics: {status: collected, source_ids: [official-www2026-research]}
+        generative-ai: {status: collected, source_ids: [official-www2026-research]}
+        supplement-appendix: {status: collected, source_ids: [official-www2026-research]}
+        artifact-reproducibility: {status: collected, source_ids: [official-www2026-research]}
+        latex-template: {status: collected, source_ids: [official-www2026-template]}
+        example-pdf: {status: not-public, source_ids: []}
+        format-checker: {status: not-public, source_ids: []}
+        camera-ready-post-conference-revision: {status: collected, source_ids: [official-www2026-research]}
+      reviewer_boundary: "Do not infer a reviewer form. Use only author-visible evaluation criteria."
+    iclr:
+      year: 2026
+      track: Conference
+      categories:
+        author-instructions-call-for-papers: {status: collected, source_ids: [official-iclr2026-author]}
+        reviewer-guide: {status: collected, source_ids: [official-iclr2026-reviewer]}
+        review-form: {status: collected, source_ids: [official-iclr2026-reviewer]}
+        rebuttal-discussion-revision: {status: collected, source_ids: [official-iclr2026-author]}
+        anonymity: {status: collected, source_ids: [official-iclr2026-author]}
+        dual-submission: {status: collected, source_ids: [official-iclr2026-author]}
+        research-ethics: {status: collected, source_ids: [official-iclr2026-reviewer]}
+        generative-ai: {status: collected, source_ids: [official-iclr2026-reviewer]}
+        supplement-appendix: {status: collected, source_ids: [official-iclr2026-author]}
+        artifact-reproducibility: {status: collected, source_ids: [official-iclr2026-author, official-iclr2026-reviewer]}
+        latex-template: {status: collected, source_ids: [official-iclr2026-template]}
+        example-pdf: {status: not-collected, source_ids: []}
+        format-checker: {status: not-public, source_ids: []}
+        camera-ready-post-conference-revision: {status: not-collected, source_ids: []}
+      response_protocol:
+        official_source_ids: [official-iclr2026-author]
+        response_mechanism: public-comments-on-reviews
+        public_discussion: true
+        manuscript_revision_during_discussion: true
+        revision_must_be_disclosed: true
+        automated_pdf_diff: true
+        author_list_change: prohibited
+        author_order_change: allowed
+        discussion_page_limit: 10
+        post_discussion_reviewer_ac_phase: private
+    icml:
+      year: 2026
+      track: Main
+      categories:
+        author-instructions-call-for-papers: {status: collected, source_ids: [official-icml2026-author]}
+        reviewer-guide: {status: collected, source_ids: [official-icml2026-reviewer]}
+        review-form: {status: collected, source_ids: [official-icml2026-reviewer]}
+        rebuttal-discussion-revision: {status: collected, source_ids: [official-icml2026-response, official-icml2026-reviewer]}
+        anonymity: {status: collected, source_ids: [official-icml2026-author]}
+        dual-submission: {status: collected, source_ids: [official-icml2026-author]}
+        research-ethics: {status: collected, source_ids: [official-icml2026-ethics, official-icml2026-peer-review-ethics]}
+        generative-ai: {status: collected, source_ids: [official-icml2026-llm-reviewing]}
+        supplement-appendix: {status: collected, source_ids: [official-icml2026-author]}
+        artifact-reproducibility: {status: collected, source_ids: [official-icml2026-author]}
+        latex-template: {status: collected, source_ids: [official-icml2026-template]}
+        example-pdf: {status: collected, source_ids: [official-icml2026-example-pdf]}
+        format-checker: {status: collected, source_ids: [official-icml2026-paper-checker]}
+        camera-ready-post-conference-revision: {status: collected, source_ids: [official-icml2026-author, official-icml2026-response]}
+      response_protocol:
+        official_source_ids: [official-icml2026-response, official-icml2026-reviewer]
+        responses_per_official_review: 1
+        response_character_limit: 5000
+        reviewer_follow_up_rounds: 1
+        author_follow_up_rounds: 1
+        reviewer_acknowledgement_required: true
+        final_justification_required: true
+        revised_manuscript_during_feedback: prohibited
+
+papers:
+  target_total_unique_primary: 90
+  target_unique_primary_per_venue: {www: 30, iclr: 30, icml: 30}
+  current_unique_primary: {www: 30, iclr: 30, icml: 30}
+  gaps: {www: 0, iclr: 0, icml: 0}
+  eligibility:
+    official_accepted_title_required: true
+    public_fulltext_required: true
+    accepted_title_and_fulltext_recorded_separately: true
+    public_preprint_is_format_evidence: false
+    sha256_deduplicate: true
+    www_primary_track: Research
+    www_other_tracks: independent-index-only
+  diversity_requirements:
+    minimum_paper_types: 4
+    paper_types: [theoretical, algorithmic, empirical, systems, dataset-benchmark]
+    minimum_topics: 6
+    maximum_single_topic_fraction: 0.25
+    labels_require_human_verification: true
+    current_label_status: assistant-reviewed-candidate-needs-human-confirmation
+    labels_awaiting_human_confirmation: 90
+    minimum_acceptance_levels: {www: 1, iclr: 2, icml: 2}
+  known_candidate_label_imbalance:
+    total_paper_types: {algorithmic: 56, dataset-benchmark: 12, systems: 9, empirical: 7, theoretical: 6}
+    by_venue:
+      www: {algorithmic: 13, dataset-benchmark: 3, systems: 4, empirical: 6, theoretical: 4}
+      iclr: {algorithmic: 21, dataset-benchmark: 6, systems: 2, empirical: 0, theoretical: 1}
+      icml: {algorithmic: 22, dataset-benchmark: 3, systems: 3, empirical: 1, theoretical: 1}
+    provisional_supplement_target: "After human label confirmation, add or replace sources so each paper type has at least 3 examples per venue."
+    provisional_gaps: {www: 0, iclr: 6, icml: 4}
+  collection_priority:
+    - {venue: www, add: 0, track: Research, status: complete}
+    - {venue: icml, add: 0, status: complete}
+    - {venue: iclr, add: 0, status: complete}
+
+figure_style_corpus:
+  target_year: 2026
+  target_per_venue: {www: 30, iclr: 30, icml: 30}
+  raw_storage: external-corpus-only
+  external_pdf_roots:
+    www: papers/WWW2026/verified_fulltext
+    iclr: papers/ICLR2026/verified_fulltext
+    icml: papers/ICML2026/verified_fulltext
+  manifest: evidence/derived/visual-style-source-manifest.yaml
+  derived_outputs:
+    - evidence/derived/visual-style-index.yaml
+    - evidence/derived/visual-style-stats.json
+    - evidence/derived/visual-style-rules.yaml
+  eligibility:
+    public_pdf_required: true
+    exact_title_or_venue_verification_required: true
+    sha256_deduplicate: true
+    accepted_main_track_only: true
+    www_primary_track: Research
+    www_excluded_sources: [ACM-restricted-pdf, Companion, Short, Industry, Web4Good]
+    no_raw_figures_crops_or_text_in_repo: true
+    arxiv_exact_title_resolver: true
+    resolver_candidate_source: accepted-title-corpus-index-only
+    resolver_cache: sources/visual-style-resolver-cache.json
+    public_preprint_style_evidence_allowed: true
+    public_preprint_official_format_evidence: false
+  promotion:
+    promoted_minimum_eligible_per_venue: 10
+    target_eligible_per_venue: 30
+    insufficient_behavior: generic-style-fallback-with-evidence-gap
+    current_snapshot_2026_07_13:
+      www: {eligible: 30, style_status: promoted, anchor_status: usable, profile_status: usable, profile_sources: 24, bootstrap_retention: 0.855}
+      iclr: {eligible: 30, style_status: promoted, anchor_status: usable, profile_status: usable, profile_sources: 22, bootstrap_retention: 0.782}
+      icml: {eligible: 30, style_status: promoted, anchor_status: usable, profile_status: usable, profile_sources: 24, bootstrap_retention: 0.750}
+  source_acquisition:
+    scope: 2026-main-conference-only
+    iclr: [openreview-api2, openreview-legacy-fallback, official-public-submissions-page-seed, accepted-title-arxiv-fallback]
+    icml: [official-virtual-paper-json, pmlr-official-fallback, accepted-title-arxiv-fallback]
+    resolver_cache: external-ttl-bound
+  palette_promotion:
+    figure_local_colors_only: true
+    exclude: [body-text, hyperlink-colors, page-chrome, neutral-colors]
+    minimum_independent_source_support: max-3-or-ceil-25-percent
+    minimum_distinct_color_families: 3
+    hue_family_bins: 12
+    minimum_selected_hue_separation_degrees: 36
+    minimum_contrast_on_white: 1.8
+    promoted_without_usable_palette: generic-style-fallback-with-promoted-no-usable-palette
+    evidence_schema: 3
+    provenance_layers: [observed_anchor, constructed_token, generic_fallback]
+    profile_families: [semantic, categorical, ordered, sequential, diverging, dark-overlay]
+    profile_requires:
+      - usable-anchor-status
+      - minimum-10-independent-figure-signature-sources
+      - paper-level-bootstrap-retention-at-least-0.60
+      - leave-one-paper-out-stability-report
+    corpus_expansion_gate: "Expand a venue from 30 to 50 only when profile stability remains below threshold; never expand merely to accumulate hex values."
+  synthetic_assets:
+    allowed_roots: [skills/top-cs-figure/assets/chart-atlas, skills/top-cs-figure/assets/gallery]
+    counts: {chart_atlas: 13, gallery: 14, visual_examples: 222}
+    maximum_file_bytes: 358400
+    maximum_total_bytes: 3145728
+    generator: skills/top-cs-figure/scripts/build_figure_atlas.py
+    provenance_manifest: skills/top-cs-figure/assets/generated-manifest.yaml
+    inputs: deterministic-temporary-synthetic-csv-yaml-and-image-inputs
+    renderer: strict-v3-production-renderer-only
+    prohibited: [paper-screenshots, user-images, raw-corpus, external-assets]
+
+reviews_and_responses:
+  raw_text_distribution: prohibited
+  stored_fields: [openreview_id, public_source_url, statistics, classification_labels, paraphrase_rules]
+  target_public_flows: {iclr: 50, icml: 50, www: unsupported}
+  current_public_flows: {iclr: 25, icml: 0, www: unsupported}
+  remaining_public_flow_gaps: {iclr: 25, icml: 50, www: unsupported}
+  minimum_valid_discussion_flows_for_venue_mode: 30
+  venue_specific_response_mode: {iclr: false, icml: false, www: false}
+  requirements:
+    iclr: [accept-and-reject, multiple-years, review, author-response, discussion, meta-review, decision]
+    icml: [public-pages-only, review, rebuttal, follow-up, meta-review, final-justification, decision]
+    www: [no-required-count, do-not-infer-from-other-venues]
+  causal_language_prohibited: "Do not claim that a writing pattern caused acceptance or a score."
+
+version_pairs:
+  target_verified: {iclr: 20, icml: 20}
+  current_verified: {iclr: 0, icml: 0}
+  remaining_verified_gaps: {iclr: 20, icml: 20}
+  required_pair_types:
+    - original-submission-to-rebuttal
+    - original-submission-to-discussion-revision
+    - submission-to-camera-ready
+    - reviewer-concern-to-manuscript-change-location
+  use: [polishing-change-truthfulness, response-resolution-rate, revision-ledger]
+  prohibited_use: copyable-sentence-bank
+
+private_regression:
+  directory: tests/private-eval
+  directory_is_external_or_gitignored: true
+  excluded_from_install: true
+  excluded_from_public_tests: true
+  excluded_from_corpus_index: true
+  required_material:
+    anonymized_latex_projects_and_pdfs: {minimum: 2, target: 3}
+    chinese_notes_with_human_confirmed_english: 2
+    review_response_revision_packages: 2
+  current_material:
+    anonymized_latex_projects_and_pdfs: 0
+    chinese_notes_with_human_confirmed_english: 0
+    review_response_revision_packages: 0
+  required_acceptance_labels:
+    - immutable_facts
+    - allowed_edit_scope
+    - expected_venue
+    - known_missing_evidence
+    - forbidden_outputs_or_citations
+  sanitization:
+    - remove names, affiliations, emails, grants, private repository URLs, and PDF metadata
+    - remove reviewer identity clues
+    - retain only evaluation scores, error types, and anonymous case IDs outside the private directory
+
+known_skill_limitations:
+  venue_corpus_rule_coverage:
+    structural_coverage: [abstract, introduction, related-work, method, experiments, discussion, limitations, conclusion]
+    semantic_venue_specific_coverage: [abstract, introduction, related-work]
+    remaining_semantic_gaps: [method, experiments, discussion, limitations, conclusion]
+    note: "Full-section structural rules are complete; deeper venue-specific rhetorical rules still require semantic annotation, not more PDFs."
+  routing: "Explicit --need routes and route-derived automatic needs are deterministic; free-form requests without route parameters still require agent interpretation."
+  evaluation: "The evaluator now checks headings, fact invariants, claim statuses, table schemas, forbidden claim patterns, and source number/citation/label preservation; overall scientific quality still requires human or fresh-context evaluation."
+  latex: "Polishing can compile multi-file projects with available XeLaTeX/pdfLaTeX/LuaLaTeX engines in an isolated directory; bibliography tool orchestration and venue-specific format checkers remain separate."
+  pdf_extraction: "Numbered/combined headings and PDF outlines are supported with confidence labels, but scanned PDFs and unusual typography can still require OCR or visual inspection."
+  literature_verification: "The skills do not verify citation entailment or novelty against a live scholarly index unless separately authorized."
+  forward_testing: "No private real-artifact regression cases are currently available."
+
+test_plan:
+  data_and_sources:
+    - sha256-deduplication
+    - topic-fraction-threshold
+    - paper-type-coverage
+    - www-nonresearch-exclusion
+    - hard-rules-resolve-to-current-official-sources
+    - soft-rules-meet-count-venue-level-topic-thresholds
+    - no-raw-fulltext-or-review-text-in-skill-or-install
+  routing:
+    - venue-specific-loading-differs
+    - unsupported-year-or-venue-routes-generic-and-lists-missing-policies
+    - all-manifest-paths-exist
+    - on-demand-references-are-not-always-loaded
+  behavior:
+    writing: cross-section-claim-consistency
+    polishing: preserve-numbers-symbols-comparison-direction-and-citation-attribution
+    reviewer: historical-patterns-are-not-official-policy
+    response: planned-or-unverified-work-is-not-claimed-complete
+  regression:
+    public_or_synthetic_cases_per_skill: 5
+    private_real_cases_per_skill: 2
+    required_passes: [venue-differentiation, fact-fidelity, placeholder-preservation]
+    validators: [quick_validate.py, installation-consistency, json-yaml-validation]
+
+assumptions:
+  - Collect only public official pages and public OpenReview records with licensing and rate-limit checks.
+  - Keep raw public data in the external corpus; install only indexes and derived, paraphrased evidence.
+  - Keep anonymous real cases private and never use them to promote general rules.
+  - Mark evidence-insufficient cells unsupported instead of copying rules across venues.

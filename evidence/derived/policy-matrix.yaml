@@ -1,0 +1,139 @@
+schema_version: 2
+venues:
+  www:
+    year: 2026
+    last_verified: '2026-07-06'
+    categories:
+      author:
+        status: verified
+        source_ids:
+        - official-www2026-research
+      reviewer:
+        status: not-public-or-not-collected
+        source_ids: []
+      review-form:
+        status: not-public-or-not-collected
+        source_ids: []
+      response:
+        status: verified
+        source_ids:
+        - official-www2026-research
+      anonymity:
+        status: verified
+        source_ids:
+        - official-www2026-research
+      supplement:
+        status: verified
+        source_ids:
+        - official-www2026-research
+      ethics-llm:
+        status: verified
+        source_ids:
+        - official-www2026-research
+      artifact-reproducibility:
+        status: verified
+        source_ids:
+        - official-www2026-research
+      template:
+        status: verified
+        source_ids:
+        - official-www2026-template
+      camera-ready:
+        status: verified
+        source_ids:
+        - official-www2026-research
+  iclr:
+    year: 2026
+    last_verified: '2026-07-06'
+    categories:
+      author:
+        status: verified
+        source_ids:
+        - official-iclr2026-author
+      reviewer:
+        status: verified
+        source_ids:
+        - official-iclr2026-reviewer
+      review-form:
+        status: verified
+        source_ids:
+        - official-iclr2026-reviewer
+      response:
+        status: verified
+        source_ids:
+        - official-iclr2026-author
+      anonymity:
+        status: verified
+        source_ids:
+        - official-iclr2026-author
+      supplement:
+        status: verified
+        source_ids:
+        - official-iclr2026-author
+      ethics-llm:
+        status: verified
+        source_ids:
+        - official-iclr2026-reviewer
+      artifact-reproducibility:
+        status: verified
+        source_ids:
+        - official-iclr2026-author
+        - official-iclr2026-reviewer
+      template:
+        status: verified
+        source_ids:
+        - official-iclr2026-template
+      camera-ready:
+        status: not-public-or-not-collected
+        source_ids: []
+  icml:
+    year: 2026
+    last_verified: '2026-07-06'
+    categories:
+      author:
+        status: verified
+        source_ids:
+        - official-icml2026-author
+      reviewer:
+        status: verified
+        source_ids:
+        - official-icml2026-reviewer
+        - official-icml2026-peer-review-ethics
+        - official-icml2026-llm-reviewing
+      review-form:
+        status: verified
+        source_ids:
+        - official-icml2026-reviewer
+      response:
+        status: verified
+        source_ids:
+        - official-icml2026-response
+      anonymity:
+        status: verified
+        source_ids:
+        - official-icml2026-author
+      supplement:
+        status: verified
+        source_ids:
+        - official-icml2026-author
+      ethics-llm:
+        status: verified
+        source_ids:
+        - official-icml2026-reviewer
+        - official-icml2026-ethics
+        - official-icml2026-peer-review-ethics
+        - official-icml2026-llm-reviewing
+      artifact-reproducibility:
+        status: verified
+        source_ids:
+        - official-icml2026-author
+      template:
+        status: verified
+        source_ids:
+        - official-icml2026-template
+        - official-icml2026-example-pdf
+        - official-icml2026-paper-checker
+      camera-ready:
+        status: verified
+        source_ids:
+        - official-icml2026-author

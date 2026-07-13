@@ -1,0 +1,52 @@
+spec_version: 2
+figure_id: Figure M1
+claim_ids: [C-M1]
+venue: www
+visual_family: comparison
+data_sources: [multipanel-comparison.csv]
+panel_map:
+  - {panel_id: a, job: benchmark comparison}
+  - {panel_id: b, job: scaling trend}
+  - {panel_id: c, job: efficiency frontier}
+  - {panel_id: d, job: calibration diagnostic}
+encodings: {x: dataset, y: score}
+metric_direction: higher-is-better
+output_base: multipanel-ablation
+export_formats: [svg, pdf, png]
+evidence_status: available
+caption: "Figure M1. (a) benchmark comparison; (b) scaling trend; (c) efficiency frontier; (d) calibration diagnostic."
+manuscript_callout: "Figure M1 summarizes C-M1 across benchmark, scaling, efficiency, and calibration evidence."
+style: {size: double}
+layout:
+  kind: mosaic
+  mosaic: ["ab", "cd"]
+  hero_panel: a
+panels:
+  - panel_id: a
+    visual_family: comparison
+    data_source: multipanel-comparison.csv
+    encodings: {x: dataset, y: score, series: method, lower: lower, upper: upper, ylabel: accuracy}
+    statistics: {aggregation: mean across seeds, uncertainty: {kind: ci}}
+    semantic_roles: {Base: baseline, Ours: ours}
+    legend: shared
+  - panel_id: b
+    visual_family: trend-scaling
+    data_source: multipanel-trend.csv
+    encodings: {x: step, y: score, series: method, lower: lower, upper: upper, xlabel: training scale, ylabel: accuracy}
+    statistics: {aggregation: mean across seeds, uncertainty: {kind: ci}}
+    semantic_roles: {Base: baseline, Ours: ours}
+    legend: shared
+  - panel_id: c
+    visual_family: tradeoff-frontier
+    data_source: multipanel-frontier.csv
+    encodings: {x: latency, y: accuracy, series: method, xlabel: latency ms, ylabel: accuracy, x_direction: lower, y_direction: higher}
+    semantic_roles: {Base: baseline, Ours: ours}
+    legend: shared
+  - panel_id: d
+    visual_family: calibration-reliability
+    data_source: multipanel-calibration.csv
+    encodings: {confidence: confidence, accuracy: accuracy, series: method}
+    semantic_roles: {Base: baseline, Ours: ours}
+    legend: shared
+data_provenance:
+  aggregation: mean across seeds

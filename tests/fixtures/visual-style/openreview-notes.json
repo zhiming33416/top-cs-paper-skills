@@ -1,0 +1,28 @@
+{
+  "notes": [
+    {
+      "id": "ICLRPOSTER1",
+      "content": {
+        "title": {"value": "Robust Agents for Long-Horizon Planning"},
+        "venue": {"value": "ICLR 2026 Conference Poster"},
+        "venueid": {"value": "ICLR.cc/2026/Conference"}
+      }
+    },
+    {
+      "id": "ICLRREJECT1",
+      "content": {
+        "title": {"value": "Rejected Planning Paper"},
+        "venue": {"value": "Submitted to ICLR 2026 Conference"},
+        "venueid": {"value": "ICLR.cc/2026/Conference"}
+      }
+    },
+    {
+      "id": "ICLRORAL1",
+      "content": {
+        "title": {"value": "Stable Representation Learning"},
+        "venue": {"value": "ICLR 2026 Conference Oral"},
+        "venueid": {"value": "ICLR.cc/2026/Conference"}
+      }
+    }
+  ]
+}

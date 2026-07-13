@@ -1,0 +1,20 @@
+spec_version: 2
+figure_id: Figure D1
+claim_ids: [C-D1]
+venue: iclr
+visual_family: distribution-uncertainty
+data_sources: [distribution.csv]
+panel_map: [{panel_id: a, job: seed distribution}]
+encodings: {group: method, value: score}
+metric_direction: higher-is-better
+output_base: distribution
+export_formats: [svg, pdf, png]
+evidence_status: available
+layout: {kind: grid, rows: 1, columns: 1}
+panels:
+  - panel_id: a
+    visual_family: distribution-uncertainty
+    data_source: distribution.csv
+    encodings: {group: method, value: score, ylabel: accuracy}
+    semantic_roles: {Base: baseline, Ours: ours}
+data_provenance: {aggregation: per-seed score}

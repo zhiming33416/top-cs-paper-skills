@@ -1,0 +1,32 @@
+{
+  "schema_version": 2,
+  "source_id": "historical-iclr-public-flow-index",
+  "source_type": "historical-public-review",
+  "relative_path": "sources/peer_review_public/review_flow_index.yaml",
+  "license": "Apache-2.0",
+  "policy_boundary": "Behavioral evidence only; not a WWW/ICML source and not an ICLR 2026 policy source.",
+  "papers": 25,
+  "target_papers_by_supported_venue": 50,
+  "reviews": 94,
+  "discussion_threads": 32,
+  "meta_reviews": 25,
+  "decisions": 25,
+  "conference_year_tracks": {
+    "ICLR 2020 Conference": 3,
+    "ICLR 2021 Conference": 7,
+    "ICLR 2022 Conference": 7,
+    "ICLR 2023 Conference": 8
+  },
+  "decision_distribution": {
+    "Accept (Poster)": 8,
+    "Accept (Spotlight)": 1,
+    "Accept: notable-top-25%": 1,
+    "Accept: poster": 3,
+    "Reject": 12
+  },
+  "venue_readiness": {
+    "iclr": "insufficient-for-venue-specific-v2",
+    "icml": "unsupported-no-local-public-flows",
+    "www": "unsupported-no-public-behavioral-evidence"
+  }
+}

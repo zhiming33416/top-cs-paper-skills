@@ -1,0 +1,5 @@
+latency,accuracy,method
+8,61,Base
+12,66,Base
+7,65,Ours
+10,71,Ours

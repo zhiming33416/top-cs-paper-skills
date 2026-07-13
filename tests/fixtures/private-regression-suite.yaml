@@ -1,0 +1,15 @@
+schema_version: 1
+suite_id: synthetic-private-interface-test
+privacy:
+  anonymized: true
+  retain_rendered_artifacts: false
+  include_source_paths_in_report: false
+cases:
+  - id: comparison-regression
+    spec: figure-specs/comparison.yaml
+    expected_panels: 1
+    expected_formats: [svg, pdf, png]
+    thresholds:
+      max_dhash_distance: 12
+      minimum_text_pt: 6
+      minimum_line_width_pt: 0.6

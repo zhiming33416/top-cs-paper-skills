@@ -1,0 +1,484 @@
+schema_version: 2
+generated: "2026-07-06"
+promotion_policy:
+  official_policy: "One verified official source is sufficient for a hard rule."
+  venue_soft_rule: "At least 3 unique papers; ICLR/ICML must span at least 2 acceptance tiers; WWW Research requires all 3 sources."
+  cross_venue_soft_rule: "At least 2 venues and 6 unique papers."
+  reviewer_behavior: "At least 5 distinct historical papers and more than one decision outcome."
+  response_behavior: "At least 5 distinct historical papers with discussion threads."
+  interpretation_boundary: "Acceptance tier is sampling coverage, not causal evidence of writing quality."
+rules:
+  - rule_id: official-www2026-first-page-relevance
+    skill: top-cs-writing
+    venue: www
+    section: introduction
+    source_type: official-policy
+    source_ids: [official-www2026-research]
+    support_count: 1
+    confidence: high
+    last_verified: "2026-07-05"
+    applies_to_stage: [submission]
+    expires_after_year: 2026
+    statement: "A WWW Research submission must state Web and selected-track relevance on the first page; using a Web artifact alone is insufficient."
+  - rule_id: official-iclr2026-main-paper-boundary
+    skill: top-cs-writing
+    venue: iclr
+    section: full-paper
+    source_type: official-policy
+    source_ids: [official-iclr2026-author]
+    support_count: 1
+    confidence: high
+    last_verified: "2026-07-05"
+    applies_to_stage: [submission, discussion-revision]
+    expires_after_year: 2026
+    statement: "Central claims and decisive evidence must remain in the bounded main paper because reviewers are not required to read appendices."
+  - rule_id: official-icml2026-review-dimensions
+    skill: top-cs-reviewer
+    venue: icml
+    section: full-paper
+    source_type: official-policy
+    source_ids: [official-icml2026-reviewer]
+    support_count: 1
+    confidence: high
+    last_verified: "2026-07-05"
+    applies_to_stage: [review, post-response]
+    expires_after_year: 2026
+    statement: "Assess soundness, presentation, significance, and originality separately and justify each assessment with manuscript evidence."
+  - rule_id: official-icml2026-assigned-llm-review-policy
+    skill: top-cs-reviewer
+    venue: icml
+    section: full-paper
+    source_type: official-policy
+    source_ids: [official-icml2026-reviewer, official-icml2026-llm-reviewing]
+    support_count: 2
+    confidence: high
+    last_verified: "2026-07-06"
+    applies_to_stage: [review]
+    expires_after_year: 2026
+    statement: "Before assisting with an actual ICML review, confirm the reviewer-specific LLM policy shown in the Reviewer Console; do not assume the permissive policy applies."
+  - rule_id: official-icml2026-research-and-review-ethics
+    skill: top-cs-reviewer
+    venue: icml
+    section: full-paper
+    source_type: official-policy
+    source_ids: [official-icml2026-ethics, official-icml2026-peer-review-ethics]
+    support_count: 2
+    confidence: high
+    last_verified: "2026-07-06"
+    applies_to_stage: [submission, review]
+    expires_after_year: 2026
+    statement: "Audit applicable research-ethics disclosures separately from peer-review conduct, and tie any concern to a verified policy provision and manuscript evidence."
+  - rule_id: official-iclr2026-review-update-after-discussion
+    skill: top-cs-reviewer
+    venue: iclr
+    section: full-paper
+    source_type: official-policy
+    source_ids: [official-iclr2026-reviewer]
+    support_count: 1
+    confidence: high
+    last_verified: "2026-07-05"
+    applies_to_stage: [review, author-reviewer-discussion]
+    expires_after_year: 2026
+    statement: "A final ICLR assessment must account for information and verified revisions supplied during discussion rather than freezing the initial review."
+  - rule_id: official-iclr2026-discussion-revision
+    skill: top-cs-response
+    venue: iclr
+    section: response
+    source_type: official-policy
+    source_ids: [official-iclr2026-author]
+    support_count: 1
+    confidence: high
+    last_verified: "2026-07-05"
+    applies_to_stage: [author-reviewer-discussion, discussion-revision]
+    expires_after_year: 2026
+    statement: "ICLR authors may comment and revise during the official discussion window; responses must preserve round state and identify manuscript changes."
+  - rule_id: official-icml2026-main-paper-and-supplement-boundary
+    skill: top-cs-writing
+    venue: icml
+    section: full-paper
+    source_type: official-policy
+    source_ids: [official-icml2026-author]
+    support_count: 1
+    confidence: high
+    last_verified: "2026-07-05"
+    applies_to_stage: [submission]
+    expires_after_year: 2026
+    statement: "Critical evaluation material must remain in the main paper because reviewers choose whether to consult appendices or supplementary material."
+  - rule_id: official-icml2026-per-review-response
+    skill: top-cs-response
+    venue: icml
+    section: response
+    source_type: official-policy
+    source_ids: [official-icml2026-response]
+    support_count: 1
+    confidence: high
+    last_verified: "2026-07-05"
+    applies_to_stage: [initial-rebuttal, reviewer-follow-up]
+    expires_after_year: 2026
+    statement: "Prepare a response for each official review, respect the live character budget, and preserve cross-review references when concerns overlap."
+  - rule_id: official-icml2026-no-feedback-period-revision-upload
+    skill: top-cs-response
+    venue: icml
+    section: response
+    source_type: official-policy
+    source_ids: [official-icml2026-author]
+    support_count: 1
+    confidence: high
+    last_verified: "2026-07-05"
+    applies_to_stage: [initial-rebuttal, author-reviewer-discussion]
+    expires_after_year: 2026
+    statement: "ICML 2026 does not permit uploading a revised paper during author feedback; describe unverified manuscript edits as planned, not completed."
+  - rule_id: official-www2026-rebuttal-protocol
+    skill: top-cs-response
+    venue: www
+    section: response
+    source_type: official-policy
+    source_ids: [official-www2026-research]
+    support_count: 1
+    confidence: high
+    last_verified: "2026-07-05"
+    applies_to_stage: [initial-rebuttal]
+    expires_after_year: 2026
+    statement: "Follow the WWW Research author rebuttal protocol and do not imply interactive follow-up unless the current official form explicitly permits it."
+  - rule_id: cross-venue-abstract-argument-chain
+    skill: top-cs-writing
+    venue: cross-venue
+    section: abstract
+    source_type: accepted-title-verified-public-version
+    source_ids:
+      - iclr2026-10d0144d9ffc
+      - iclr2026-071647c96de3
+      - iclr2026-3698058099e9
+      - iclr2026-5c8000261028
+      - iclr2026-38dac74099fe
+      - icml2026-f91e5112d3fe
+      - icml2026-b974f97035e8
+      - icml2026-5a93dd1a0789
+      - icml2026-f8aa0dc11b59
+      - icml2026-237846fe92a1
+      - www2026-0a66a5c7689e
+    support_count: 11
+    confidence: medium
+    last_verified: "2026-07-04"
+    statement: "A compact gap-to-approach-to-evidence chain is a recurring abstract structure across the three venues; use it as a reasoning sequence, not a sentence template."
+  - rule_id: cross-venue-introduction-contribution-preview
+    skill: top-cs-writing
+    venue: cross-venue
+    section: introduction
+    source_type: accepted-title-verified-public-version
+    source_ids:
+      - iclr2026-552f9264cfef
+      - iclr2026-24365928b673
+      - iclr2026-10d0144d9ffc
+      - icml2026-e9ff709d03ba
+      - icml2026-d8f91900f8f1
+      - icml2026-5beb9ff37ae6
+      - www2026-fa1d1834d99c
+      - www2026-aef43db1e8e9
+      - www2026-0a66a5c7689e
+    support_count: 9
+    confidence: medium
+    last_verified: "2026-07-04"
+    statement: "Introductions commonly make the contribution set explicit; each contribution should preview its evidence rather than list implementation features."
+  - rule_id: icml2026-related-work-explicit-section
+    skill: top-cs-writing
+    venue: icml
+    section: related-work
+    source_type: accepted-title-verified-public-version
+    source_ids:
+      - icml2026-f91e5112d3fe
+      - icml2026-e9ff709d03ba
+      - icml2026-d8f91900f8f1
+      - icml2026-14376bfa221f
+      - icml2026-72b52feb2ac3
+      - icml2026-33bae55e2896
+      - icml2026-51d275fc8ee0
+      - icml2026-11630aaab1d2
+      - icml2026-2dea48f9d92c
+      - icml2026-2458bfb6152c
+      - icml2026-3f49f7df8372
+      - icml2026-aa03a05d7867
+      - icml2026-ed630829d635
+      - icml2026-0c7f46ee0dd9
+      - icml2026-b974f97035e8
+      - icml2026-5beb9ff37ae6
+      - icml2026-221df6bfd5d7
+      - icml2026-5a93dd1a0789
+      - icml2026-ade199256414
+      - icml2026-51077dd28188
+      - icml2026-2bbc465c3c6e
+      - icml2026-f8aa0dc11b59
+      - icml2026-309376b8ba71
+      - icml2026-237846fe92a1
+      - icml2026-8f4d6319d7aa
+    support_count: 25
+    confidence: high
+    last_verified: "2026-07-06"
+    statement: "A dedicated related-work section was detected in 25 of 30 unique ICML sources; use it when it improves explicit novelty positioning, but do not treat it as an official requirement."
+  - rule_id: iclr2026-related-work-placement-flexible
+    skill: top-cs-writing
+    venue: iclr
+    section: related-work
+    source_type: accepted-title-verified-public-version
+    source_ids:
+      - iclr2026-76543f11aa8a
+      - iclr2026-d777d8a33f9a
+      - iclr2026-552f9264cfef
+      - iclr2026-21bc969656ce
+      - iclr2026-9ad2b8bc1239
+      - iclr2026-24365928b673
+      - iclr2026-642b377bbcce
+      - iclr2026-3ec48982b3d2
+      - iclr2026-c7f25646bf84
+      - iclr2026-69596ada7104
+      - iclr2026-9e5f710027b7
+      - iclr2026-d2b8ca379377
+      - iclr2026-e91b28b0e9e9
+      - iclr2026-884a28a0febc
+      - iclr2026-513b1cf56ef0
+      - iclr2026-e9d03a027d92
+      - iclr2026-d7856fa34f76
+      - iclr2026-b43e47846932
+      - iclr2026-10d0144d9ffc
+      - iclr2026-0aac00293451
+      - iclr2026-356636912b02
+      - iclr2026-dbf2c35318a6
+      - iclr2026-67b23491e037
+      - iclr2026-071647c96de3
+      - iclr2026-3698058099e9
+      - iclr2026-38d946319db3
+      - iclr2026-5c8000261028
+      - iclr2026-49ce499b2161
+      - iclr2026-ed0ab9db86a8
+      - iclr2026-38dac74099fe
+    support_count: 30
+    confidence: medium
+    last_verified: "2026-07-06"
+    statement: "A related-work heading was detected in 26 of 30 ICLR sources after combining text headings and PDF outlines; integrated placement still occurs, so choose placement by argument flow rather than forcing one layout."
+  - rule_id: cross-venue-polishing-abstract-argument-recovery
+    skill: top-cs-polishing
+    venue: cross-venue
+    section: abstract
+    source_type: accepted-title-verified-public-version
+    source_ids:
+      - iclr2026-10d0144d9ffc
+      - iclr2026-071647c96de3
+      - iclr2026-3698058099e9
+      - iclr2026-5c8000261028
+      - iclr2026-38dac74099fe
+      - icml2026-f91e5112d3fe
+      - icml2026-b974f97035e8
+      - icml2026-5a93dd1a0789
+      - icml2026-f8aa0dc11b59
+      - icml2026-237846fe92a1
+      - www2026-0a66a5c7689e
+    support_count: 11
+    confidence: medium
+    last_verified: "2026-07-05"
+    statement: "When source facts permit, revise abstracts so the gap, approach, decisive evidence, and boundary are recoverable in one pass; this is a reasoning audit, not a phrase template."
+  - rule_id: cross-venue-polishing-contribution-evidence-alignment
+    skill: top-cs-polishing
+    venue: cross-venue
+    section: introduction
+    source_type: accepted-title-verified-public-version
+    source_ids:
+      - iclr2026-552f9264cfef
+      - iclr2026-24365928b673
+      - iclr2026-10d0144d9ffc
+      - icml2026-e9ff709d03ba
+      - icml2026-d8f91900f8f1
+      - icml2026-5beb9ff37ae6
+      - www2026-fa1d1834d99c
+      - www2026-aef43db1e8e9
+      - www2026-0a66a5c7689e
+    support_count: 9
+    confidence: medium
+    last_verified: "2026-07-05"
+    statement: "Revise contribution lists into claim-evidence pairs and demote implementation features that lack independent scientific support."
+  - rule_id: icml2026-polishing-related-work-placement
+    skill: top-cs-polishing
+    venue: icml
+    section: related-work
+    source_type: accepted-title-verified-public-version
+    source_ids:
+      - icml2026-f91e5112d3fe
+      - icml2026-e9ff709d03ba
+      - icml2026-d8f91900f8f1
+      - icml2026-14376bfa221f
+      - icml2026-72b52feb2ac3
+      - icml2026-33bae55e2896
+      - icml2026-51d275fc8ee0
+      - icml2026-11630aaab1d2
+      - icml2026-2dea48f9d92c
+      - icml2026-2458bfb6152c
+      - icml2026-3f49f7df8372
+      - icml2026-aa03a05d7867
+      - icml2026-ed630829d635
+      - icml2026-0c7f46ee0dd9
+      - icml2026-b974f97035e8
+      - icml2026-5beb9ff37ae6
+      - icml2026-221df6bfd5d7
+      - icml2026-5a93dd1a0789
+      - icml2026-ade199256414
+      - icml2026-51077dd28188
+      - icml2026-2bbc465c3c6e
+      - icml2026-f8aa0dc11b59
+      - icml2026-309376b8ba71
+      - icml2026-237846fe92a1
+      - icml2026-8f4d6319d7aa
+    support_count: 25
+    confidence: high
+    last_verified: "2026-07-06"
+    statement: "A dedicated related-work section was detected in 25 of 30 ICML sources; use it to clarify novelty positioning when useful, without presenting it as a format requirement."
+  - rule_id: www2026-research-explicit-contribution-evidence
+    skill: top-cs-writing
+    venue: www
+    section: introduction
+    source_type: accepted-title-verified-public-version
+    source_ids: [www2026-fa1d1834d99c, www2026-aef43db1e8e9, www2026-0a66a5c7689e]
+    support_count: 3
+    confidence: low
+    last_verified: "2026-07-04"
+    statement: "All three WWW Research sources explicitly preview contributions and empirical evidence; apply cautiously because the sample is small and topic-biased."
+  - rule_id: www2026-research-related-work-prevalent
+    skill: top-cs-writing
+    venue: www
+    section: related-work
+    source_type: accepted-title-verified-public-version
+    source_ids:
+      - www2026-a827b277f985
+      - www2026-d929ae1c81fd
+      - www2026-fa1d1834d99c
+      - www2026-ae0d724545e8
+      - www2026-30cb56e35634
+      - www2026-aef43db1e8e9
+      - www2026-268e85e9988a
+      - www2026-8aaa3d5fd9dc
+      - www2026-518704dd351c
+      - www2026-c81d8388d6a8
+      - www2026-2dcd16764989
+      - www2026-b976d381fdfd
+      - www2026-1b0974af9db7
+      - www2026-90990d2d362e
+      - www2026-5f943f4d67e9
+      - www2026-b9d50079dbe4
+      - www2026-21b1c1ddf9db
+      - www2026-e2e7922dc156
+      - www2026-0a66a5c7689e
+      - www2026-12be7d3da0d6
+      - www2026-37b52e61aecb
+      - www2026-953448c3eaa9
+      - www2026-185106be1740
+    support_count: 23
+    confidence: medium
+    last_verified: "2026-07-06"
+    statement: "A dedicated related-work heading was detected in 23 of 30 WWW Research sources; use it as a prevalent structural option, not an official requirement."
+  - rule_id: www2026-polishing-related-work-placement
+    skill: top-cs-polishing
+    venue: www
+    section: related-work
+    source_type: accepted-title-verified-public-version
+    source_ids:
+      - www2026-a827b277f985
+      - www2026-d929ae1c81fd
+      - www2026-fa1d1834d99c
+      - www2026-ae0d724545e8
+      - www2026-30cb56e35634
+      - www2026-aef43db1e8e9
+      - www2026-268e85e9988a
+      - www2026-8aaa3d5fd9dc
+      - www2026-518704dd351c
+      - www2026-c81d8388d6a8
+      - www2026-2dcd16764989
+      - www2026-b976d381fdfd
+      - www2026-1b0974af9db7
+      - www2026-90990d2d362e
+      - www2026-5f943f4d67e9
+      - www2026-b9d50079dbe4
+      - www2026-21b1c1ddf9db
+      - www2026-e2e7922dc156
+      - www2026-0a66a5c7689e
+      - www2026-12be7d3da0d6
+      - www2026-37b52e61aecb
+      - www2026-953448c3eaa9
+      - www2026-185106be1740
+    support_count: 23
+    confidence: medium
+    last_verified: "2026-07-06"
+    statement: "When revising WWW Research related work, a dedicated section is a prevalent option in 23 of 30 sources; retain integrated placement when it better serves the argument."
+  - rule_id: historical-iclr-review-concern-clusters
+    skill: top-cs-reviewer
+    venue: iclr-historical
+    section: full-paper
+    source_type: historical-public-review
+    source_ids:
+      - historical-iclr-eddb14628494
+      - historical-iclr-0cd9fcf9d874
+      - historical-iclr-49292194d524
+      - historical-iclr-bb51886a525f
+      - historical-iclr-e2a88926ea44
+      - historical-iclr-3be97c1cc016
+      - historical-iclr-ba080379f49f
+      - historical-iclr-a0f88fb235c1
+      - historical-iclr-15573a3eb2fd
+      - historical-iclr-d7ef24bf0057
+    support_count: 10
+    confidence: medium
+    last_verified: "2026-07-04"
+    statement: "Historical reviews repeatedly connect the recommendation to contribution positioning, clarity, comparator adequacy, and reproducibility; reviewer output should tie each concern to the central claim it threatens."
+  - rule_id: historical-iclr-response-artifact-anchors
+    skill: top-cs-response
+    venue: iclr-historical
+    section: response
+    source_type: historical-public-review
+    source_ids:
+      - historical-iclr-eddb14628494
+      - historical-iclr-0cd9fcf9d874
+      - historical-iclr-c21da28ec7e4
+      - historical-iclr-49292194d524
+      - historical-iclr-bb51886a525f
+      - historical-iclr-e2a88926ea44
+      - historical-iclr-3be97c1cc016
+      - historical-iclr-2e24e07e5e88
+      - historical-iclr-ba080379f49f
+      - historical-iclr-a0f88fb235c1
+    support_count: 10
+    confidence: medium
+    last_verified: "2026-07-04"
+    statement: "Effective historical responses repeatedly anchor answers to concrete tables, figures, sections, equations, or supplied additional analyses; unsupported location claims must remain placeholders."
+  - rule_id: historical-iclr-response-discussion-is-stateful
+    skill: top-cs-response
+    venue: iclr-historical
+    section: response
+    source_type: historical-public-review
+    source_ids:
+      - historical-iclr-eddb14628494
+      - historical-iclr-0cd9fcf9d874
+      - historical-iclr-c21da28ec7e4
+      - historical-iclr-49292194d524
+      - historical-iclr-bb51886a525f
+      - historical-iclr-e2a88926ea44
+      - historical-iclr-3be97c1cc016
+      - historical-iclr-2e24e07e5e88
+      - historical-iclr-08838239a73c
+      - historical-iclr-ba080379f49f
+    support_count: 10
+    confidence: medium
+    last_verified: "2026-07-04"
+    statement: "Historical ICLR discussion is stateful: preserve comment IDs, prior answers, new reviewer questions, and unresolved issues across rounds rather than rewriting each message as an isolated letter."
+  - rule_id: historical-iclr-evidence-based-disagreement
+    skill: top-cs-response
+    venue: iclr-historical
+    section: response
+    source_type: historical-public-review
+    source_ids:
+      - historical-iclr-49292194d524
+      - historical-iclr-ba080379f49f
+      - historical-iclr-a0f88fb235c1
+      - historical-iclr-15573a3eb2fd
+      - historical-iclr-f30daea6dccd
+      - historical-iclr-b6d70ba19648
+    support_count: 6
+    confidence: medium
+    last_verified: "2026-07-04"
+    statement: "When disagreeing, first restate the concern, then provide a verifiable artifact or scope argument, and finally record the clarifying manuscript action; disagreement without evidence is not promoted."

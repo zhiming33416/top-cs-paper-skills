@@ -1,0 +1,14 @@
+figure_id: Figure C1
+claim_ids: [C1]
+venue: icml
+visual_family: comparison
+data_sources: [comparison.csv]
+panel_map:
+  - {panel_id: a, job: main comparison, source: comparison.csv}
+encodings: {x: dataset, y: score, series: method, ylabel: Accuracy}
+metric_direction: higher-is-better
+output_base: comparison
+export_formats: [svg, pdf, png]
+evidence_status: available
+caption: "Figure C1. a, Main comparison."
+manuscript_callout: "Figure C1 compares the methods."
