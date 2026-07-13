@@ -643,9 +643,26 @@ class FigureToolTests(unittest.TestCase):
             self.assertEqual(stats["venues"]["icml"]["coverage"]["track_mix"], {"Regular": 10})
 
     def test_visual_style_outputs_do_not_store_raw_images_or_caption_text(self):
+        import fitz
+
         with tempfile.TemporaryDirectory() as tmp:
-            output = Path(tmp) / "derived"
-            result = visual_derive.derive(ROOT.parent, output, local_only=True, max_pages=1)
+            root = Path(tmp)
+            source = root / "synthetic.pdf"
+            doc = fitz.open()
+            page = doc.new_page(width=300, height=220)
+            page.insert_text((20, 30), "Figure 1: Private caption text", fontsize=10)
+            page.draw_rect(fitz.Rect(20, 60, 180, 120), color=(0.2, 0.3, 0.8), fill=(0.2, 0.3, 0.8))
+            doc.save(source)
+            doc.close()
+            manifest = root / "source-manifest.yaml"
+            manifest.write_text(yaml.safe_dump({"sources": [{
+                "source_id": "synthetic-privacy-fixture",
+                "venue": "icml",
+                "relative_path": source.name,
+                "eligibility": "style-evidence",
+            }]}), encoding="utf-8")
+            output = root / "derived"
+            result = visual_derive.derive(root, output, local_only=True, max_pages=1, source_manifest=manifest)
             self.assertGreater(result["records"], 0)
             for path in output.iterdir():
                 self.assertNotIn(path.suffix.lower(), {".pdf", ".png", ".jpg", ".jpeg", ".tif", ".tiff"})

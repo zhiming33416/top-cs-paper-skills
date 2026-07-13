@@ -114,6 +114,11 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def source_sha256(path: Path) -> str:
+    """Hash source bytes with CRLF normalized so provenance is platform-stable."""
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 def base_panel(panel_id: str, family: str, variant: str, title: str) -> dict[str, Any]:
     if title == "default":
         title = family.replace("-", " ")
@@ -297,7 +302,7 @@ def build(output_root: Path) -> dict[str, object]:
             output = output_root / f"{relative}.png"; compress_png(rendered_png, output); expected.add(output.resolve())
             csv_path = root / f"{slug}.csv"
             records.append({
-                "asset": str(output.relative_to(output_root)), "sha256": sha256(output), "bytes": output.stat().st_size,
+                "asset": output.relative_to(output_root).as_posix(), "sha256": sha256(output), "bytes": output.stat().st_size,
                 "synthetic_csv_sha256": sha256(csv_path), "synthetic_yaml_sha256": sha256(spec_path), "seed": 40,
                 "panel_count": panel_count, "visual_families": sorted({family for family, _ in items}),
                 "production_renderer": True, "render_manifest_sha256": sha256(Path(result["render_manifest"])),
@@ -310,9 +315,9 @@ def build(output_root: Path) -> dict[str, object]:
                     path.unlink()
     script_dir = Path(__file__).resolve().parent
     manifest = {
-        "schema_version": 2, "generator": Path(__file__).name, "generator_sha256": sha256(Path(__file__)),
-        "renderer_sha256": sha256(script_dir / "render_from_figure_spec.py"),
-        "style_dependency_sha256": sha256(script_dir / "cs_figure_style.py"), "external_assets_used": False,
+        "schema_version": 2, "generator": Path(__file__).name, "generator_sha256": source_sha256(Path(__file__)),
+        "renderer_sha256": source_sha256(script_dir / "render_from_figure_spec.py"),
+        "style_dependency_sha256": source_sha256(script_dir / "cs_figure_style.py"), "external_assets_used": False,
         "atlas_count": len(ATLAS), "gallery_count": len(GALLERY),
         "visual_example_count": sum(record["panel_count"] for record in records),
         "records": records, "total_bytes": sum(record["bytes"] for record in records),

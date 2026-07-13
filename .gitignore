@@ -4,3 +4,11 @@ collection-manifest.yaml
 __pycache__/
 *.py[cod]
 .citation-cache/
+.pytest_cache/
+.coverage
+.venv/
+venv/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

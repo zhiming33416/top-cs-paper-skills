@@ -31,6 +31,10 @@ renderer = load_module("figure_v4_renderer", SCRIPTS / "render_from_figure_spec.
 regressions = load_module("figure_v4_regressions", SCRIPTS / "run_private_figure_regressions.py")
 
 
+def source_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 class FigureV4Tests(unittest.TestCase):
     def test_manifest_schema_and_routes_are_v4(self):
         manifest = yaml.safe_load((ROOT / "skills" / "top-cs-figure" / "manifest.yaml").read_text(encoding="utf-8"))
@@ -157,10 +161,11 @@ class FigureV4Tests(unittest.TestCase):
         self.assertEqual(manifest["gallery_count"], 14)
         self.assertEqual(manifest["visual_example_count"], 222)
         self.assertLess(manifest["total_bytes"], 3 * 1024 * 1024)
-        self.assertEqual(manifest["generator_sha256"], hashlib.sha256((SCRIPTS / "build_figure_atlas.py").read_bytes()).hexdigest())
-        self.assertEqual(manifest["renderer_sha256"], hashlib.sha256((SCRIPTS / "render_from_figure_spec.py").read_bytes()).hexdigest())
-        self.assertEqual(manifest["style_dependency_sha256"], hashlib.sha256((SCRIPTS / "cs_figure_style.py").read_bytes()).hexdigest())
+        self.assertEqual(manifest["generator_sha256"], source_sha256(SCRIPTS / "build_figure_atlas.py"))
+        self.assertEqual(manifest["renderer_sha256"], source_sha256(SCRIPTS / "render_from_figure_spec.py"))
+        self.assertEqual(manifest["style_dependency_sha256"], source_sha256(SCRIPTS / "cs_figure_style.py"))
         for record in manifest["records"]:
+            self.assertNotIn("\\", record["asset"])
             path = root / record["asset"]
             self.assertTrue(path.is_file())
             self.assertLessEqual(path.stat().st_size, 350 * 1024)

@@ -1,0 +1,46 @@
+name: Bug report
+description: Report a reproducible problem in a skill, script, installation, or document.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - top-cs-writing
+        - top-cs-polishing
+        - top-cs-reviewer
+        - top-cs-response
+        - top-cs-figure
+        - Installation
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem
+      description: Describe what happened and what you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Include a minimal, non-confidential example when possible.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Codex surface, operating system, Python version, and relevant commit.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed private manuscripts, reviewer correspondence, credentials, and personal paths.
+          required: true

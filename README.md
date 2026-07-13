@@ -1,104 +1,124 @@
 # Top CS Paper Skills
 
-面向 WWW、ICLR、ICML 论文写作全流程的 Codex skills 仓库。首版以 2026 年官方投稿规则为硬约束，并将论文样例中观察到的写作惯例标记为软规则。
+[English](README_EN.md) · [安装指南](INSTALL.md) · [技能索引](#技能索引) · [设计与证据](docs/EVIDENCE.md) · [参与贡献](CONTRIBUTING.md)
 
-## Skills
+[![CI](https://github.com/zhiming33416/top-cs-paper-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/zhiming33416/top-cs-paper-skills/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![Skills](https://img.shields.io/badge/skills-5-6f42c1)
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB)
 
-Current installable skills:
+面向 WWW、ICLR、ICML 及通用计算机科学会议工作流的五个 Codex skills，覆盖论文写作、语言与 LaTeX 润色、投稿前预审、审稿回复和科研图制作。
 
-- `top-cs-writing`: plan and draft evidence-grounded CS conference papers.
-- `top-cs-polishing`: revise prose and LaTeX while preserving evidence.
-- `top-cs-reviewer`: run confidential author-side manuscript audits.
-- `top-cs-response`: draft and verify reviewer-response packages.
-- `top-cs-figure`: create, revise, export, and QA Python-rendered paper figures from figure briefs and source data.
+这些技能强调证据边界、可复现过程和保守表达。仓库中的会议资料和语料统计不是官方投稿政策；正式投稿前请始终重新核对目标会议官网。
 
-- `top-cs-writing`：构建论证、章节大纲和英文草稿。
-- `top-cs-polishing`：在不改变证据的前提下重构和润色。
-- `top-cs-reviewer`：按技术、实验/复现、venue/scope 三个视角预审。
-- `top-cs-response`：整理审稿意见、起草逐点回复和修订清单。
+## 快速开始
 
-默认用中文说明问题，论文正文和 rebuttal 使用英文。支持 `.tex`、Markdown、纯文本、中文笔记和 PDF。
+安装后，直接把论文、段落、实验数据、审稿意见或任务描述交给 Codex：
 
-## Architecture
+| 想做什么 | 可以这样说 |
+| --- | --- |
+| 规划或撰写论文 | `使用 top-cs-writing，根据这些实验结果为 ICLR 论文设计论证和 Introduction。` |
+| 润色或中译英 | `使用 top-cs-polishing，把这段中文改写成简洁的学术英文，不增强原有主张。` |
+| 投稿前预审 | `使用 top-cs-reviewer，检查这篇 WWW 稿件的主要拒稿风险和复现缺口。` |
+| 回复审稿意见 | `使用 top-cs-response，把这些意见整理成逐点回复和可验证的修订清单。` |
+| 制作科研图 | `使用 top-cs-figure，根据这份 CSV 和图件说明生成可编辑的 SVG/PDF/PNG。` |
 
-四个技能共享证据纪律、匿名性、论文类型和会议来源，但不再强制使用同一套路由：
+## 技能索引
 
-- `top-cs-writing`：`venue × paper_type × section × language` 多轴路由；按需加载章节片段。
-- `top-cs-polishing`：同样使用四轴路由，并增加 failure modes、claim-strength 与 LaTeX QA。
-- `top-cs-reviewer`：只把 `venue` 作为内容轴；手稿范围和评审模式是运行时参数。
-- `top-cs-response`：不使用内容轴；按 venue、task mode、response phase、decision type 和 language 运行线性状态机。
+| Skill | 状态 | 用途 |
+| --- | --- | --- |
+| [`top-cs-writing`](skills/top-cs-writing/README.md) | Beta | 构建论文论证、章节大纲并起草英文内容。 |
+| [`top-cs-polishing`](skills/top-cs-polishing/README.md) | Beta | 在不改变证据的前提下翻译、压缩、重构和检查 LaTeX。 |
+| [`top-cs-reviewer`](skills/top-cs-reviewer/README.md) | Beta | 从作者侧模拟投稿前评审，定位技术、实验、复现和 venue 风险。 |
+| [`top-cs-response`](skills/top-cs-response/README.md) | Beta | 解析审稿意见，起草回复、cover letter 和修订台账。 |
+| [`top-cs-figure`](skills/top-cs-figure/README.md) | Beta | 使用 Python 生成、修订、导出和审计投稿级科研图。 |
 
-每个技能的 `manifest.yaml` 声明 `always_load`、路由轴或运行时参数，以及 `references.on_demand`。`static/core/` 保存每次必须执行的立场、工作流和输出格式；`static/fragments/` 保存按路由加载的内容；`references/` 仅在具体条件满足时加载。
+`skills/_shared/` 保存五个技能共同使用的证据纪律、会议资料、契约和路由资源，不是独立技能。
 
-## Evidence basis
+## 安装
 
-仓库使用外部只读语料生成可移植证据，不复制论文或评审全文：
+### 推荐：把仓库链接交给 Codex
 
-- 100个PDF文件、99个唯一SHA；重复的 `Agent0-VL` 只计一次。
-- 主要写作证据为 ICLR 30、ICML 30、WWW Research 30，共90篇。
-- WWW Industry、Short、Web4Good仅索引，不进入Research风格规则。
-- 全文均标记为“接收题名核验的公开版本”，不能作为官方格式、页数或匿名要求来源。
-- 25篇历史ICLR公开流程提供94份review和32个discussion threads，仅用于review/response行为模式。
+将下面的提示词发给 Codex：
 
-派生索引、统计和人工晋级规则位于 `evidence/derived/`。安装时这些文件会复制到 `_shared/evidence/derived/`。
+```text
+请从这个仓库安装全部 Codex skills：
+https://github.com/zhiming33416/top-cs-paper-skills.git
 
-## Install
-
-```powershell
-python scripts/install_skills.py --target "$HOME/.codex/skills"
-python scripts/install_skills.py --target "$HOME/.codex/skills" --check
+请 clone 仓库并运行 python scripts/install_skills.py。
+安装后运行 python scripts/install_skills.py --check 验证。
+请保留 skills/top-cs-* 的完整目录、skills/_shared 和派生 evidence，
+不要只复制 SKILL.md。完成后提醒我开启新的 Codex 会话。
 ```
 
-安装会复制四个 skill 及其 `_shared` 依赖，不删除目标目录中的其他内容。使用前开启新的 Codex 会话。
+### 手动安装
 
-## Tools
-
-```powershell
-python scripts/build_corpus_manifest.py --input .. --output corpus-sources.generated.yaml
-python scripts/audit_submission.py --venue iclr --year 2026 --source paper.tex --pdf paper.pdf
-python scripts/collect_public_sources.py --config public-sources.yaml --cache-root "C:\path\to\external-corpus" --dry-run
-python scripts/collect_visual_style_corpus.py --corpus-root "D:\桌面\www" --year 2026 --target-per-venue 30 --venues www,iclr,icml
-python scripts/collect_visual_style_corpus.py --corpus-root "D:\桌面\www" --year 2026 --target-per-venue 30 --venues iclr --candidate-seed "D:\桌面\www\sources\iclr2026-accepted-title-expansion.yaml"
-python scripts/derive_corpus_evidence.py --corpus-root "C:\path\to\corpus" --output-dir evidence\derived --schema-version 2
-python scripts/derive_visual_style_evidence.py --corpus-root .. --output-dir evidence\derived --local-only
-python scripts/derive_visual_style_evidence.py --corpus-root "D:\桌面\www" --source-manifest evidence\derived\visual-style-source-manifest.yaml --output-dir evidence\derived
-python scripts/validate_evidence.py --index evidence\derived\corpus-index.yaml --rules evidence\derived\rules.yaml --strict
-python scripts/route_skill.py --skill top-cs-writing --venue iclr --paper-type empirical --section abstract --language zh-to-en --format json
-python scripts/route_skill.py --skill top-cs-figure --venue icml --visual-family comparison --need visual-style --format json
-python scripts/route_skill.py --skill top-cs-writing --venue icml --section experiments --need full-section-corpus --format json
-python scripts/evaluate_skill_output.py --case tests\acceptance-cases.yaml --case-id iclr-abstract-from-chinese-notes --source notes.md --output draft.md
-python scripts/verify_citations.py --bib references.bib --output citation-report.json --format json --cache-dir .citation-cache
-python skills\top-cs-polishing\scripts\check_latex_project.py --project paper --root main.tex --format json
-python skills\top-cs-figure\scripts\render_from_figure_spec.py --spec tests\fixtures\figure-specs\comparison.yaml --outdir "C:\tmp\figures"
-python skills\top-cs-figure\scripts\check_figure_bundle.py --base "C:\tmp\figures\comparison" --format json
-python skills\top-cs-figure\scripts\audit_figure_spec.py --spec tests\fixtures\figure-specs\multipanel-ablation.yaml --base "C:\tmp\figures\multipanel-ablation"
-python skills\top-cs-figure\scripts\run_figure_evals.py
-python skills\top-cs-figure\scripts\run_private_figure_regressions.py --suite "D:\private-figure-evals\suite.yaml" --output "D:\private-figure-evals\aggregate-report.json"
-python skills\top-cs-figure\scripts\build_figure_atlas.py --output-root skills\top-cs-figure\assets
+```bash
+git clone https://github.com/zhiming33416/top-cs-paper-skills.git
+cd top-cs-paper-skills
+python scripts/install_skills.py
+python scripts/install_skills.py --check
 ```
 
-`derive_corpus_evidence.py` 只读取 corpus root，输出SHA去重索引和聚合统计，不写回语料库，也不保存论文/评审正文。统计候选不会自动成为skill规则；软规则必须经过阈值和人工语义审查。
+只安装一个或多个技能：
 
-`generic` 只执行通用论证和证据检查，不代表任何会议的最新政策。投稿前始终重新核对目标会议官网。
+```bash
+python scripts/install_skills.py --skill top-cs-writing
+python scripts/install_skills.py --skill top-cs-writing --skill top-cs-figure
+```
 
-## Phase-2 readiness
+安装器默认写入 `~/.codex/skills`，自动携带 `_shared` 和派生 evidence，不会删除其他 Codex skills。完整的跨平台安装、更新和排错说明见 [INSTALL.md](INSTALL.md)。
 
-Schema v2 records structural features, paper-type/topic candidates, version-pair status, policy validity, and explicit readiness gaps. The current baseline is 100 files, 99 unique hashes, and 90 eligible main-track papers. All 90 topic and paper-type labels remain assistant-reviewed candidates pending human confirmation; structural statistics may be used now, but label-dependent rules may not be promoted yet.
+## 工作方式
 
-The machine-readable preparation backlog is in `data-preparation.yaml`. Raw public downloads must remain in the external corpus. Private regression suites, specs, data, and rendered artifacts remain outside the repository; the aggregate-only runner reports anonymized IDs, hashes, geometry, perceptual distance, scores, and error categories.
+五个技能保持清晰分工，并通过共享契约协作：
 
-Full-section structural evidence for method, experiments, discussion, limitations, and conclusion is generated in `evidence/derived/full-section-rules.yaml`. Reference selection supports deterministic explicit needs and route-derived automatic needs. The output evaluator can enforce structured semantic contracts and source-artifact preservation. Multi-file LaTeX compilation is isolated, disables shell escape, and leaves the source project unchanged.
+1. `top-cs-writing` 从证据、论证和章节结构开始起草。
+2. `top-cs-polishing` 对已有文本做保真修订，不负责补造内容。
+3. `top-cs-reviewer` 对作者稿件进行保守的投稿前审计。
+4. `top-cs-response` 将评审意见、证据和修订动作绑定到稳定 issue ID。
+5. `top-cs-figure` 接收 figure brief、数据或 render spec，负责图件生产与 QA。
 
-## Version 4.1 figure production boundary
+路由架构、共享目录和文件加载规则见 [Architecture](docs/ARCHITECTURE.md)。
 
-The paper-writing, polishing, reviewer, and response skills share machine-readable citation, figure-handoff, and response-issue contracts. Functional rhetorical moves and topic-sentence scaffolds guide full-section work without becoming venue rules. Citation verification queries public Crossref, arXiv, and DBLP metadata with cache/offline support; it never treats metadata existence as claim entailment or downloads full text. Response work uses stable issue IDs, explicit state transitions, and an optional three-round adversarial self-check.
+## 图件示例
 
-Figure planning still begins with the shared `figure-brief` contract. The `top-cs-figure` skill is the only skill that owns rendering backend, allow-listed data transforms, descriptive statistics, visual grammar, palette, export bundles, and image QA; the other four skills continue to hand off or audit figures without rendering them. Strict v3 render specs produce panel-level plotted-data CSVs, including declared schematic geometry, a normalized spec, render manifest, SVG/PDF/PNG, and an optional revision audit. V1/v2 specs remain supported through an explicit recorded migration.
+下列预览全部由仓库内的确定性合成数据和渲染器生成，不包含论文截图或用户数据。
 
-Visual-style evidence is derived as aggregate-only statistics in `evidence/derived/visual-style-*`; it is never official venue policy. The 2026-07-13 snapshot contains 30 verified independent sources for each of WWW Research, ICLR, and ICML. All three report promoted style evidence plus usable anchors and co-occurrence profiles. Runtime styling resolves six task-specific families: semantic, categorical, ordered, sequential, diverging, and dark-overlay. Every color is labeled as an observed anchor, an accessibility-constrained constructed token, or a generic fallback; the live rules file remains authoritative for future runs.
+| 多面板实验图 | 方法与系统图 | 会议感知示例 |
+| --- | --- | --- |
+| ![Benchmark and ablation](skills/top-cs-figure/assets/gallery/benchmark-ablation.png) | ![Systems scaling tradeoff](skills/top-cs-figure/assets/gallery/systems-scaling-tradeoff.png) | ![ICML heatmap](skills/top-cs-figure/assets/gallery/icml-heatmap-venue.png) |
 
-Figure-style corpus expansion uses `visual-style-source-manifest.yaml` as the stable provenance layer. Raw public PDFs must stay under the external corpus root, normally `D:\桌面\www\papers\{WWW2026,ICLR2026,ICML2026}\verified_fulltext\`; the skill repo stores only source metadata, hashes, aggregate color/layout statistics, and confidence labels. WWW Research rows require title-exact public fulltext and must not use ACM-restricted PDFs or non-Research tracks to fill style gaps.
+## 证据与边界
 
-The visual collector resolves title-exact public arXiv PDFs for WWW, ICLR, and ICML only after each title is admitted by the accepted-title corpus index. Resolver cache files remain under the external corpus root. Public preprints may contribute aggregate visual-style evidence after verification, but never establish official venue formatting policy.
+- 官方投稿规则与语料观察严格分层；语料统计只作为软证据。
+- 仓库不包含原始论文、评审全文、私有实验数据或用户材料。
+- 技能不会把元数据存在性当作主张成立的证据，也不会编造实验、引用或审稿人立场。
+- `generic` 模式只提供通用论证和证据检查，不代表任何会议的最新要求。
 
-The lightweight atlas under `skills/top-cs-figure/assets/` contains 13 chart-atlas PNGs and 14 composite CS gallery PNGs, totaling 222 rendered panels. It includes one six-family palette atlas and two venue-aware scenario galleries per conference. Every asset is generated through the strict v3 production renderer from deterministic synthetic CSV/YAML/image inputs; `generated-manifest.yaml` records generator, renderer, style dependency, venue, input, output, panel-count, and size hashes. No paper screenshots, user images, raw corpus files, or external visual assets are included.
+证据来源、快照范围和隐私边界见 [Evidence and provenance](docs/EVIDENCE.md)。
+
+## 项目结构
+
+```text
+skills/                 # 五个可安装技能与共享依赖
+evidence/derived/       # 可移植的聚合证据和来源索引
+scripts/                # 安装、路由、验证和语料派生工具
+tests/                  # 单元、验收和合成图件测试
+docs/                   # 架构、证据与开发文档
+```
+
+## 开发与贡献
+
+```bash
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -p "test_*.py"
+python scripts/validate_evidence.py --index evidence/derived/corpus-index.yaml --rules evidence/derived/rules.yaml --strict
+python skills/top-cs-figure/scripts/run_figure_evals.py
+```
+
+提交新规则、文档或技能前，请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 和 [Development guide](docs/DEVELOPMENT.md)。Issue 和 Pull Request 都欢迎使用中文或英文。
+
+## License
+
+本项目采用 [MIT License](LICENSE)。

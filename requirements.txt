@@ -1,0 +1,5 @@
+matplotlib>=3.8,<4
+Pillow>=10,<13
+PyMuPDF>=1.24,<2
+pypdf>=5,<7
+PyYAML>=6,<7

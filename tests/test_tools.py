@@ -90,6 +90,60 @@ class InstallTests(unittest.TestCase):
                 self.assertEqual(install_mod.differences(install_mod.SOURCE / unit, target / unit), [])
             self.assertTrue(install_mod.EVIDENCE.is_dir())
 
+    def test_selected_units_include_shared_dependency(self):
+        self.assertEqual(
+            install_mod.selected_units(["top-cs-writing", "top-cs-figure"]),
+            ("_shared", "top-cs-writing", "top-cs-figure"),
+        )
+        self.assertEqual(install_mod.selected_units(None), install_mod.UNITS)
+
+    def test_single_skill_install_and_check(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / "skills"
+            self.assertEqual(
+                install_mod.main(["--target", str(target), "--skill", "top-cs-writing"]),
+                0,
+            )
+            self.assertTrue((target / "top-cs-writing" / "SKILL.md").is_file())
+            self.assertTrue((target / "_shared" / "evidence" / "derived" / "rules.yaml").is_file())
+            self.assertFalse((target / "top-cs-figure").exists())
+            self.assertEqual(
+                install_mod.main(["--target", str(target), "--skill", "top-cs-writing", "--check"]),
+                0,
+            )
+
+    def test_multiple_skill_install(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / "skills"
+            result = install_mod.main(
+                [
+                    "--target",
+                    str(target),
+                    "--skill",
+                    "top-cs-polishing",
+                    "--skill",
+                    "top-cs-reviewer",
+                ]
+            )
+            self.assertEqual(result, 0)
+            self.assertTrue((target / "top-cs-polishing" / "SKILL.md").is_file())
+            self.assertTrue((target / "top-cs-reviewer" / "SKILL.md").is_file())
+            self.assertFalse((target / "top-cs-writing").exists())
+
+    def test_full_install_and_check(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / "skills"
+            self.assertEqual(install_mod.main(["--target", str(target)]), 0)
+            for unit in install_mod.UNITS:
+                self.assertTrue((target / unit).is_dir())
+            self.assertEqual(install_mod.main(["--target", str(target), "--check"]), 0)
+
+    def test_default_target_is_codex_skills_directory(self):
+        self.assertEqual(install_mod.default_target(), Path.home() / ".codex" / "skills")
+
+    def test_list_mode_does_not_install(self):
+        self.assertEqual(install_mod.main(["--list"]), 0)
+
 
 if __name__ == "__main__":
     unittest.main()
