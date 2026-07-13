@@ -302,7 +302,7 @@ def build(output_root: Path) -> dict[str, object]:
             output = output_root / f"{relative}.png"; compress_png(rendered_png, output); expected.add(output.resolve())
             csv_path = root / f"{slug}.csv"
             records.append({
-                "asset": str(output.relative_to(output_root)), "sha256": sha256(output), "bytes": output.stat().st_size,
+                "asset": output.relative_to(output_root).as_posix(), "sha256": sha256(output), "bytes": output.stat().st_size,
                 "synthetic_csv_sha256": sha256(csv_path), "synthetic_yaml_sha256": sha256(spec_path), "seed": 40,
                 "panel_count": panel_count, "visual_families": sorted({family for family, _ in items}),
                 "production_renderer": True, "render_manifest_sha256": sha256(Path(result["render_manifest"])),

@@ -19,17 +19,24 @@ def geometry_report(fig, axes: dict[str, Any], panel_rows: dict[str, list[dict[s
     for panel_id, ax in axes.items():
         bbox = ax.get_window_extent(renderer)
         text_boxes = []
-        artists = ax.texts + [ax.title, ax.xaxis.label, ax.yaxis.label] + list(ax.get_xticklabels()) + list(ax.get_yticklabels())
-        for item in artists:
+        artists = (
+            [(item, "annotation") for item in ax.texts]
+            + [(ax.title, "title"), (ax.xaxis.label, "x_label"), (ax.yaxis.label, "y_label")]
+            + [(item, "x_tick") for item in ax.get_xticklabels()]
+            + [(item, "y_tick") for item in ax.get_yticklabels()]
+        )
+        for item, role in artists:
             if not item.get_text():
                 continue
             text_bbox = item.get_window_extent(renderer)
-            text_boxes.append({"text": item.get_text(), "font_pt": round(float(item.get_fontsize()), 3), "bbox_px": [round(value, 2) for value in text_bbox.bounds]})
+            text_boxes.append({"text": item.get_text(), "font_pt": round(float(item.get_fontsize()), 3), "bbox_px": [round(value, 2) for value in text_bbox.bounds], "_role": role})
         overlaps = []
         for left_index, left in enumerate(text_boxes):
             lx, ly, lw, lh = left["bbox_px"]
             for right in text_boxes[left_index + 1:]:
                 rx, ry, rw, rh = right["bbox_px"]
+                if {left["_role"], right["_role"]} == {"x_tick", "y_tick"}:
+                    continue
                 if _overlap(left["bbox_px"], right["bbox_px"]):
                     overlaps.append([left["text"], right["text"]])
         legend = ax.get_legend()
@@ -51,7 +58,7 @@ def geometry_report(fig, axes: dict[str, Any], panel_rows: dict[str, list[dict[s
         panels[panel_id] = {
             "axes_bbox_px": [round(value, 2) for value in bbox.bounds],
             "inside_canvas": bool(bbox.x0 >= figure_bbox.x0 and bbox.y0 >= figure_bbox.y0 and bbox.x1 <= figure_bbox.x1 and bbox.y1 <= figure_bbox.y1),
-            "texts": text_boxes, "text_overlaps": overlaps, "uncertainty_clipped": uncertainty_clipped,
+            "texts": [{key: value for key, value in item.items() if key != "_role"} for item in text_boxes], "text_overlaps": overlaps, "uncertainty_clipped": uncertainty_clipped,
             "legend_bbox_px": [round(value, 2) for value in legend_bbox] if legend_bbox else None,
             "legend_text_overlaps": legend_text_overlaps,
             "panel_label_title_overlap": panel_label_title_overlap,

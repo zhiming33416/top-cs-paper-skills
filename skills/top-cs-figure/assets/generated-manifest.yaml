@@ -1,6 +1,6 @@
 schema_version: 2
 generator: build_figure_atlas.py
-generator_sha256: 8637488e7242f9cd790405baaccc502ed3daf38dd46c4bc459184a9debb295f6
+generator_sha256: 927bca5da8c060c00df3b52285f9d24bbe365c0663c4441d08bd5c4711e7089d
 renderer_sha256: 426e2e727e15d5e5ff6beb8a1a6267356d6cbd1893aabef665f8736c939334c9
 style_dependency_sha256: aa95b0b0732afda87cef481280ccf6555a470d165ddd9b32504d5de94d0ef359
 external_assets_used: false
@@ -8,7 +8,7 @@ atlas_count: 13
 gallery_count: 14
 visual_example_count: 222
 records:
-- asset: chart-atlas\www-palette-atlas.png
+- asset: chart-atlas/www-palette-atlas.png
   sha256: 96411563b7476251efab7ab9149ce8638719a6c64d9506b45bcaa0d3580ed3d9
   bytes: 46988
   synthetic_csv_sha256: f3b862ee402a191f963bb9afcffb99d8c083e8df393695e3dba2f2573fbedac9
@@ -23,7 +23,7 @@ records:
   production_renderer: true
   render_manifest_sha256: f30249b9186c47540927cb6030c711fab9e2fddf11464c0b5df18c3c3fa52df5
   venue: www
-- asset: chart-atlas\iclr-palette-atlas.png
+- asset: chart-atlas/iclr-palette-atlas.png
   sha256: 577f210119a6d341d09b5cba850b5016ef85d73707dfcc7bfd543a2f483f49ba
   bytes: 47947
   synthetic_csv_sha256: f3b862ee402a191f963bb9afcffb99d8c083e8df393695e3dba2f2573fbedac9
@@ -38,7 +38,7 @@ records:
   production_renderer: true
   render_manifest_sha256: fdd295ba05fbb9d27ab52313c8343eef7be85fd326bac69e0bb18593f9d6d33f
   venue: iclr
-- asset: chart-atlas\icml-palette-atlas.png
+- asset: chart-atlas/icml-palette-atlas.png
   sha256: 2af3c60e6175495af0cfabc459bff38e07000883d9685b0d1c58f3f2056af1bc
   bytes: 48190
   synthetic_csv_sha256: f3b862ee402a191f963bb9afcffb99d8c083e8df393695e3dba2f2573fbedac9
@@ -53,7 +53,7 @@ records:
   production_renderer: true
   render_manifest_sha256: 00fa6ad7c2430769b3e469c3c3d186df9eba0018b93216248e61d0880b76f9b7
   venue: icml
-- asset: chart-atlas\comparison-composition.png
+- asset: chart-atlas/comparison-composition.png
   sha256: 57b8851fd3dfa4b41ce9d12646cb196b80fa5056da128f26c3b4181573ef5579
   bytes: 107716
   synthetic_csv_sha256: ccf6eeb29f4addf220b2d7382cefcfca4e4c6b72174651f66def4249002b6ff8
@@ -68,7 +68,7 @@ records:
   production_renderer: true
   render_manifest_sha256: a72b7334c3f909516cee58818e929d010e27434bb2d97b18176fb3100179162e
   venue: generic
-- asset: chart-atlas\trend-uncertainty.png
+- asset: chart-atlas/trend-uncertainty.png
   sha256: 3a4d03b474e643626c7a38f173dfc7a6838a29551d51a58eb1915c1eb2324953
   bytes: 134343
   synthetic_csv_sha256: 2977181ebc68ba797ba804125598289022683042f4bf1002b036ecd8f448d195
@@ -83,7 +83,7 @@ records:
   production_renderer: true
   render_manifest_sha256: 846172b3ed50d45901a276a84dd5a8db8e9e8c8187ada5c636a2666b5d408241
   venue: generic
-- asset: chart-atlas\distribution-interval.png
+- asset: chart-atlas/distribution-interval.png
   sha256: 31b098b37434e5b3fa8b9d48059d527ff0ac2f7bbeddb1f7cd363efbad0b9863
   bytes: 113210
   synthetic_csv_sha256: a0dd3a4c82dad5a9ef29b735cca116b3ca42657d2d35fd0c313a38f76e81a979
@@ -98,7 +98,7 @@ records:
   production_renderer: true
   render_manifest_sha256: dca5e778c8ff71a5376754792f3cb24a78f8308770bedd8e4678a772f775b963
   venue: generic
-- asset: chart-atlas\matrix-heatmap.png
+- asset: chart-atlas/matrix-heatmap.png
   sha256: ae797646d3e40426282af19df22f5ffb2766332b33635e4c939bdd54310e6483
   bytes: 105161
   synthetic_csv_sha256: 6448dec2ea7e6d1a60236b830035175434a68e39845f6fce5fd9c767a36aed7c
@@ -110,7 +110,7 @@ records:
   production_renderer: true
   render_manifest_sha256: 755bec7cec77385cef422294264669d67af474620d1a0e271b54310199d22276
   venue: generic
-- asset: chart-atlas\scatter-tradeoff.png
+- asset: chart-atlas/scatter-tradeoff.png
   sha256: c142ad8d476699bad09831de99ba7ad3161bb2306d401d123d830499c7ee6a2d
   bytes: 127878
   synthetic_csv_sha256: 73b0b062f30f2d382497fbd2cd3bca598874190976cb08fe1bc6199ee1d65c49
@@ -124,7 +124,7 @@ records:
   production_renderer: true
   render_manifest_sha256: 6350e927a40cceab506df12b7b61339426de3b7821a3dd9485d08a4963a65693
   venue: generic
-- asset: chart-atlas\ranking-calibration.png
+- asset: chart-atlas/ranking-calibration.png
   sha256: 3a3226297a4c728c85d566aaac41ef2b036059969ba7b4c7ba714d46c8abcc69
   bytes: 126371
   synthetic_csv_sha256: 697febc55cfaf945b6ad3c11ae3952013aa45b794624eec1440f5e7933de915d
@@ -141,7 +141,7 @@ records:
   production_renderer: true
   render_manifest_sha256: a1f377f38e990afb1ed17e74a6c8e3be42dea907bd4e4c04b289d1292535e110
   venue: generic
-- asset: chart-atlas\network-matrix.png
+- asset: chart-atlas/network-matrix.png
   sha256: 29fe1254e20c438828d9c383c4652c8752268a1271a664726f1d75dca1195062
   bytes: 88463
   synthetic_csv_sha256: b3653de0961ca006124a196ea66c44a9c141abc306cf6bb92adc48c4c16c9074
@@ -155,7 +155,7 @@ records:
   production_renderer: true
   render_manifest_sha256: aec9e49283f59bf4a242a44ce6ffbc9cbdd1ae3c3d112357f5a85072eac37c57
   venue: generic
-- asset: chart-atlas\schematic-layout.png
+- asset: chart-atlas/schematic-layout.png
   sha256: 8397a915d4ef684cfc6561e59d4e03bf0d2890f12cce6644648f26207063beb4
   bytes: 84920
   synthetic_csv_sha256: ad4961c8937c370869ddffcfbba2ef5b98f37c30e201fa832369a436d560bc35
@@ -167,7 +167,7 @@ records:
   production_renderer: true
   render_manifest_sha256: 1cb1dcd5812aa7aafc14e12f97b841014badb6db5d2c29f02f4826ec055c22f0
   venue: generic
-- asset: chart-atlas\qualitative-image.png
+- asset: chart-atlas/qualitative-image.png
   sha256: 8c10f440b19a5f8c6e8a396d8801ceb6d67d4807eae12ad48bf83546b617a48a
   bytes: 44646
   synthetic_csv_sha256: 877bac7f7166bc94bfe8b5776e638872f994d1f827bb96f9a54662f2ee749142
@@ -179,7 +179,7 @@ records:
   production_renderer: true
   render_manifest_sha256: 787b04d62693cfaa9805668f92ba67427b76ebc8d5d20ef888cf19194b9134d0
   venue: generic
-- asset: chart-atlas\cs-systems.png
+- asset: chart-atlas/cs-systems.png
   sha256: 21642706a436e4429fc20819d9b6d4f1ab8a17ddcfb49198ffc5960db3896591
   bytes: 121914
   synthetic_csv_sha256: c08ef3e0fe301470a2a1c53f15520f4c0e04bd9ea2590613baf277fc821a5040
@@ -202,7 +202,7 @@ records:
   production_renderer: true
   render_manifest_sha256: 97bdcd86371987039876e4d23b68c5f14cb2dfc3f3c93314aa16ad9aa73d2644
   venue: generic
-- asset: gallery\www-benchmark-venue.png
+- asset: gallery/www-benchmark-venue.png
   sha256: b153de6b14a9f1697d22f31f71d96c8b0e1a4d29eb8f2e71d5336001cad85ae2
   bytes: 65141
   synthetic_csv_sha256: e30aa107f79f3e02719aac3e9b8d6d0ed7e91041c0f78b0216b8247c735e019c
@@ -218,7 +218,7 @@ records:
   production_renderer: true
   render_manifest_sha256: 5e78e692f1f68ccaad7951901aa601d5056ff94f90fe9cdc65d4bbb37456d05b
   venue: www
-- asset: gallery\iclr-scaling-venue.png
+- asset: gallery/iclr-scaling-venue.png
   sha256: 5f647bab8a45aa21b72ab4a4d2499cd46fa0a9970fae571e9f19324c8304e4f2
   bytes: 78710
   synthetic_csv_sha256: 9d1ed26058be0854f782ab920a30a38e2270b1d58a5805e8f838176b9075d663
@@ -234,7 +234,7 @@ records:
   production_renderer: true
   render_manifest_sha256: 2f592462655ffa15f0a8c5a10d1679696db704c4e0ff9a7ac348dd051331df68
   venue: iclr
-- asset: gallery\icml-heatmap-venue.png
+- asset: gallery/icml-heatmap-venue.png
   sha256: 0fac32ea5e8303087d7030e9c1cd3f0b7d3913ea89576a86551de8697cd3b54a
   bytes: 51497
   synthetic_csv_sha256: e4295abd5edcd7f740d57a5824f683a23c2f8fecd3f3b65832646bdafd719510
@@ -248,7 +248,7 @@ records:
   production_renderer: true
   render_manifest_sha256: f6dc004240244cc1308f1fa8c923c24a8cda53f82117fe6de2342cc35aefa5bc
   venue: icml
-- asset: gallery\www-calibration-venue.png
+- asset: gallery/www-calibration-venue.png
   sha256: 2da5e6b1df64fb803b58f25616fd8492e3107e468a813982b4f4f9728845eb32
   bytes: 69381
   synthetic_csv_sha256: 085b523268148bfbef5577fbbb2400d183dc56f7e8813730d755c44f52e2ee4d
@@ -265,7 +265,7 @@ records:
   production_renderer: true
   render_manifest_sha256: e41444ae3cdd3d7cb78003096dafe65cf53d8a10bc78781576b7bff0c6cfb1d5
   venue: www
-- asset: gallery\iclr-network-venue.png
+- asset: gallery/iclr-network-venue.png
   sha256: cf17343720439d74045304884a80655853ff5a0bbf61cac3a1f7ed9bfaa5b0f7
   bytes: 51263
   synthetic_csv_sha256: adc8f9901754426dd4d78342083b45971fa4390df3b3885f213d11523c3ed133
@@ -282,7 +282,7 @@ records:
   production_renderer: true
   render_manifest_sha256: f2bbaeda933fc4cff317f3cefe36d799808c182c65a9cb31663ea50899a14016
   venue: iclr
-- asset: gallery\icml-schematic-venue.png
+- asset: gallery/icml-schematic-venue.png
   sha256: e867975cfbea925c4aeb045cc145825ca1ea0f133d0eb158b697f61b57c79e9d
   bytes: 56669
   synthetic_csv_sha256: ddc20dd2f0aa73f5dfc156c2dd87aea9ea4a7857578d71435be63c384b5dbd6c
@@ -299,7 +299,7 @@ records:
   production_renderer: true
   render_manifest_sha256: add9367ea2543e3a2fe0e6f5141a551249c412b775029643aa14e4c172d1ffb6
   venue: icml
-- asset: gallery\benchmark-ablation.png
+- asset: gallery/benchmark-ablation.png
   sha256: b4ec703fee39056367aa453afde44b9189790776fa56f3331d517e7a35941bfa
   bytes: 67906
   synthetic_csv_sha256: 33e316e06717c16fef0389d4b809d46046d4de755755544ceb7e0ad6cab60f74
@@ -315,7 +315,7 @@ records:
   production_renderer: true
   render_manifest_sha256: d6f4b3654b648462c974d908dad6211ab19021de93579e2467fd311596802d4e
   venue: generic
-- asset: gallery\systems-scaling-tradeoff.png
+- asset: gallery/systems-scaling-tradeoff.png
   sha256: 5f631ff1eecfd1cb6d27d79d39177781919bca5f9280e9d77a3b0973aaee2d7a
   bytes: 68541
   synthetic_csv_sha256: 8c370e0af4a75a1e7280284b1eefb9fc31b9dabf775fda6f17690ebac3ce0bf0
@@ -332,7 +332,7 @@ records:
   production_renderer: true
   render_manifest_sha256: 5d3c845575ff5fde8a058f0533b9dfb9807943524254fe927760d923cd441d76
   venue: generic
-- asset: gallery\calibration-qualitative.png
+- asset: gallery/calibration-qualitative.png
   sha256: 30388e178e9bb17f73b963d74ab2d28b8c6d147dd07ca75a367b76faa28b5e1f
   bytes: 60288
   synthetic_csv_sha256: b3242a38976143837e79296f668236e03e7702c029a700cb98103b966129a5e4
@@ -348,7 +348,7 @@ records:
   production_renderer: true
   render_manifest_sha256: efe7ba008bb40fa09a0473093cf4d8436c9415e623b34168ca1c35dcbf39919a
   venue: generic
-- asset: gallery\graph-robustness.png
+- asset: gallery/graph-robustness.png
   sha256: a842b50753db492aabffa8a8d7cb86d76f450ddfe46732f0220db4c196343312
   bytes: 58577
   synthetic_csv_sha256: 2d53bb666bf3df9d2218dad44dfec57a5619ed787fbdc10fe4e6d79b0dba4191
@@ -365,7 +365,7 @@ records:
   production_renderer: true
   render_manifest_sha256: 6e407ed6874ad3937762f5437dc9a7b86205b7679947badef8e2645f6cfdaec7
   venue: generic
-- asset: gallery\llm-scaling-efficiency.png
+- asset: gallery/llm-scaling-efficiency.png
   sha256: 10f66e5aabd08e1a8659abbf84fc4bc3db847e226aa93cc4062b809d3fef2954
   bytes: 68084
   synthetic_csv_sha256: 870d3b251840205d2497892d4d337b3088a8ee32dc0b3e6779e51120b60e8867
@@ -382,7 +382,7 @@ records:
   production_renderer: true
   render_manifest_sha256: 24ec9e6a190e5ab8659b1d81ea690d7b1b96353799bb5718b46183443da8acf2
   venue: generic
-- asset: gallery\retrieval-online-offline.png
+- asset: gallery/retrieval-online-offline.png
   sha256: 9434e2f8a18a226a7e67dab1ec608c5a54d06b42ef213d3685b58fa8c91f1cba
   bytes: 74726
   synthetic_csv_sha256: ef2bd9e23a942f5df165bab78bef0d67804c98697275fb62b7e03c0f25719e61
@@ -399,7 +399,7 @@ records:
   production_renderer: true
   render_manifest_sha256: 03f69f5e0af8337b3f77bcc08a79e3673f2577bb759dfa80eda7a2cca008718b
   venue: generic
-- asset: gallery\agent-failure-analysis.png
+- asset: gallery/agent-failure-analysis.png
   sha256: 493b96cf51095ee5b05210683e546a76a6b5ca051083b10a0a36dbb028281e06
   bytes: 63784
   synthetic_csv_sha256: 479fbd8249c254d503c4751b333195ffae74a2b4e4ed057b2c476bc641a9ce12
@@ -416,7 +416,7 @@ records:
   production_renderer: true
   render_manifest_sha256: fd8f2d383aa2a2bb14aefab3e168adbb2947c1d1790f036cf18d7983e4d39126
   venue: generic
-- asset: gallery\multimodal-evidence.png
+- asset: gallery/multimodal-evidence.png
   sha256: 94cd0f623aa512881ec8b1cd027560bc54352008a19a0d253a31202de8e1e2b9
   bytes: 47565
   synthetic_csv_sha256: 3914574886d4949c8d8361914b22df6423493da7405494d3aa0e665640bef7bb

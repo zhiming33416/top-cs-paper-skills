@@ -165,6 +165,7 @@ class FigureV4Tests(unittest.TestCase):
         self.assertEqual(manifest["renderer_sha256"], source_sha256(SCRIPTS / "render_from_figure_spec.py"))
         self.assertEqual(manifest["style_dependency_sha256"], source_sha256(SCRIPTS / "cs_figure_style.py"))
         for record in manifest["records"]:
+            self.assertNotIn("\\", record["asset"])
             path = root / record["asset"]
             self.assertTrue(path.is_file())
             self.assertLessEqual(path.stat().st_size, 350 * 1024)
