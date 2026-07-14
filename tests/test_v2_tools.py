@@ -636,6 +636,9 @@ class FigureToolTests(unittest.TestCase):
             output = root / "derived"
             result = visual_derive.derive(root, output, source_manifest=manifest, max_pages=1, target_per_venue=10)
             self.assertEqual(result["eligible"], 10)
+            index = yaml.safe_load((output / "visual-style-index.yaml").read_text(encoding="utf-8"))
+            self.assertEqual(index["source_policy"]["source_manifest"], manifest.name)
+            self.assertNotIn(str(root), yaml.safe_dump(index, allow_unicode=True))
             rules = yaml.safe_load((output / "visual-style-rules.yaml").read_text(encoding="utf-8"))
             stats = yaml.safe_load((output / "visual-style-stats.json").read_text(encoding="utf-8"))
             self.assertEqual(rules["rules"]["icml"]["status"], "promoted")

@@ -43,7 +43,7 @@ properties:
         type: object
         properties:
           mode: {enum: [generic, venue-derived, custom]}
-          family: {enum: [semantic, categorical, ordered, sequential, diverging, dark-overlay]}
+          family: {enum: [semantic, categorical, ordered, sequential, diverging, dark-overlay, unified-family]}
           series_count: {type: integer, minimum: 2, maximum: 8}
           background: {type: string, pattern: '^#[0-9A-Fa-f]{6}$'}
           emphasis_role: {enum: [ours, strong_baseline, baseline, ablation, secondary, positive, negative]}
@@ -243,7 +243,7 @@ $defs:
         type: object
         properties:
           mode: {enum: [generic, venue-derived, custom]}
-          family: {enum: [semantic, categorical, ordered, sequential, diverging, dark-overlay]}
+          family: {enum: [semantic, categorical, ordered, sequential, diverging, dark-overlay, unified-family]}
           series_count: {type: integer, minimum: 2, maximum: 8}
           background: {type: string, pattern: '^#[0-9A-Fa-f]{6}$'}
           emphasis_role: {enum: [ours, strong_baseline, baseline, ablation, secondary, positive, negative]}

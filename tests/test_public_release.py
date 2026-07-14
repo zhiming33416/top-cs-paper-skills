@@ -33,7 +33,26 @@ def public_docs() -> list[Path]:
     return sorted(docs)
 
 
+def public_text_assets() -> list[Path]:
+    suffixes = {".md", ".yaml", ".yml", ".json", ".py", ".txt"}
+    paths = [path for path in ROOT.iterdir() if path.is_file() and path.suffix.lower() in suffixes]
+    for directory in (ROOT / "docs", ROOT / "skills", ROOT / "evidence", ROOT / "scripts"):
+        paths.extend(path for path in directory.rglob("*") if path.is_file() and path.suffix.lower() in suffixes)
+    return sorted(paths)
+
+
 class PublicReleaseTests(unittest.TestCase):
+    def test_public_text_assets_contain_no_absolute_paths(self):
+        forbidden = (
+            re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]"),
+            re.compile(r"/Users/[^/<\s]+/"),
+            re.compile(r"/home/[^/<\s]+/"),
+        )
+        for path in public_text_assets():
+            text = path.read_text(encoding="utf-8")
+            for pattern in forbidden:
+                self.assertIsNone(pattern.search(text), f"absolute path in {path}: {pattern.pattern}")
+
     def test_public_docs_contain_no_personal_absolute_paths(self):
         forbidden = (
             re.compile(r"[A-Za-z]:\\Users\\", re.IGNORECASE),

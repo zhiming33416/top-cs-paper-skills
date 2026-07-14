@@ -122,3 +122,5 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and the [Development guide](docs/DEVELOP
 ## License
 
 This project is available under the [MIT License](LICENSE).
+
+The MIT License covers this repository's original code, documentation, and synthetic assets only. Linked conference websites, papers, templates, and third-party material remain subject to their own terms.
