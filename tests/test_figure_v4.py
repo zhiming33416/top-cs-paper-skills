@@ -186,13 +186,13 @@ class FigureV4Tests(unittest.TestCase):
             self.assertGreaterEqual(record["panel_count"], 6)
 
     def test_eval_matrix_is_executable_and_complete(self):
-        matrix = yaml.safe_load((ROOT / "tests" / "figure-evals.yaml").read_text(encoding="utf-8"))
+        matrix = yaml.safe_load((ROOT / "tests" / "cases" / "figure-evals.yaml").read_text(encoding="utf-8"))
         self.assertGreaterEqual(len(matrix["cases"]), 30)
         required = {"fixture", "cli", "expected_files", "structural_assertions", "numeric_assertions", "qa_thresholds", "failure_mode"}
         self.assertTrue(all(required.issubset(case) for case in matrix["cases"]))
 
-    def test_private_regression_interface_is_aggregate_only(self):
-        report = regressions.run(ROOT / "tests" / "fixtures" / "private-regression-suite.yaml")
+    def test_synthetic_regression_interface_is_aggregate_only(self):
+        report = regressions.run(ROOT / "tests" / "fixtures" / "synthetic-regression-suite.yaml")
         self.assertEqual(report["passed"], 1)
         self.assertEqual(report["failed"], 0)
         self.assertTrue(report["aggregate_only"])

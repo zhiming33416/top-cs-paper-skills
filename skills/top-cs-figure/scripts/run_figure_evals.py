@@ -411,7 +411,7 @@ def run(matrix: Path) -> dict[str, object]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--matrix", type=Path, default=ROOT / "tests" / "figure-evals.yaml")
+    parser.add_argument("--matrix", type=Path, default=ROOT / "tests" / "cases" / "figure-evals.yaml")
     args = parser.parse_args()
     print(json.dumps(run(args.matrix.resolve()), indent=2))
     return 0

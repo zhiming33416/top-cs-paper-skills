@@ -136,7 +136,7 @@ def resolve(skill: str, requested: dict[str, Any], year: int = 2026, needs: list
             selected_references.append({"need": need, "path": path})
     policies = yaml.safe_load((SKILLS / "_shared" / "venue-policies.yaml").read_text(encoding="utf-8"))
     profile = policies["venues"].get(venue, policies["venues"]["generic"])
-    preparation = yaml.safe_load((ROOT / "data-preparation.yaml").read_text(encoding="utf-8"))
+    preparation = yaml.safe_load((ROOT / "config" / "evidence" / "data-preparation.yaml").read_text(encoding="utf-8"))
     required_policy_categories = preparation["official_policy"]["required_categories"]
     if venue == "generic":
         missing_policy_categories = list(required_policy_categories)

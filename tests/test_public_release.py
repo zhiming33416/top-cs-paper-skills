@@ -21,6 +21,7 @@ def public_docs() -> list[Path]:
         ROOT / "README_EN.md",
         ROOT / "INSTALL.md",
         ROOT / "CONTRIBUTING.md",
+        ROOT / "tests" / "README.md",
         *(ROOT / "docs").glob("*.md"),
     ]
     for skill in SKILLS:
@@ -36,7 +37,7 @@ def public_docs() -> list[Path]:
 def public_text_assets() -> list[Path]:
     suffixes = {".md", ".yaml", ".yml", ".json", ".py", ".txt"}
     paths = [path for path in ROOT.iterdir() if path.is_file() and path.suffix.lower() in suffixes]
-    for directory in (ROOT / "docs", ROOT / "skills", ROOT / "evidence", ROOT / "scripts"):
+    for directory in (ROOT / "config", ROOT / "docs", ROOT / "skills", ROOT / "evidence", ROOT / "scripts"):
         paths.extend(path for path in directory.rglob("*") if path.is_file() and path.suffix.lower() in suffixes)
     return sorted(paths)
 
@@ -84,8 +85,36 @@ class PublicReleaseTests(unittest.TestCase):
         english = (ROOT / "README_EN.md").read_text(encoding="utf-8")
         zh_sections = [line for line in chinese.splitlines() if line.startswith("## ")]
         en_sections = [line for line in english.splitlines() if line.startswith("## ")]
-        self.assertEqual(len(zh_sections), len(en_sections))
-        self.assertEqual(len(zh_sections), 9)
+        self.assertEqual(
+            zh_sections,
+            [
+                "## 适用范围与边界",
+                "## 快速开始",
+                "## 选择技能",
+                "## 技能索引",
+                "## 协作流程",
+                "## 图件示例",
+                "## 项目结构",
+                "## 文档导航",
+                "## 开发与贡献",
+                "## 许可证",
+            ],
+        )
+        self.assertEqual(
+            en_sections,
+            [
+                "## Scope and Boundaries",
+                "## Quick Start",
+                "## Choose a Skill",
+                "## Skill Index",
+                "## Workflow",
+                "## Figure Examples",
+                "## Repository Layout",
+                "## Documentation",
+                "## Development and Contributing",
+                "## License",
+            ],
+        )
 
     def test_public_markdown_relative_links_resolve(self):
         link_pattern = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
@@ -116,6 +145,13 @@ class PublicReleaseTests(unittest.TestCase):
         expected = (
             ROOT / "LICENSE",
             ROOT / "requirements.txt",
+            ROOT / "config" / "evidence" / "data-preparation.yaml",
+            ROOT / "config" / "evidence" / "public-sources.yaml",
+            ROOT / "docs" / "README.md",
+            ROOT / "tests" / "README.md",
+            ROOT / "tests" / "cases" / "acceptance-cases.yaml",
+            ROOT / "tests" / "cases" / "deep-acceptance-cases.yaml",
+            ROOT / "tests" / "cases" / "figure-evals.yaml",
             ROOT / ".github" / "workflows" / "ci.yml",
             ROOT / ".github" / "PULL_REQUEST_TEMPLATE.md",
             ROOT / ".github" / "ISSUE_TEMPLATE" / "bug_report.yml",
@@ -123,6 +159,10 @@ class PublicReleaseTests(unittest.TestCase):
         )
         for path in expected:
             self.assertTrue(path.is_file(), str(path))
+
+    def test_root_has_no_maintenance_yaml(self):
+        self.assertEqual(list(ROOT.glob("*.yaml")), [])
+        self.assertFalse((ROOT / "corpus-sources.yaml").exists())
 
 
 if __name__ == "__main__":

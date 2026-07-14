@@ -3,7 +3,7 @@ description: "Source-backed behavior contracts. These complement keyword accepta
 cases:
   - id: deep-writing-abstract-fidelity
     skill: top-cs-writing
-    source_file: fixtures/deep/writing-abstract.md
+    source_file: ../fixtures/deep/writing-abstract.md
     prompt: "Draft an ICLR abstract from these notes without inventing missing uncertainty."
     required_placeholders: ["[DETAIL NEEDED]"]
     semantic_contract:
@@ -17,7 +17,7 @@ cases:
 
   - id: deep-writing-targeted-revision
     skill: top-cs-writing
-    source_file: fixtures/deep/writing-targeted-revision.md
+    source_file: ../fixtures/deep/writing-targeted-revision.md
     prompt: "Correct only paragraph P2 and preserve approved paragraphs P1 and P3 verbatim."
     semantic_contract:
       required_sections: ["Changed region", "Preserved region", "Revised text"]
@@ -29,7 +29,7 @@ cases:
 
   - id: deep-polishing-compression
     skill: top-cs-polishing
-    source_file: fixtures/deep/polishing-compression.md
+    source_file: ../fixtures/deep/polishing-compression.md
     prompt: "Compress by at least one third while preserving every number, citation, label, comparator, and limitation."
     semantic_contract:
       required_sections: ["Diagnosis", "Revised text", "Revision ledger", "Verification status"]
@@ -42,7 +42,7 @@ cases:
 
   - id: deep-polishing-layout
     skill: top-cs-polishing
-    source_file: fixtures/deep/polishing-layout.md
+    source_file: ../fixtures/deep/polishing-layout.md
     prompt: "Diagnose the float backlog and propose the smallest safe repair; do not claim compilation or visual success."
     semantic_contract:
       required_sections: ["Diagnosis", "Material changes", "Verification status"]
@@ -52,7 +52,7 @@ cases:
 
   - id: deep-reviewer-partial-scope
     skill: top-cs-reviewer
-    source_file: fixtures/deep/reviewer-partial.md
+    source_file: ../fixtures/deep/reviewer-partial.md
     prompt: "Review only the supplied abstract and state the assessment boundary."
     semantic_contract:
       required_sections: ["Review setup and assessment boundary", "Anchored issue ledger", "Not-assessable items and confidence limits"]
@@ -65,7 +65,7 @@ cases:
 
   - id: deep-reviewer-systems-efficiency
     skill: top-cs-reviewer
-    source_file: fixtures/deep/reviewer-systems.md
+    source_file: ../fixtures/deep/reviewer-systems.md
     prompt: "Audit the efficiency claim and produce one complete issue-contract row."
     semantic_contract:
       required_sections: ["Technical audit", "Anchored issue ledger", "Revision plan"]
@@ -78,7 +78,7 @@ cases:
 
   - id: deep-response-missing-results
     skill: top-cs-response
-    source_file: fixtures/deep/response-missing-results.md
+    source_file: ../fixtures/deep/response-missing-results.md
     prompt: "Prepare a point-by-point draft while keeping the claimed validation experiment unverified."
     required_placeholders: ["AUTHOR_INPUT_NEEDED", "[LOCATION NEEDED]"]
     semantic_contract:
@@ -92,7 +92,7 @@ cases:
 
   - id: deep-response-conference-guard
     skill: top-cs-response
-    source_file: fixtures/deep/response-conference-guard.md
+    source_file: ../fixtures/deep/response-conference-guard.md
     prompt: "Draft the ICML author response without claiming a revised-paper upload."
     semantic_contract:
       required_sections: ["Protocol and character budget", "Point-by-point English response", "Verified revision ledger"]
@@ -103,7 +103,7 @@ cases:
 
   - id: deep-figure-brief-csv
     skill: top-cs-figure
-    source_file: fixtures/deep/figure-brief-csv.md
+    source_file: ../fixtures/deep/figure-brief-csv.md
     prompt: "Use the supplied figure brief and CSV values to create Figure 3 without inventing statistics."
     semantic_contract:
       required_sections: ["Figure contract", "Generated/updated files", "Caption and manuscript-callout notes", "Visual QA", "Unresolved inputs"]
@@ -116,7 +116,7 @@ cases:
 
   - id: deep-figure-script-audit
     skill: top-cs-figure
-    source_file: fixtures/deep/figure-script-audit.md
+    source_file: ../fixtures/deep/figure-script-audit.md
     prompt: "Audit this plotting script and specify the smallest changes needed for a paper-ready export bundle."
     semantic_contract:
       required_sections: ["Figure contract", "Generated/updated files", "Caption and manuscript-callout notes", "Visual QA", "Unresolved inputs"]

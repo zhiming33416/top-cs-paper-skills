@@ -8,7 +8,7 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CASE_FILE = ROOT / "tests" / "deep-acceptance-cases.yaml"
+CASE_FILE = ROOT / "tests" / "cases" / "deep-acceptance-cases.yaml"
 
 
 class DeepAcceptanceContractTests(unittest.TestCase):

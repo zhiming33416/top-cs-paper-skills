@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class DataPreparationContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.plan = yaml.safe_load((ROOT / "data-preparation.yaml").read_text(encoding="utf-8"))
+        cls.plan = yaml.safe_load((ROOT / "config" / "evidence" / "data-preparation.yaml").read_text(encoding="utf-8"))
         cls.index = yaml.safe_load((ROOT / "evidence" / "derived" / "corpus-index.yaml").read_text(encoding="utf-8"))
 
     def test_scope_and_storage_boundary(self):

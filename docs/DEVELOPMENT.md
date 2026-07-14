@@ -10,6 +10,10 @@ python -m pip install -r requirements.txt
 
 The skills themselves are instruction bundles. Third-party Python dependencies are needed only for helper scripts, PDF inspection, or figure rendering.
 
+## Repository configuration
+
+Maintainer-only source and policy configuration lives in <code>config/evidence/</code>. These files are versioned for routing, collection, and validation, but the installer intentionally does not copy them into a user's Codex skills directory. Public aggregate outputs that skills need at runtime remain in <code>evidence/derived/</code>.
+
 ## Validation
 
 Run the complete unit and acceptance suite:
@@ -42,7 +46,7 @@ python scripts/install_skills.py --target <temporary-skills-dir> --check
 ```bash
 python scripts/audit_submission.py --venue iclr --year 2026 --source paper.tex --pdf paper.pdf
 python scripts/route_skill.py --skill top-cs-writing --venue iclr --paper-type empirical --section abstract --language zh-to-en --format json
-python scripts/evaluate_skill_output.py --case tests/acceptance-cases.yaml --case-id iclr-abstract-from-chinese-notes --source notes.md --output draft.md
+python scripts/evaluate_skill_output.py --case tests/cases/acceptance-cases.yaml --case-id iclr-abstract-from-chinese-notes --source notes.md --output draft.md
 python scripts/verify_citations.py --bib references.bib --output citation-report.json --format json --cache-dir <cache-dir>
 python skills/top-cs-polishing/scripts/check_latex_project.py --project paper --root main.tex --format json
 python skills/top-cs-figure/scripts/render_from_figure_spec.py --spec tests/fixtures/figure-specs/comparison.yaml --outdir <output-dir>
@@ -52,7 +56,7 @@ python skills/top-cs-figure/scripts/check_figure_bundle.py --base <output-dir>/c
 Corpus derivation always uses an external corpus root. Raw downloads must remain outside this repository:
 
 ```bash
-python scripts/collect_public_sources.py --config public-sources.yaml --cache-root <corpus-root> --dry-run
+python scripts/collect_public_sources.py --config config/evidence/public-sources.yaml --cache-root <corpus-root> --dry-run
 python scripts/collect_visual_style_corpus.py --corpus-root <corpus-root> --year 2026 --target-per-venue 30 --venues www,iclr,icml
 python scripts/derive_corpus_evidence.py --corpus-root <corpus-root> --output-dir evidence/derived --schema-version 2
 python scripts/derive_visual_style_evidence.py --corpus-root <corpus-root> --source-manifest evidence/derived/visual-style-source-manifest.yaml --output-dir evidence/derived

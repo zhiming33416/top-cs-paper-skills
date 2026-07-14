@@ -103,7 +103,7 @@ class ArchitectureTests(unittest.TestCase):
             self.assertFalse(any(path.name in forbidden_names for path in (SKILLS / skill).rglob("*.py")))
 
     def test_each_skill_has_seven_executable_acceptance_cases(self):
-        document = yaml.safe_load((ROOT / "tests" / "acceptance-cases.yaml").read_text(encoding="utf-8"))
+        document = yaml.safe_load((ROOT / "tests" / "cases" / "acceptance-cases.yaml").read_text(encoding="utf-8"))
         counts = Counter(case["skill"] for case in document["cases"])
         self.assertEqual(
             counts,

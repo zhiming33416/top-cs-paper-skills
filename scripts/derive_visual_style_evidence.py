@@ -29,7 +29,7 @@ except ImportError as exc:  # pragma: no cover - import guard
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CONFERENCES = {"www": "WWW2026", "iclr": "ICLR2026", "icml": "ICML2026"}
+DEFAULT_SOURCE_MANIFEST = ROOT / "evidence" / "derived" / "visual-style-source-manifest.yaml"
 PROMOTION_MIN_SOURCES = 10
 PRELIMINARY_MIN_SOURCES = 3
 
@@ -311,19 +311,6 @@ def extract_pdf_visual_record(path: Path, source: dict[str, Any] | None = None, 
     }
 
 
-def load_local_sources(config_path: Path, corpus_root: Path) -> list[tuple[Path, dict[str, Any]]]:
-    document = yaml.safe_load(config_path.read_text(encoding="utf-8"))
-    result: list[tuple[Path, dict[str, Any]]] = []
-    for source in document.get("sources", []):
-        file_name = source.get("file")
-        if not file_name:
-            continue
-        path = corpus_root / file_name
-        if path.is_file():
-            result.append((path, source))
-    return result
-
-
 def load_source_manifest(manifest_path: Path, corpus_root: Path) -> tuple[list[tuple[Path, dict[str, Any]]], list[dict[str, Any]]]:
     document = yaml.safe_load(manifest_path.read_text(encoding="utf-8")) or {}
     rows = list(document.get("sources", []))
@@ -346,14 +333,6 @@ def load_source_manifest(manifest_path: Path, corpus_root: Path) -> tuple[list[t
         }
         sources.append((path, meta))
     return sources, rows
-
-
-def discover_external_sources(corpus_root: Path) -> list[tuple[Path, dict[str, Any]]]:
-    result: list[tuple[Path, dict[str, Any]]] = []
-    for venue, conference in CONFERENCES.items():
-        for path in sorted((corpus_root / "papers" / conference).rglob("*.pdf")) if (corpus_root / "papers" / conference).is_dir() else []:
-            result.append((path, {"file": path.name, "venue": venue, "status": "verified-main", "use": "style-evidence"}))
-    return result
 
 
 def stability(counter: Counter[str]) -> dict[str, float | int | None]:
@@ -566,21 +545,11 @@ def promote_rules(records: list[dict[str, Any]], source_rows: list[dict[str, Any
     return stats, rules
 
 
-def derive(corpus_root: Path, output_dir: Path, local_only: bool = False, max_pages: int = 12, source_manifest: Path | None = None, target_per_venue: int = 30) -> dict[str, Any]:
-    config = ROOT / "corpus-sources.yaml"
-    source_rows: list[dict[str, Any]] = []
-    if source_manifest is not None:
-        if not source_manifest.is_file():
-            raise FileNotFoundError(f"source manifest does not exist: {source_manifest}")
-        sources, source_rows = load_source_manifest(source_manifest, corpus_root)
-    else:
-        sources = load_local_sources(config, corpus_root)
-    if not local_only:
-        # A supplied manifest is the provenance boundary. Do not silently
-        # promote PDFs merely because they happen to exist under corpus_root.
-        if source_manifest is None:
-            known = {path.resolve() for path, _ in sources}
-            sources.extend((path, meta) for path, meta in discover_external_sources(corpus_root) if path.resolve() not in known)
+def derive(corpus_root: Path, output_dir: Path, max_pages: int = 12, source_manifest: Path | None = None, target_per_venue: int = 30) -> dict[str, Any]:
+    source_manifest = source_manifest or DEFAULT_SOURCE_MANIFEST
+    if not source_manifest.is_file():
+        raise FileNotFoundError(f"source manifest does not exist: {source_manifest}")
+    sources, source_rows = load_source_manifest(source_manifest, corpus_root)
     records = [extract_pdf_visual_record(path, meta, max_pages=max_pages) for path, meta in sources]
     stats, rules = promote_rules(records, source_rows=source_rows, target_per_venue=target_per_venue)
     index = {
@@ -590,8 +559,8 @@ def derive(corpus_root: Path, output_dir: Path, local_only: bool = False, max_pa
             "aggregate_only": True,
             "raw_pages_or_figures_retained": False,
             "raw_text_retained": False,
-            "local_only": local_only,
-            "source_manifest": source_manifest.name if source_manifest else None,
+            "source_manifest": source_manifest.name,
+            "source_selection": "manifest-only",
         },
         "records": records,
     }
@@ -604,19 +573,27 @@ def derive(corpus_root: Path, output_dir: Path, local_only: bool = False, max_pa
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--corpus-root", type=Path, default=ROOT.parent, help="Root containing local PDFs and optional papers/<conference> external corpus")
+    parser.add_argument(
+        "--corpus-root",
+        type=Path,
+        default=ROOT.parent,
+        help="External corpus root; only PDFs declared by the source manifest are read",
+    )
     parser.add_argument("--output-dir", type=Path, default=ROOT / "evidence" / "derived")
-    parser.add_argument("--source-manifest", type=Path, help="Verified visual-style source manifest produced by collect_visual_style_corpus.py")
-    parser.add_argument("--local-only", action="store_true", help="Only use corpus-sources.yaml local PDFs")
+    parser.add_argument(
+        "--source-manifest",
+        type=Path,
+        default=DEFAULT_SOURCE_MANIFEST,
+        help="Verified visual-style source manifest produced by collect_visual_style_corpus.py",
+    )
     parser.add_argument("--max-pages", type=int, default=12)
     parser.add_argument("--target-per-venue", type=int, default=30)
     args = parser.parse_args()
     result = derive(
         args.corpus_root.resolve(),
         args.output_dir.resolve(),
-        local_only=args.local_only,
         max_pages=args.max_pages,
-        source_manifest=args.source_manifest.resolve() if args.source_manifest else None,
+        source_manifest=args.source_manifest.resolve(),
         target_per_venue=args.target_per_venue,
     )
     print(json.dumps(result, indent=2, ensure_ascii=False))

@@ -4,7 +4,7 @@ The evaluation system has two layers because public synthetic coverage and priva
 
 ## Public synthetic matrix
 
-`tests/figure-evals.yaml` is executable configuration. Each case declares:
+`tests/cases/figure-evals.yaml` is executable configuration. Each case declares:
 
 - fixture and CLI/operation;
 - expected files;

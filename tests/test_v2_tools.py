@@ -58,7 +58,7 @@ figure_audit = load_skill_script("top-cs-figure", "audit_figure_spec")
 
 class CollectionConfigTests(unittest.TestCase):
     def test_public_collection_config_is_safe_and_unique(self):
-        config = collector.load_config(ROOT / "public-sources.yaml")
+        config = collector.load_config(ROOT / "config" / "evidence" / "public-sources.yaml")
         self.assertTrue(config["collection_policy"]["public_only"])
         self.assertTrue(all(item["url"].startswith("https://") for item in config["sources"]))
         self.assertEqual(len(config["sources"]), len({item["relative_path"] for item in config["sources"]}))
@@ -199,7 +199,7 @@ class EvaluationTests(unittest.TestCase):
                 evaluator.load_case(path, None)
 
     def test_case_source_file_can_be_resolved_by_cli_contract(self):
-        case_path = ROOT / "tests" / "deep-acceptance-cases.yaml"
+        case_path = ROOT / "tests" / "cases" / "deep-acceptance-cases.yaml"
         case = evaluator.load_case(case_path, "deep-writing-abstract-fidelity")
         source = (case_path.parent / case["source_file"]).resolve()
         self.assertTrue(source.is_file())
@@ -503,7 +503,7 @@ class FigureToolTests(unittest.TestCase):
                 visual_collector.read_url = original
 
     def test_figure_evaluation_matrix_has_production_depth(self):
-        document = yaml.safe_load((ROOT / "tests" / "figure-evals.yaml").read_text(encoding="utf-8"))
+        document = yaml.safe_load((ROOT / "tests" / "cases" / "figure-evals.yaml").read_text(encoding="utf-8"))
         self.assertGreaterEqual(len(document["cases"]), 30)
         for case in document["cases"]:
             for field in ("fixture", "cli", "expected_files", "structural_assertions", "numeric_assertions", "qa_thresholds", "failure_mode"):
@@ -645,6 +645,15 @@ class FigureToolTests(unittest.TestCase):
             self.assertEqual(stats["venues"]["icml"]["coverage"]["eligible_count"], 10)
             self.assertEqual(stats["venues"]["icml"]["coverage"]["track_mix"], {"Regular": 10})
 
+    def test_visual_style_derivation_defaults_to_the_versioned_manifest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            output = root / "derived"
+            visual_derive.derive(root, output, max_pages=1)
+            index = yaml.safe_load((output / "visual-style-index.yaml").read_text(encoding="utf-8"))
+            self.assertEqual(index["source_policy"]["source_manifest"], "visual-style-source-manifest.yaml")
+            self.assertEqual(index["source_policy"]["source_selection"], "manifest-only")
+
     def test_visual_style_outputs_do_not_store_raw_images_or_caption_text(self):
         import fitz
 
@@ -665,7 +674,7 @@ class FigureToolTests(unittest.TestCase):
                 "eligibility": "style-evidence",
             }]}), encoding="utf-8")
             output = root / "derived"
-            result = visual_derive.derive(root, output, local_only=True, max_pages=1, source_manifest=manifest)
+            result = visual_derive.derive(root, output, max_pages=1, source_manifest=manifest)
             self.assertGreater(result["records"], 0)
             for path in output.iterdir():
                 self.assertNotIn(path.suffix.lower(), {".pdf", ".png", ".jpg", ".jpeg", ".tif", ".tiff"})
