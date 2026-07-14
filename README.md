@@ -122,3 +122,5 @@ python skills/top-cs-figure/scripts/run_figure_evals.py
 ## License
 
 本项目采用 [MIT License](LICENSE)。
+
+MIT 许可证仅适用于本仓库原创代码、文档和合成资产；链接的会议网站、论文、模板和第三方材料仍适用其各自条款。

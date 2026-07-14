@@ -38,7 +38,7 @@ def source_sha256(path: Path) -> str:
 class FigureV4Tests(unittest.TestCase):
     def test_manifest_schema_and_routes_are_v4(self):
         manifest = yaml.safe_load((ROOT / "skills" / "top-cs-figure" / "manifest.yaml").read_text(encoding="utf-8"))
-        self.assertEqual(manifest["version"], "4.1.0")
+        self.assertEqual(manifest["version"], "4.2.0")
         self.assertTrue({"forest-interval", "composition-stacked", "paired-change", "polar-summary"}.issubset(manifest["axes"]["visual_family"]["values"]))
         self.assertTrue({"rendering-api", "data-statistics", "qa-contract", "tutorials"}.issubset(manifest["reference_routes"]))
 
@@ -106,9 +106,19 @@ class FigureV4Tests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "distinguishable"):
             style.resolve_palette_profile("generic", "categorical", 2, mode="custom", custom_colors=["#335577", "#345678"])
 
+    def test_unified_family_palette_is_venue_independent_and_role_stable(self):
+        generic = style.resolve_palette_profile("generic", "unified-family", 5, mode="generic")
+        icml = style.resolve_palette_profile("icml", "unified-family", 5, mode="generic")
+        self.assertEqual(generic["colors"], icml["colors"])
+        self.assertEqual(generic["semantic_roles"]["ours"], generic["colors"][0])
+        self.assertEqual(generic["semantic_roles"]["strong_baseline"], generic["colors"][1])
+        self.assertFalse(generic["observed_anchors"])
+        self.assertEqual(generic["fallback_reason"], "unified-family-generic-system")
+        self.assertEqual(generic["token_provenance"][0]["source"], "generic_fallback")
+
     def test_v3_palette_profile_is_closed(self):
         fixture = yaml.safe_load((ROOT / "tests" / "fixtures" / "figure-specs" / "raw-bootstrap-v3.yaml").read_text(encoding="utf-8"))
-        fixture.setdefault("style", {})["palette_profile"] = {"mode": "generic", "family": "semantic", "series_count": 3}
+        fixture.setdefault("style", {})["palette_profile"] = {"mode": "generic", "family": "unified-family", "series_count": 3}
         core_spec.validate_v3_spec(fixture)
         fixture["style"]["palette_profile"]["secret"] = True
         with self.assertRaisesRegex(ValueError, "unknown palette profile"):

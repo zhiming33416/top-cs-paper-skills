@@ -93,7 +93,7 @@ class ArchitectureTests(unittest.TestCase):
             self.assertIn("citation-verification", manifest["reference_routes"])
             self.assertIn("figure-handoff", manifest["reference_routes"])
         figure, _ = load_manifest("top-cs-figure")
-        self.assertEqual(figure["version"], "4.1.0")
+        self.assertEqual(figure["version"], "4.2.0")
         self.assertIn("python-workflow", figure["reference_routes"])
         self.assertIn("visual-qa", figure["reference_routes"])
         self.assertIn("figure-handoff", figure["reference_routes"])

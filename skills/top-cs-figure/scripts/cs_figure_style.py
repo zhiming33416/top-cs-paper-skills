@@ -35,10 +35,15 @@ PALETTE = {
 }
 GENERIC_PALETTE = dict(PALETTE)
 GENERIC_CATEGORICAL = ["#0072B2", "#D55E00", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#6A3D9A", "#5B6675"]
+UNIFIED_FAMILY_PALETTE = {
+    "baseline_dark": "#405A78", "baseline_mid": "#627A9F", "baseline_soft": "#93A6C2",
+    "ours_dark": "#944E75", "ours_mid": "#B4678D", "ours_soft": "#D7AFC1",
+    "secondary": "#7A68A6",
+}
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_EVIDENCE_DIR = PROJECT_ROOT / "evidence" / "derived"
 FIGURE_SIZES_MM = {"single": (89.0, 55.0), "single_tall": (89.0, 75.0), "double": (183.0, 95.0), "double_tall": (183.0, 125.0), "teaser": (183.0, 70.0)}
-PROFILE_FAMILIES = {"semantic", "categorical", "ordered", "sequential", "diverging", "dark-overlay"}
+PROFILE_FAMILIES = {"semantic", "categorical", "ordered", "sequential", "diverging", "dark-overlay", "unified-family"}
 _ACTIVE_RESOLUTION: dict[str, object] | None = None
 
 
@@ -115,6 +120,25 @@ def _categorical(anchors: list[str], count: int, background: str) -> tuple[list[
     return colors, provenance
 
 
+def _unified_family(series_count: int) -> tuple[dict[str, str], list[str], list[dict[str, object]]]:
+    """Return a venue-independent cool-baseline/warm-ours profile."""
+    semantic = {
+        "ours": UNIFIED_FAMILY_PALETTE["ours_dark"],
+        "strong_baseline": UNIFIED_FAMILY_PALETTE["baseline_dark"],
+        "baseline": UNIFIED_FAMILY_PALETTE["baseline_mid"],
+        "ablation": UNIFIED_FAMILY_PALETTE["ours_mid"],
+        "secondary": UNIFIED_FAMILY_PALETTE["secondary"],
+    }
+    candidates = [
+        semantic["ours"], semantic["strong_baseline"], semantic["baseline"],
+        semantic["ablation"], semantic["secondary"], UNIFIED_FAMILY_PALETTE["baseline_soft"],
+        UNIFIED_FAMILY_PALETTE["ours_soft"],
+    ]
+    colors = candidates[:max(2, min(7, series_count))]
+    provenance = [{"hex": color, "source": "generic_fallback", "profile": "unified-family"} for color in colors]
+    return semantic, colors, provenance
+
+
 def resolve_palette_profile(
     venue: str = "generic", family: str = "semantic", series_count: int = 6,
     background: str = "#FFFFFF", evidence_dir: str | Path | None = None,
@@ -149,7 +173,14 @@ def resolve_palette_profile(
         fallback_reason = None
     for role, color in zip(("ours", "strong_baseline", "ablation", "secondary"), anchors):
         semantic[role] = color
-    if family == "semantic":
+    if family == "unified-family":
+        unified_semantic, colors, token_provenance = _unified_family(series_count)
+        semantic.update(unified_semantic)
+        anchors = []
+        observed = []
+        constructed = []
+        fallback_reason = "unified-family-generic-system"
+    elif family == "semantic":
         roles = [emphasis_role, "strong_baseline", "baseline", "ablation", "secondary", "positive", "negative"]
         colors = list(dict.fromkeys(semantic.get(role, semantic["ours"]) for role in roles))
         token_provenance = [{"hex": color, "source": "observed_anchor" if color in anchors else "generic_fallback"} for color in colors]

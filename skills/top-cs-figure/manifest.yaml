@@ -1,5 +1,5 @@
 name: top-cs-figure
-version: 4.1.0
+version: 4.2.0
 description: "Corpus-calibrated Python-first router for CS paper figure rendering, export, and visual QA."
 always_load:
   - ../_shared/core/evidence-discipline.md
@@ -75,7 +75,7 @@ references:
       path: references/corpus-visual-style.md
     - condition: "needs palette semantics, color slots, or venue-calibrated default colors"
       path: references/palette-policy.md
-    - condition: "selecting semantic, categorical, ordered, sequential, diverging, or dark-overlay palette profiles"
+    - condition: "selecting semantic, categorical, ordered, sequential, diverging, dark-overlay, or cross-venue unified-family palette profiles"
       path: references/palette-profiles.md
     - condition: "auditing color contrast, grayscale order, OKLab distance, or color-vision distinguishability"
       path: references/color-accessibility.md

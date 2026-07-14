@@ -29,7 +29,7 @@ A normalized spec, panel-level plotted-data CSV files, render manifest, SVG/PDF/
 
 ## Boundaries
 
-The skill does not invent data, alter image pixels to support a conclusion, or present corpus style as official formatting. It does not build interactive dashboards, use Figma or Illustrator as the primary backend, or generate AI graphical abstracts.
+The skill does not invent data, alter image pixels to support a conclusion, or present corpus style as official formatting. Its cross-venue `unified-family` palette is a generic implementation choice, not a venue preference. It does not build interactive dashboards, use Figma or Illustrator as the primary backend, or generate AI graphical abstracts.
 
 ## Runtime and Dependencies
 

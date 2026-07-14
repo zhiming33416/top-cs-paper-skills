@@ -29,7 +29,7 @@
 
 ## 边界
 
-不会编造数据、改变图片像素以配合结论或把语料风格描述成官方格式。它不负责交互式 dashboard、Figma/Illustrator-first 排版或 AI 生成 graphical abstract。
+不会编造数据、改变图片像素以配合结论或把语料风格描述成官方格式。跨 venue 的 `unified-family` 配色只是通用实现选择，不代表任何会议偏好。它不负责交互式 dashboard、Figma/Illustrator-first 排版或 AI 生成 graphical abstract。
 
 ## 运行和依赖
 

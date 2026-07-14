@@ -591,7 +591,7 @@ def derive(corpus_root: Path, output_dir: Path, local_only: bool = False, max_pa
             "raw_pages_or_figures_retained": False,
             "raw_text_retained": False,
             "local_only": local_only,
-            "source_manifest": source_manifest.as_posix() if source_manifest else None,
+            "source_manifest": source_manifest.name if source_manifest else None,
         },
         "records": records,
     }

@@ -23,6 +23,8 @@ The repository does not store:
 - resolver caches or downloaded corpus PDFs;
 - private regression specifications or rendered private artifacts.
 
+The repository's MIT license covers its original code, documentation, and deterministic synthetic assets. It does not relicense linked conference websites, papers, templates, or third-party material.
+
 ## Rule labels
 
 - `official-policy`: a dated venue rule backed by an official source;

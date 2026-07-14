@@ -5,7 +5,7 @@ source_policy:
   raw_pages_or_figures_retained: false
   raw_text_retained: false
   local_only: false
-  source_manifest: D:/桌面/www/top-cs-paper-skills/evidence/derived/visual-style-source-manifest.yaml
+  source_manifest: visual-style-source-manifest.yaml
 records:
 - source_id: iclr2026-642b377bbcce
   source_hash: 642b377bbcce14657049d335282260713a91649fd59ad9d42d7a3ebbcf8f7d3a
