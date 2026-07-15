@@ -145,6 +145,7 @@ class PublicReleaseTests(unittest.TestCase):
         expected = (
             ROOT / "LICENSE",
             ROOT / "requirements.txt",
+            ROOT / "assets" / "top-cs-paper-skills-banner.png",
             ROOT / "config" / "evidence" / "data-preparation.yaml",
             ROOT / "config" / "evidence" / "public-sources.yaml",
             ROOT / "docs" / "README.md",

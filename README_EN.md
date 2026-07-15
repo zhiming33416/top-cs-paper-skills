@@ -7,6 +7,8 @@
 ![Skills](https://img.shields.io/badge/skills-5-6f42c1)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB)
 
+![Top CS Paper Skills: evidence-grounded Codex skills for leading CS conferences](assets/top-cs-paper-skills-banner.png)
+
 Five Codex skills for computer-science paper workflows: argument design and drafting, fidelity-preserving polishing, pre-submission review, reviewer responses, and reproducible scientific figures. They share evidence boundaries, traceable inputs and outputs, and conservative claims.
 
 ## Scope and Boundaries
@@ -90,6 +92,7 @@ All previews below are generated from deterministic synthetic inputs and reposit
 ~~~text
 .
 ├── .github/                 # CI, Issue templates, and PR template
+├── assets/                  # README hero and other repository visual assets; not installed
 ├── config/evidence/         # Maintainer source and policy configuration; not installed
 ├── docs/                    # Architecture, evidence, and development documentation
 ├── evidence/derived/        # Public aggregate evidence installed with shared resources
@@ -108,7 +111,7 @@ All previews below are generated from deterministic synthetic inputs and reposit
 └── LICENSE
 ~~~
 
-The installer copies only the selected <code>skills/top-cs-*</code>, <code>skills/_shared</code>, and <code>evidence/derived</code>. <code>config/</code>, <code>docs/</code>, <code>scripts/</code>, and <code>tests/</code> support maintenance and contribution; they are not installed into a user's Codex skills directory. Read [tests/README.md](tests/README.md) for the public-test boundary.
+The installer copies only the selected <code>skills/top-cs-*</code>, <code>skills/_shared</code>, and <code>evidence/derived</code>. <code>assets/</code>, <code>config/</code>, <code>docs/</code>, <code>scripts/</code>, and <code>tests/</code> support presentation, maintenance, and contribution; they are not installed into a user's Codex skills directory. Read [tests/README.md](tests/README.md) for the public-test boundary.
 
 ## Documentation
 

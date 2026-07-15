@@ -7,6 +7,8 @@
 ![Skills](https://img.shields.io/badge/skills-5-6f42c1)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB)
 
+![Top CS Paper Skills：面向顶级计算机科学会议的证据驱动 Codex skills](assets/top-cs-paper-skills-banner.png)
+
 面向计算机科学论文工作流的五个 Codex skills：从论证与写作，到保真润色、投稿前预审、审稿回复和可复现科研图件。它们以证据边界、可追溯的输入输出和保守表述为共同原则。
 
 ## 适用范围与边界
@@ -89,6 +91,7 @@ top-cs-reviewer ─────────→ top-cs-response
 ~~~text
 .
 ├── .github/                 # CI、Issue 与 PR 模板
+├── assets/                  # README 宣传图等仓库展示资产；不会安装
 ├── config/evidence/         # 维护者的来源与政策配置；不会安装
 ├── docs/                    # 架构、证据、开发文档
 ├── evidence/derived/        # 可公开的聚合证据；安装时随共享资源提供
@@ -107,7 +110,7 @@ top-cs-reviewer ─────────→ top-cs-response
 └── LICENSE
 ~~~
 
-安装器只复制选定的 <code>skills/top-cs-*</code>、<code>skills/_shared</code> 和 <code>evidence/derived</code>。<code>config/</code>、<code>docs/</code>、<code>scripts/</code> 与 <code>tests/</code> 服务于维护和贡献，不会进入用户的 Codex skills 目录；测试范围说明见 [tests/README.md](tests/README.md)。
+安装器只复制选定的 <code>skills/top-cs-*</code>、<code>skills/_shared</code> 和 <code>evidence/derived</code>。<code>assets/</code>、<code>config/</code>、<code>docs/</code>、<code>scripts/</code> 与 <code>tests/</code> 服务于展示、维护和贡献，不会进入用户的 Codex skills 目录；测试范围说明见 [tests/README.md](tests/README.md)。
 
 ## 文档导航
 
