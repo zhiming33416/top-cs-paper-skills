@@ -1,0 +1,20 @@
+schema_version: 1
+example_only: true
+claims:
+  - id: CLM-001
+    statement: "The manuscript will distinguish measured evidence, pending evidence, and author decisions."
+    status: proposed
+    evidence_ids:
+      - EVD-001
+    author_confirmation_required: true
+evidence:
+  - id: EVD-001
+    kind: planned-evaluation-record
+    status: pending-author-input
+    source: author-provided
+    note: "No experiment result is included in this synthetic example."
+handoff:
+  figure_ids:
+    - FIG-001
+  review_issue_ids:
+    - RSK-001

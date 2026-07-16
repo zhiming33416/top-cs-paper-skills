@@ -1,0 +1,4 @@
+interface:
+  display_name: "Top CS Paper Workflow"
+  short_description: "Coordinate evidence-grounded full-paper projects"
+  default_prompt: "Use $top-cs-paper-workflow to coordinate this full paper project across the five Top CS skills."

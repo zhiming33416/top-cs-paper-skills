@@ -1,6 +1,6 @@
 # Architecture
 
-Top CS Paper Skills contains five installable skills and one shared resource directory. Each skill keeps its own stance, workflow, output contract, on-demand references, and task-specific scripts while reusing common evidence and venue material.
+Top CS Paper Skills contains five installable specialist skills, one optional full-paper workflow coordinator, and one shared resource directory. Each specialist keeps its own stance, workflow, output contract, on-demand references, and task-specific scripts while reusing common evidence and venue material. The coordinator records traceable handoffs; it does not merge the specialist workflows into one large skill.
 
 ## Package layout
 
@@ -11,7 +11,8 @@ skills/
 ├── top-cs-polishing/
 ├── top-cs-reviewer/
 ├── top-cs-response/
-└── top-cs-figure/
+├── top-cs-figure/
+└── top-cs-paper-workflow/    # Optional: project state and cross-skill handoffs
 ```
 
 Each skill is installed as a complete directory. Router-style skills use:
@@ -30,15 +31,16 @@ Each skill is installed as a complete directory. Router-style skills use:
 - `top-cs-reviewer` treats venue as its content axis and takes manuscript scope and audit mode as runtime inputs.
 - `top-cs-response` uses a linear issue-state workflow for review intake, evidence mapping, drafting, and revision verification.
 - `top-cs-figure` owns figure contracts, rendering, descriptive statistics, visual grammar, export bundles, and image QA.
+- `top-cs-paper-workflow` is optional. It keeps metadata-only state in a user-selected project root and checks claim, evidence, figure, review, response, and revision handoffs. It never generates a manuscript, figure, result, citation, or venue policy.
 
 ## Shared contracts
 
-Writing, polishing, review, response, and figure work exchange machine-readable records for citations, figure briefs, render specs, response issues, and regression suites. The shared contracts prevent one skill from silently changing another skill's evidence or output assumptions.
+Writing, polishing, review, response, and figure work exchange machine-readable records for citations, figure briefs, render specs, response issues, and regression suites. The workflow manifest schema adds stable IDs and checkpoint status for project-level handoffs. Shared contracts prevent one skill from silently changing another skill's evidence or output assumptions.
 
 ## Installation boundary
 
-The skills intentionally retain sibling references to `_shared`. Figure style routing also consumes repository-derived evidence that the installer places under `_shared/evidence/derived`. The installer therefore always copies shared resources even when the user selects only one skill.
+The skills intentionally retain sibling references to `_shared`. Figure style routing also consumes repository-derived evidence that the installer places under `_shared/evidence/derived`. The installer therefore always copies shared resources even when the user selects only one skill. `--workflow` installs the coordinator together with all five specialist skills; the default remains the five specialists only.
 
 ## Compatibility
 
-The repository preserves existing `SKILL.md`, manifest, and evidence interfaces. Public documentation and installation tooling may evolve, but changes to runtime contracts require corresponding schema, acceptance-test, and migration updates.
+`skills/` is the canonical source for Codex and Claude Code installations; no duplicate release tree is checked in. The installer preserves unrelated host skills and records owned files for scoped verification and pruning. Public documentation and installation tooling may evolve, but changes to runtime contracts require corresponding schema, acceptance-test, and migration updates. See [Host compatibility](HOSTS.md) and [Full-paper workflow](WORKFLOW.md).

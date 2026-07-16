@@ -23,6 +23,8 @@ The repository does not store:
 - resolver caches or downloaded corpus PDFs;
 - private regression specifications or rendered private artifacts.
 
+The optional full-paper workflow writes a local manifest only beneath a user-selected project's `.top-cs-paper/` directory. That manifest may contain relative paths, file metadata, hashes, stable IDs, and checkpoint states, but it is not evidence by itself and must not be committed as a user artifact.
+
 The repository's MIT license covers its original code, documentation, and deterministic synthetic assets. It does not relicense linked conference websites, papers, templates, or third-party material.
 
 ## Rule labels
@@ -42,4 +44,4 @@ Visual-style evidence records aggregate color, layout, and co-occurrence statist
 
 ## Privacy and integrity
 
-Citation verification checks public metadata but does not treat metadata existence as proof that a source entails a manuscript claim. Review and response workflows do not invent reviewer identities, experiments, results, edits, or promises. Private regression runs emit only aggregate identifiers, hashes, geometry, perceptual distance, scores, and error categories.
+Citation verification checks public metadata but does not treat metadata existence as proof that a source entails a manuscript claim. Review and response workflows do not invent reviewer identities, experiments, results, edits, or promises. Workflow status does not establish that an experiment ran, a figure is valid, a citation entails a claim, or a venue policy is current. Private regression runs emit only aggregate identifiers, hashes, geometry, perceptual distance, scores, and error categories.

@@ -1,0 +1,34 @@
+name: top-cs-paper-workflow
+version: 1.0.0
+description: "Optional project-level coordinator for the five Top CS paper skills."
+always_load:
+  - ../_shared/core/evidence-discipline.md
+  - ../_shared/core/claim-evidence-boundary.md
+  - ../_shared/references/figure-handoff.md
+runtime_parameters:
+  project_root:
+    description: "User-selected paper project root; never infer or search beyond it."
+  workflow_mode:
+    values: [initialize, resume, status]
+    default: status
+  strictness:
+    values: [advisory, strict]
+    default: advisory
+references:
+  on_demand:
+    - condition: "needs checkpoint meanings, project-state fields, or cross-skill traceability"
+      path: references/handoff-and-checkpoints.md
+    - condition: "needs schema fields or manifest validation"
+      path: ../_shared/contracts/workflow-manifest.schema.yaml
+    - condition: "needs a figure handoff or figure-to-claim validation"
+      path: ../_shared/references/figure-handoff.md
+reference_routes:
+  workflow-contract:
+    - references/handoff-and-checkpoints.md
+    - ../_shared/contracts/workflow-manifest.schema.yaml
+  figure-handoff:
+    - ../_shared/references/figure-handoff.md
+    - ../_shared/contracts/figure-brief.schema.yaml
+  response-issue:
+    - ../_shared/contracts/response-issue.schema.yaml
+output_contract: "project route, workflow manifest updates, linked handoffs, status report, missing-input list"

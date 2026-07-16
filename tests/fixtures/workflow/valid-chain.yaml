@@ -1,0 +1,44 @@
+schema_version: 1
+project:
+  title: Synthetic traceability example
+  venue: generic
+  year: null
+  paper_type: empirical
+  submission_stage: response
+  author_confirmation: confirmed
+materials:
+  - path: manuscript/main.tex
+    kind: manuscript
+    bytes: 0
+    sha256: "0000000000000000000000000000000000000000000000000000000000000000"
+claims:
+  - claim_id: C1
+    statement: The synthetic method improves the reported outcome.
+    evidence_ids: [E1]
+    figure_ids: [F1]
+evidence:
+  - evidence_id: E1
+    claim_ids: [C1]
+    status: available
+figures:
+  - figure_id: F1
+    claim_ids: [C1]
+    evidence_ids: [E1]
+    evidence_status: available
+review_issues:
+  - issue_id: R1
+    claim_ids: [C1]
+    action: Add the requested synthetic ablation reference.
+    revision_ids: [V1]
+    status: verified
+revisions:
+  - revision_id: V1
+    issue_ids: [R1]
+    status: verified
+checkpoints:
+  brief: ready
+  claims: ready
+  evidence-and-figures: ready
+  manuscript: ready
+  review: ready
+  response: ready
