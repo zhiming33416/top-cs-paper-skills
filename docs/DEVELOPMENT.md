@@ -5,10 +5,10 @@
 Python 3.10 or newer is required for the helper scripts and test suite.
 
 ```bash
-python -m pip install -r requirements.txt
+python -m pip install -r requirements.txt -r requirements-dev.txt
 ```
 
-The skills themselves are instruction bundles. Third-party Python dependencies are needed only for helper scripts, PDF inspection, or figure rendering.
+The skills themselves are instruction bundles. Third-party runtime dependencies are needed only for helper scripts, PDF inspection, or figure rendering; `requirements-dev.txt` supplies the separate Ruff lint tool.
 
 ## Repository configuration
 
@@ -37,9 +37,14 @@ python skills/top-cs-figure/scripts/run_figure_evals.py
 Smoke-test installation in an isolated directory:
 
 ```bash
-python scripts/install_skills.py --target <temporary-skills-dir>
-python scripts/install_skills.py --target <temporary-skills-dir> --check
+python scripts/install_skills.py --host codex --target <temporary-skills-dir>
+python scripts/install_skills.py --host codex --target <temporary-skills-dir> --check
+python scripts/install_skills.py --workflow --host claude --target <temporary-skills-dir>
+python scripts/install_skills.py --workflow --host claude --target <temporary-skills-dir> --check
+python -m ruff check --select E9,F --ignore E402 scripts/install_skills.py scripts/route_skill.py skills/top-cs-paper-workflow tests/test_public_release.py
 ```
+
+For the project-state tool, use a disposable, synthetic project root. Verify `init`, explicit relative-path `inventory`, advisory `status`, strict warnings, traversal rejection, and no-copy behavior. Do not run it against a contributor's home directory or a real manuscript in CI.
 
 ## Common tools
 
@@ -66,6 +71,7 @@ python scripts/derive_visual_style_evidence.py --corpus-root <corpus-root> --sou
 
 - Keep official policy, corpus observations, synthetic examples, and author artifacts explicitly labeled.
 - Do not commit raw corpus files, private evaluation suites, resolver caches, generated user figures, or credentials.
+- Keep workflow manifests and local workflow outputs out of the repository root; only synthetic examples may be committed under `examples/` or `tests/fixtures/`.
 - Update tests and schemas with any interface change.
 - Keep Chinese and English public README pages aligned.
 - Run `git diff --check` before committing.

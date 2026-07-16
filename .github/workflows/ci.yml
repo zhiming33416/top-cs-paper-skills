@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   test:
+    name: Full validation (${{ matrix.os }}, Python ${{ matrix.python-version }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -27,7 +28,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
 
-      - name: Install dependencies
+      - name: Install runtime dependencies
         run: python -m pip install -r requirements.txt
 
       - name: Run unit and acceptance tests
@@ -39,6 +40,59 @@ jobs:
       - name: Run public figure evaluations
         run: python skills/top-cs-figure/scripts/run_figure_evals.py
 
+  public-quality:
+    name: Public docs and lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install runtime and development dependencies
+        run: python -m pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Lint maintained public Python surface
+        run: python -m ruff check --select E9,F --ignore E402 scripts/install_skills.py scripts/route_skill.py skills/top-cs-paper-workflow tests/test_public_release.py
+
+      - name: Validate public documentation, links, and path boundary
+        run: python -m unittest tests.test_public_release
+
       - name: Check patch whitespace
-        if: github.event_name == 'pull_request'
         run: git diff --check HEAD^ HEAD
+
+  macos-smoke:
+    name: macOS installer and route smoke
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install runtime dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Smoke-test Codex workflow install
+        run: |
+          python scripts/install_skills.py --host codex --workflow --target "$RUNNER_TEMP/codex-skills"
+          python scripts/install_skills.py --host codex --workflow --target "$RUNNER_TEMP/codex-skills" --check
+
+      - name: Smoke-test Claude Code workflow install
+        run: |
+          python scripts/install_skills.py --host claude --workflow --target "$RUNNER_TEMP/claude-skills"
+          python scripts/install_skills.py --host claude --workflow --target "$RUNNER_TEMP/claude-skills" --check
+
+      - name: Smoke-test deterministic route resolution
+        run: python scripts/route_skill.py --skill top-cs-writing --format json
+
+      - name: Validate public documentation, links, and path boundary
+        run: python -m unittest tests.test_public_release

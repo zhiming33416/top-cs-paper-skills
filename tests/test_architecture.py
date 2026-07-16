@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ROOT / "skills"
 PAPER_SKILLS = ("top-cs-writing", "top-cs-polishing", "top-cs-reviewer", "top-cs-response")
 ALL_SKILLS = PAPER_SKILLS + ("top-cs-figure",)
+OPTIONAL_WORKFLOW = "top-cs-paper-workflow"
 
 
 def load_manifest(skill: str):
@@ -86,7 +87,20 @@ class ArchitectureTests(unittest.TestCase):
 
     def test_contract_routes_and_figure_skill_boundary(self):
         skill_dirs = sorted(path.name for path in SKILLS.iterdir() if path.is_dir() and not path.name.startswith("_"))
-        self.assertEqual(skill_dirs, ["top-cs-figure", "top-cs-polishing", "top-cs-response", "top-cs-reviewer", "top-cs-writing"])
+        self.assertEqual(
+            skill_dirs,
+            [
+                "top-cs-figure",
+                "top-cs-paper-workflow",
+                "top-cs-polishing",
+                "top-cs-response",
+                "top-cs-reviewer",
+                "top-cs-writing",
+            ],
+        )
+        workflow = SKILLS / OPTIONAL_WORKFLOW
+        self.assertTrue((workflow / "SKILL.md").is_file())
+        self.assertTrue((workflow / "agents" / "openai.yaml").is_file())
         for skill in PAPER_SKILLS:
             manifest, _ = load_manifest(skill)
             self.assertEqual(manifest["version"], "2.3.0")
@@ -101,6 +115,21 @@ class ArchitectureTests(unittest.TestCase):
         forbidden_names = {"render_figure.py", "generate_figure.py", "figure_backend.py"}
         for skill in PAPER_SKILLS:
             self.assertFalse(any(path.name in forbidden_names for path in (SKILLS / skill).rglob("*.py")))
+
+    def test_optional_workflow_has_a_valid_project_level_contract(self):
+        manifest, base = load_manifest(OPTIONAL_WORKFLOW)
+        self.assertEqual(manifest["version"], "1.0.0")
+        self.assertEqual(
+            set(manifest["runtime_parameters"]),
+            {"project_root", "workflow_mode", "strictness"},
+        )
+        self.assertIn("workflow-contract", manifest["reference_routes"])
+        self.assertIn("figure-handoff", manifest["reference_routes"])
+        self.assertIn("response-issue", manifest["reference_routes"])
+        for relative in declared_paths(manifest):
+            with self.subTest(path=relative):
+                self.assertTrue((base / relative).resolve().is_file())
+        self.assertTrue((base / "scripts" / "paper_workflow.py").is_file())
 
     def test_each_skill_has_seven_executable_acceptance_cases(self):
         document = yaml.safe_load((ROOT / "tests" / "cases" / "acceptance-cases.yaml").read_text(encoding="utf-8"))

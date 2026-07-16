@@ -1,0 +1,117 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "top-cs-paper-skills/workflow-manifest.schema.yaml"
+title: Top CS paper workflow manifest
+description: >-
+  Project-local, metadata-only traceability state for a paper workflow. It must not
+  contain manuscript text, reviewer text, raw data, or copied source material.
+type: object
+required:
+  - schema_version
+  - project
+  - materials
+  - claims
+  - evidence
+  - figures
+  - review_issues
+  - revisions
+  - checkpoints
+properties:
+  schema_version:
+    const: 1
+  project:
+    type: object
+    required: [title, venue, year, paper_type, submission_stage, author_confirmation]
+    properties:
+      title: {type: string, minLength: 1}
+      venue: {enum: [www, iclr, icml, generic, other]}
+      year: {type: [integer, "null"], minimum: 2000, maximum: 2100}
+      paper_type: {enum: [empirical, algorithmic, theoretical, systems, dataset-benchmark, other]}
+      submission_stage: {enum: [planning, draft, pre-submission, review, response, camera-ready]}
+      author_confirmation: {enum: [pending, confirmed, not-required]}
+    additionalProperties: false
+  materials:
+    type: array
+    items:
+      type: object
+      required: [path, kind, bytes, sha256]
+      properties:
+        # Paths are canonical project-relative POSIX strings. Reject Windows
+        # separators as well as roots, traversal, duplicate separators, and
+        # empty path segments so this public schema matches the CLI guard.
+        path:
+          type: string
+          minLength: 1
+          pattern: '^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\.{1,2}(?:/|$))(?!.*//)(?!.*\/$)[^\\]+$'
+        kind: {enum: [manuscript, data, figure, review, reference, other]}
+        bytes: {type: integer, minimum: 0}
+        sha256: {type: string, pattern: "^[a-f0-9]{64}$"}
+      additionalProperties: false
+  claims:
+    type: array
+    items:
+      type: object
+      required: [claim_id, statement, evidence_ids, figure_ids]
+      properties:
+        claim_id: {type: string, minLength: 1}
+        statement: {type: string, minLength: 1}
+        evidence_ids: {type: array, items: {type: string, minLength: 1}, uniqueItems: true}
+        figure_ids: {type: array, items: {type: string, minLength: 1}, uniqueItems: true}
+      additionalProperties: false
+  evidence:
+    type: array
+    items:
+      type: object
+      required: [evidence_id, claim_ids, status]
+      properties:
+        evidence_id: {type: string, minLength: 1}
+        claim_ids: {type: array, items: {type: string, minLength: 1}, uniqueItems: true}
+        status: {enum: [available, partial, planned, missing, unverified]}
+      additionalProperties: false
+  figures:
+    type: array
+    items:
+      type: object
+      required: [figure_id, claim_ids, evidence_ids, evidence_status]
+      properties:
+        figure_id: {type: string, minLength: 1}
+        claim_ids: {type: array, items: {type: string, minLength: 1}, uniqueItems: true}
+        evidence_ids: {type: array, items: {type: string, minLength: 1}, uniqueItems: true}
+        evidence_status: {enum: [available, partial, planned, missing, unverified]}
+      additionalProperties: false
+  review_issues:
+    type: array
+    items:
+      type: object
+      required: [issue_id, claim_ids, action, revision_ids, status]
+      properties:
+        issue_id: {type: string, minLength: 1}
+        claim_ids: {type: array, items: {type: string, minLength: 1}, uniqueItems: true}
+        action: {type: string, minLength: 1}
+        revision_ids: {type: array, items: {type: string, minLength: 1}, uniqueItems: true}
+        status: {enum: [unresolved, evidence-needed, drafted, verified, planned, cannot-complete, author-input-needed]}
+      additionalProperties: false
+  revisions:
+    type: array
+    items:
+      type: object
+      required: [revision_id, issue_ids, status]
+      properties:
+        revision_id: {type: string, minLength: 1}
+        issue_ids: {type: array, items: {type: string, minLength: 1}, uniqueItems: true}
+        status: {enum: [planned, drafted, verified, author-input-needed]}
+      additionalProperties: false
+  checkpoints:
+    type: object
+    required: [brief, claims, evidence-and-figures, manuscript, review, response]
+    properties:
+      brief: {$ref: "#/$defs/checkpoint"}
+      claims: {$ref: "#/$defs/checkpoint"}
+      evidence-and-figures: {$ref: "#/$defs/checkpoint"}
+      manuscript: {$ref: "#/$defs/checkpoint"}
+      review: {$ref: "#/$defs/checkpoint"}
+      response: {$ref: "#/$defs/checkpoint"}
+    additionalProperties: false
+additionalProperties: false
+$defs:
+  checkpoint:
+    enum: [pending, in-progress, blocked, ready, not-applicable]

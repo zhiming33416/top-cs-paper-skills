@@ -1,0 +1,2 @@
+# Development-only tooling. Runtime helpers remain in requirements.txt.
+ruff>=0.6,<1
