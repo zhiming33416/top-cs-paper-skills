@@ -19,9 +19,19 @@ class DataPreparationContractTests(unittest.TestCase):
     def test_scope_and_storage_boundary(self):
         self.assertEqual(self.plan["schema_version"], 2)
         supported = {(x["venue"], x["year"]) for x in self.plan["scope"]["supported"]}
-        self.assertEqual(supported, {("www", 2026), ("iclr", 2026), ("icml", 2026), ("generic", None)})
+        self.assertEqual(
+            supported,
+            {("www", 2026), ("iclr", 2026), ("icml", 2026), ("neurips", 2026), ("cvpr", 2026), ("acl", 2026), ("generic", None)},
+        )
         self.assertEqual(self.plan["storage_policy"]["raw_public_material"], "external-corpus-only")
         self.assertFalse(self.plan["storage_policy"]["install_private_cases"])
+
+    def test_profile_only_venues_remain_separate_from_the_deep_corpus(self):
+        profiles = self.plan["venue_profiles"]
+        self.assertEqual(set(profiles), {"neurips", "cvpr", "acl"})
+        for profile in profiles.values():
+            self.assertEqual(profile["coverage"], "official-profile-only")
+            self.assertTrue(profile["official_source"].startswith("https://"))
 
     def test_every_venue_has_every_required_policy_category(self):
         required = set(self.plan["official_policy"]["required_categories"])

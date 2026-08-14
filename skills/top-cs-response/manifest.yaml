@@ -9,7 +9,7 @@ always_load:
   - static/core/output-format.md
 runtime_parameters:
   venue:
-    values: [www, iclr, icml, generic]
+    values: [www, iclr, icml, neurips, cvpr, acl, generic]
     default: generic
   task_mode:
     values: [draft, audit, revise, triage-only, cover-letter, revision-package, latex-template, appeal-like]
@@ -89,6 +89,7 @@ reference_routes:
   issue-board: [references/issue-board-and-stress-test.md, ../_shared/contracts/response-issue.schema.yaml]
   response-stress-test: [references/issue-board-and-stress-test.md, ../_shared/contracts/response-issue.schema.yaml]
   citation-verification: [../_shared/references/citation-verification.md, ../_shared/contracts/citation-record.schema.yaml, ../_shared/scripts/verify_citations.py]
+  evidence-handoff: [../_shared/contracts/claim-evidence-map.schema.yaml, ../_shared/contracts/revision-ledger.schema.yaml]
   figure-handoff: [../_shared/references/figure-handoff.md, ../_shared/contracts/figure-brief.schema.yaml]
   venue-protocol: [references/multi-round-protocol.md, references/venue-protocols.md]
   revision-verification: [references/revision-verification.md]
@@ -104,3 +105,8 @@ reference_routes:
   chinese-alignment: [references/chinese-author-alignment.md]
   examples: [references/examples.md]
   source-basis: [references/source-basis.md, ../_shared/rule-provenance.yaml]
+interface:
+  inputs: [author-provided review text or issue summary, evidence status, actual revision state]
+  outputs: [issue matrix, point-by-point response, revision ledger, author-input-needed list]
+  verification: [no invented experiment or promise, response-to-revision links, venue protocol route when available]
+  handoff: [response-issue, revision-ledger, claim-evidence-map, figure-brief]

@@ -1,0 +1,18 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "top-cs-paper-skills/revision-ledger.schema.yaml"
+title: Revision ledger
+type: object
+required: [schema_version, revisions, boundary]
+properties:
+  schema_version: {const: 1}
+  boundary: {const: "A revision record does not prove that an experiment ran, a claim is supported, or a reviewer concern is resolved."}
+  revisions:
+    type: array
+    items:
+      type: object
+      required: [revision_id, issue_ids, status, location]
+      properties:
+        revision_id: {type: string, minLength: 1}
+        issue_ids: {type: array, items: {type: string, minLength: 1}, uniqueItems: true}
+        status: {enum: [planned, drafted, verified, author-input-needed]}
+        location: {type: string, minLength: 1}

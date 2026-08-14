@@ -2,7 +2,7 @@
 
 [中文说明](README.md)
 
-An optional project coordinator that records handoffs among the five specialist skills in a user-selected paper project without collapsing them into one large skill.
+An optional project coordinator that records handoffs among the six specialist skills in a user-selected paper project without collapsing them into one large skill.
 
 ## Tasks
 

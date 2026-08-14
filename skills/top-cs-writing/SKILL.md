@@ -1,6 +1,6 @@
 ---
 name: top-cs-writing
-description: Draft, restructure, or plan evidence-grounded computer-science conference papers for WWW, ICLR, ICML, or a generic venue. Use for paper outlines, titles, abstracts, introductions, related work, methods, experiments, discussions, limitations, conclusions, full manuscript arguments, Chinese research notes to English drafting, and LaTeX or Markdown section writing. Do not use for sentence-only polishing of a finished draft, reviewer-style auditing, or rebuttal writing.
+description: Draft, restructure, or plan evidence-grounded computer-science conference papers for WWW, ICLR, ICML, NeurIPS, CVPR, ACL, or a generic venue. Use for paper outlines, titles, abstracts, introductions, related work, methods, experiments, discussions, limitations, conclusions, full manuscript arguments, Chinese research notes to English drafting, and LaTeX or Markdown section writing. Do not use for sentence-only polishing of a finished draft, reviewer-style auditing, or rebuttal writing.
 ---
 
 # Top CS Paper Writing

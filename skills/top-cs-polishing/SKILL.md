@@ -1,6 +1,6 @@
 ---
 name: top-cs-polishing
-description: Polish, translate, tighten, structurally revise, or diagnose existing computer-science manuscript prose and LaTeX for WWW, ICLR, ICML, or a generic venue while preserving evidence. Use for Chinese-to-English academic rewriting, paragraph flow, section-level revision, claim calibration, concision, terminology consistency, reducing generic AI prose, revision ledgers, and LaTeX layout or float-placement problems. Do not use to invent a paper from sparse notes, simulate peer review, or write a reviewer response.
+description: Polish, translate, tighten, structurally revise, or diagnose existing computer-science manuscript prose and LaTeX for WWW, ICLR, ICML, NeurIPS, CVPR, ACL, or a generic venue while preserving evidence. Use for Chinese-to-English academic rewriting, paragraph flow, section-level revision, claim calibration, concision, terminology consistency, reducing generic AI prose, revision ledgers, and LaTeX layout or float-placement problems. Do not use to invent a paper from sparse notes, simulate peer review, or write a reviewer response.
 ---
 
 # Top CS Paper Polishing

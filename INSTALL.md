@@ -4,9 +4,9 @@
 
 ## 中文安装
 
-`top-cs-paper-skills` 不是 Python 包。五个 `skills/top-cs-*` 专项目录、可选的 `skills/top-cs-paper-workflow/`、共享目录 `skills/_shared/` 和派生 evidence 一起构成可安装内容。请安装完整目录，不要只复制 `SKILL.md`。
+`top-cs-paper-skills` 不是 Python 包。六个 `skills/top-cs-*` 专项目录、可选的 `skills/top-cs-paper-workflow/`、共享目录 `skills/_shared/` 和派生 evidence 一起构成可安装内容。请安装完整目录，不要只复制 `SKILL.md`。
 
-安装器支持 Codex 和 Claude Code，默认只安装五个专项技能；`--workflow` 才会额外安装协调包。它不会静默安装 Python 依赖、不会修改宿主的设置文件，也不会删除无关技能。
+安装器支持 Codex 和 Claude Code，默认安装六个专项技能；`--workflow` 才会额外安装协调包。它不会静默安装 Python 依赖、不会修改宿主的设置文件，也不会删除无关技能。
 
 ### 推荐：让 Codex 安装
 
@@ -70,6 +70,7 @@ python scripts/install_skills.py --list
 
 ```bash
 python scripts/install_skills.py --skill top-cs-writing --host codex
+python scripts/install_skills.py --skill top-cs-evidence --host codex
 python scripts/install_skills.py --skill top-cs-writing --skill top-cs-figure --host claude
 ```
 
@@ -80,7 +81,7 @@ python scripts/install_skills.py --workflow --host codex
 python scripts/install_skills.py --workflow --host claude
 ```
 
-协调包仅适用于跨技能、可恢复的完整论文项目；五个专项技能仍是单阶段任务的优先入口。安装后，协调脚本位于 `<skills-root>/top-cs-paper-workflow/scripts/paper_workflow.py`；`<skills-root>` 是所选宿主的技能根目录。
+协调包仅适用于跨技能、可恢复的完整论文项目；六个专项技能仍是单阶段任务的优先入口。安装后，协调脚本位于 `<skills-root>/top-cs-paper-workflow/scripts/paper_workflow.py`；`<skills-root>` 是所选宿主的技能根目录。
 
 ### 自定义安装位置与验证
 
@@ -133,9 +134,9 @@ python -m pip install -r requirements-dev.txt
 
 ## English Installation
 
-`top-cs-paper-skills` is not a Python package. The five specialist `skills/top-cs-*` directories, the optional `skills/top-cs-paper-workflow/`, `skills/_shared/`, and derived evidence make up the installable content. Install complete directories rather than copying only `SKILL.md`.
+`top-cs-paper-skills` is not a Python package. The six specialist `skills/top-cs-*` directories, the optional `skills/top-cs-paper-workflow/`, `skills/_shared/`, and derived evidence make up the installable content. Install complete directories rather than copying only `SKILL.md`.
 
-The installer supports Codex and Claude Code. By default it installs the five specialist skills; `--workflow` additionally installs the coordinator. It never silently installs Python dependencies, modifies host settings files, or removes unrelated skills.
+The installer supports Codex and Claude Code. By default it installs the six specialist skills; `--workflow` additionally installs the coordinator. It never silently installs Python dependencies, modifies host settings files, or removes unrelated skills.
 
 ### Recommended: ask Codex to install
 
@@ -199,6 +200,7 @@ Install one or several specialist skills:
 
 ```bash
 python scripts/install_skills.py --skill top-cs-writing --host codex
+python scripts/install_skills.py --skill top-cs-evidence --host codex
 python scripts/install_skills.py --skill top-cs-writing --skill top-cs-figure --host claude
 ```
 
@@ -209,7 +211,7 @@ python scripts/install_skills.py --workflow --host codex
 python scripts/install_skills.py --workflow --host claude
 ```
 
-The coordinator is for resumable, cross-skill paper projects only; the five specialist skills remain the preferred entry points for a single-stage task. After installation, its script lives at `<skills-root>/top-cs-paper-workflow/scripts/paper_workflow.py`, where `<skills-root>` means the selected host's skills root.
+The coordinator is for resumable, cross-skill paper projects only; the six specialist skills remain the preferred entry points for a single-stage task. After installation, its script lives at `<skills-root>/top-cs-paper-workflow/scripts/paper_workflow.py`, where `<skills-root>` means the selected host's skills root.
 
 ### Custom target and verification
 

@@ -1,11 +1,11 @@
 ---
 name: top-cs-paper-workflow
-description: Coordinate a complete evidence-grounded CS paper project across the five Top CS skills. Use when work spans contribution planning, evidence and figure handoff, manuscript revision, pre-submission review, or reviewer response and needs resumable project status. Do not use for a single writing, polishing, review, response, or figure task.
+description: Coordinate a complete evidence-grounded CS paper project across the six Top CS skills. Use when work spans contribution planning, literature evidence and figure handoff, manuscript revision, pre-submission review, or reviewer response and needs resumable project status. Do not use for a single specialist task.
 ---
 
 # Top CS Paper Workflow
 
-Coordinate work; do not replace the five specialist skills. Use this skill only when the user wants a project-level view or to resume a multi-stage paper workflow.
+Coordinate work; do not replace the six specialist skills. Use this skill only when the user wants a project-level view or to resume a multi-stage paper workflow.
 
 ## Start safely
 
@@ -19,14 +19,15 @@ Coordinate work; do not replace the five specialist skills. Use this skill only 
 3. The tool writes only `<project-root>/.top-cs-paper/workflow.yaml`. It stores structured IDs, relative file paths, file metadata, and SHA-256 hashes; it never copies manuscript, PDF, data, reviewer text, or citation content.
 4. Use `inventory` only with explicit relative `--include` paths. Do not infer that every file in a project is in scope.
 
-## Coordinate the five skills
+## Coordinate the six skills
 
 Follow this order when the relevant stage applies. A stage may be marked `not-applicable`; do not invent missing work to make it pass.
 
 | Stage | Owner | Required handoff |
 | --- | --- | --- |
 | Contribution and argument | `top-cs-writing` | claim IDs, evidence needs, manuscript plan |
-| Evidence and figures | `top-cs-figure` | figure briefs linked to claims and evidence |
+| Literature evidence | `top-cs-evidence` | citation ledger and claim-to-source map linked to claim IDs |
+| Figures | `top-cs-figure` | figure briefs linked to claims and evidence |
 | Manuscript refinement | `top-cs-polishing` | terminology and revision notes |
 | Pre-submission risk audit | `top-cs-reviewer` | review issues, threatened claims, proposed actions |
 | Response and verified change | `top-cs-response` | revision IDs linked back to review issues |

@@ -1,6 +1,6 @@
 # Contributing
 
-Contributions are welcome in Chinese or English. This repository keeps five specialist skills as its primary public interface; the optional `top-cs-paper-workflow` coordinates their handoffs and does not replace their individual contracts.
+Contributions are welcome in Chinese or English. This repository keeps six specialist skills as its primary public interface; the optional `top-cs-paper-workflow` coordinates their handoffs and does not replace their individual contracts.
 
 ## Before opening a change
 
@@ -17,7 +17,7 @@ Every public specialist skill must keep `README.md` and `README_EN.md` aligned. 
 
 For changes to the optional workflow coordinator:
 
-- preserve the five specialist skills as the first choice for a single-stage request;
+- preserve the six specialist skills as the first choice for a single-stage request;
 - keep project state under a user-selected `.top-cs-paper/` directory, using relative paths and optional hashes only;
 - reject traversal, absolute-path inventory, and unsafe link targets rather than scanning arbitrary user storage;
 - make missing evidence and author confirmation advisory by default; reserve failing behavior for explicit `--strict` checks;
@@ -32,7 +32,7 @@ python -m pip install -r requirements.txt -r requirements-dev.txt
 python -m unittest discover -s tests -p "test_*.py"
 python scripts/validate_evidence.py --index evidence/derived/corpus-index.yaml --rules evidence/derived/rules.yaml --strict
 python skills/top-cs-figure/scripts/run_figure_evals.py
-python -m ruff check --select E9,F --ignore E402 scripts/install_skills.py scripts/route_skill.py skills/top-cs-paper-workflow tests/test_public_release.py
+python -m ruff check --select E9,F --ignore E402 scripts/install_skills.py scripts/route_skill.py skills/top-cs-evidence skills/top-cs-paper-workflow tests/test_public_release.py tests/test_paper_evidence.py
 git diff --check
 ```
 

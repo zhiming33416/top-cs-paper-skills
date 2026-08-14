@@ -1,0 +1,52 @@
+schema_version: 2
+boundary: "Synthetic contract cases only; not a model-quality benchmark or submission-readiness claim."
+tasks:
+  - id: golden-evidence
+    skill: top-cs-evidence
+    material_class: synthetic
+    input: "claim list + BibTeX + optional note path"
+    output: "source plan + citation ledger + claim map"
+    assertion: "metadata-never-implies-entailment"
+    verified_by: [tests/test_paper_evidence.py, tests/test_skill_depth.py]
+  - id: golden-writing
+    skill: top-cs-writing
+    material_class: synthetic
+    input: "result notes + contribution"
+    output: "claim-evidence outline"
+    assertion: "missing-evidence-explicit"
+    verified_by: [tests/test_skill_depth.py, tests/test_deep_acceptance.py]
+  - id: golden-polishing
+    skill: top-cs-polishing
+    material_class: synthetic
+    input: "synthetic prose or LaTeX"
+    output: "revision ledger"
+    assertion: "facts-and-citation-anchors-preserved"
+    verified_by: [tests/test_skill_depth.py, tests/test_deep_acceptance.py]
+  - id: golden-figure
+    skill: top-cs-figure
+    material_class: synthetic
+    input: "synthetic CSV + figure brief"
+    output: "render spec + export bundle"
+    assertion: "editable-export-and-qa"
+    verified_by: [tests/test_v2_tools.py, tests/test_figure_v4.py]
+  - id: golden-reviewer
+    skill: top-cs-reviewer
+    material_class: synthetic
+    input: "synthetic manuscript summary"
+    output: "issue board"
+    assertion: "uncertainty-calibrated"
+    verified_by: [tests/test_skill_depth.py, tests/test_deep_acceptance.py]
+  - id: golden-response
+    skill: top-cs-response
+    material_class: synthetic
+    input: "synthetic reviewer concern"
+    output: "response + revision ledger"
+    assertion: "no-invented-experiment-or-promise"
+    verified_by: [tests/test_skill_depth.py, tests/test_v23_capabilities.py]
+  - id: golden-workflow
+    skill: top-cs-paper-workflow
+    material_class: synthetic
+    input: "metadata-only project state"
+    output: "advisory and strict report"
+    assertion: "no-copied-private-material"
+    verified_by: [tests/test_paper_workflow.py, tests/test_public_release.py]

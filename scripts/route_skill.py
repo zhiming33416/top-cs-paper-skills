@@ -14,7 +14,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ROOT / "skills"
-SUPPORTED_VENUES = {"www", "iclr", "icml", "generic"}
+SUPPORTED_VENUES = {"www", "iclr", "icml", "neurips", "cvpr", "acl", "generic"}
 
 
 def parameter_spec(value: Any) -> tuple[list[str], str | None]:
@@ -52,6 +52,12 @@ def infer_needs(skill: str, selected: dict[str, Any], runtime: dict[str, Any]) -
         needs.add("venue-protocol")
     if runtime.get("citation_verification") == "metadata":
         needs.add("citation-verification")
+    if skill == "top-cs-evidence":
+        needs.add("claim-evidence-map")
+        if runtime.get("task_mode") == "verify-metadata":
+            needs.add("citation-verification")
+        if runtime.get("venue") != "generic":
+            needs.add("official-policy")
     if runtime.get("figure_handoff") not in {None, "none"}:
         needs.add("figure-handoff")
     if skill == "top-cs-response":
@@ -141,14 +147,21 @@ def resolve(skill: str, requested: dict[str, Any], year: int = 2026, needs: list
     if venue == "generic":
         missing_policy_categories = list(required_policy_categories)
     else:
-        policy_matrix = preparation["official_policy"]["venues"][venue]["categories"]
+        policy_matrix = preparation["official_policy"]["venues"].get(venue, {}).get("categories", {})
         missing_policy_categories = [
             category for category in required_policy_categories
-            if policy_matrix[category]["status"] != "collected"
+            if policy_matrix.get(category, {}).get("status") != "collected"
         ]
+    venue_profile = preparation.get("venue_profiles", {}).get(venue)
+    if venue == "generic":
+        policy_coverage = "generic-no-policy"
+    elif venue_profile is not None:
+        policy_coverage = venue_profile.get("coverage", "official-profile-only")
+    else:
+        policy_coverage = "policy-matrix"
     freshness = {
         "status": "generic-no-policy" if venue == "generic" else "current" if profile.get("year") == year and profile.get("expires_after", year) >= year else "stale-or-unsupported",
-        "last_verified": policies.get("last_verified"),
+        "last_verified": profile.get("last_verified", policies.get("last_verified")),
         "year": profile.get("year"),
     }
     resolved_files = []
@@ -176,6 +189,8 @@ def resolve(skill: str, requested: dict[str, Any], year: int = 2026, needs: list
         "on_demand_references": manifest.get("references", {}).get("on_demand", []),
         "missing_parameters": sorted(set(missing)),
         "policy_freshness": freshness,
+        "policy_coverage": policy_coverage,
+        "venue_profile": venue_profile,
         "missing_policy_categories": missing_policy_categories,
         "generic_fallback_reason": fallback_reason,
         "resolved_on": date.today().isoformat(),
@@ -184,7 +199,7 @@ def resolve(skill: str, requested: dict[str, Any], year: int = 2026, needs: list
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--skill", required=True, choices=("top-cs-writing", "top-cs-polishing", "top-cs-reviewer", "top-cs-response", "top-cs-figure"))
+    parser.add_argument("--skill", required=True, choices=("top-cs-writing", "top-cs-polishing", "top-cs-reviewer", "top-cs-response", "top-cs-figure", "top-cs-evidence"))
     parser.add_argument("--venue", default="generic")
     parser.add_argument("--year", type=int, default=2026)
     parser.add_argument("--paper-type")
@@ -201,6 +216,9 @@ def main() -> int:
     parser.add_argument("--data-state")
     parser.add_argument("--output-target")
     parser.add_argument("--stress-test", choices=("off", "up-to-3-rounds"))
+    parser.add_argument("--task-mode")
+    parser.add_argument("--source-access")
+    parser.add_argument("--source-text-state")
     parser.add_argument("--param", action="append", default=[], metavar="KEY=VALUE")
     parser.add_argument("--need", action="append", default=[], help="Select a manifest reference route deterministically")
     parser.add_argument("--format", choices=("json", "text"), default="text")
@@ -221,6 +239,9 @@ def main() -> int:
         "data_state": args.data_state,
         "output_target": args.output_target,
         "stress_test": args.stress_test,
+        "task_mode": args.task_mode,
+        "source_access": args.source_access,
+        "source_text_state": args.source_text_state,
     }
     requested = {key: value for key, value in requested.items() if value is not None}
     for item in args.param:

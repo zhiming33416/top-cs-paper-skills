@@ -167,6 +167,20 @@ class PaperWorkflowTests(unittest.TestCase):
             self.assertEqual(report["warnings"], [])
             self.assertTrue(report["schema_valid"])
 
+    def test_preflight_is_advisory_by_default_and_never_claims_submission_readiness(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp) / "paper-project"
+            self.assertEqual(self.run_main("init", "--project", str(project))[0], 0)
+            result, output, _ = self.run_main("preflight", "--project", str(project), "--format", "json")
+            self.assertEqual(result, 0)
+            report = json.loads(output)
+            self.assertEqual({check["status"] for check in report["checks"]}, {"warning", "not-run"})
+            strict_result, strict_output, _ = self.run_main(
+                "preflight", "--project", str(project), "--format", "json", "--strict"
+            )
+            self.assertEqual(strict_result, 1)
+            self.assertTrue(json.loads(strict_output)["strict"])
+
 
 if __name__ == "__main__":
     unittest.main()

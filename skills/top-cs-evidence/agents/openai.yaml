@@ -1,0 +1,4 @@
+interface:
+  display_name: "Top CS Evidence"
+  short_description: "Map claims to sources and verify citation metadata safely."
+  default_prompt: "Use $top-cs-evidence to map these claims to my provided sources and verify citation metadata."

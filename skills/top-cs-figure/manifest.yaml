@@ -15,6 +15,9 @@ axes:
       www: [../_shared/venues/www.md, static/fragments/venue-style/www.md]
       iclr: [../_shared/venues/iclr.md, static/fragments/venue-style/iclr.md]
       icml: [../_shared/venues/icml.md, static/fragments/venue-style/icml.md]
+      neurips: [../_shared/venues/neurips.md, static/fragments/venue-style/generic.md]
+      cvpr: [../_shared/venues/cvpr.md, static/fragments/venue-style/generic.md]
+      acl: [../_shared/venues/acl.md, static/fragments/venue-style/generic.md]
       generic: [../_shared/venues/generic.md, static/fragments/venue-style/generic.md]
     default: generic
     multi: false
@@ -158,3 +161,8 @@ reference_routes:
   atlas-gallery: [references/atlas-and-gallery.md, assets/generated-manifest.yaml]
   failure-gallery: [references/failure-gallery.md]
   regression-evaluation: [references/regression-evaluation.md, scripts/run_figure_evals.py, scripts/run_private_figure_regressions.py, ../_shared/contracts/figure-regression-suite.schema.yaml]
+interface:
+  inputs: [author-provided data, figure brief, render spec or visual question, target venue or generic mode]
+  outputs: [editable SVG/PDF/PNG bundle, render spec, provenance record, visual QA report]
+  verification: [data/spec/provenance checks, accessibility and export QA, public-style evidence only when available]
+  handoff: [figure-brief, figure-render-spec, claim-evidence-map]

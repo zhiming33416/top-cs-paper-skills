@@ -6,7 +6,9 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import subprocess
 import sys
+import tempfile
 from pathlib import Path, PureWindowsPath
 from typing import Any, Iterable
 
@@ -16,6 +18,8 @@ import yaml
 SCHEMA_VERSION = 1
 STATE_DIR_NAME = ".top-cs-paper"
 MANIFEST_NAME = "workflow.yaml"
+BRIEF_NAME = "paper-brief.yaml"
+EVIDENCE_LEDGER_NAME = "evidence-ledger.yaml"
 CHECKPOINTS = (
     "brief",
     "claims",
@@ -98,6 +102,35 @@ def write_manifest(path: Path, manifest: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     rendered = yaml.safe_dump(manifest, allow_unicode=True, sort_keys=False)
     path.write_text(rendered, encoding="utf-8")
+
+
+def write_state_yaml(project: Path, name: str, payload: dict[str, Any]) -> None:
+    """Write metadata-only companion state inside the selected project."""
+
+    path = project / STATE_DIR_NAME / name
+    if path.is_symlink():
+        raise WorkflowError(f"workflow state file must not be a symlink: {STATE_DIR_NAME}/{name}")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(yaml.safe_dump(payload, allow_unicode=True, sort_keys=False), encoding="utf-8")
+
+
+def initial_brief() -> dict[str, Any]:
+    return {
+        "schema_version": 1,
+        "boundary": "Metadata only; keep manuscript text, data, and review content in author-controlled files.",
+        "title": "AUTHOR_INPUT_NEEDED",
+        "contribution_summary": "AUTHOR_INPUT_NEEDED",
+        "target_reader": "AUTHOR_INPUT_NEEDED",
+    }
+
+
+def initial_evidence_ledger() -> dict[str, Any]:
+    return {
+        "schema_version": 1,
+        "boundary": "Metadata verification and claim entailment are separate; source support requires author-provided text or notes.",
+        "claims": [],
+        "sources": [],
+    }
 
 
 def _is_nonempty_string(value: Any) -> bool:
@@ -213,7 +246,7 @@ def validate_manifest(manifest: Any) -> list[str]:
             errors.append(f"project has unsupported fields: {', '.join(sorted(unexpected))}")
         if not _is_nonempty_string(project.get("title")):
             errors.append("project.title must be a non-empty string")
-        if project.get("venue") not in {"www", "iclr", "icml", "generic", "other"}:
+        if project.get("venue") not in {"www", "iclr", "icml", "neurips", "cvpr", "acl", "generic", "other"}:
             errors.append("project.venue is unsupported")
         year = project.get("year")
         if year is not None and (not isinstance(year, int) or isinstance(year, bool) or not 2000 <= year <= 2100):
@@ -558,7 +591,9 @@ def command_init(args: argparse.Namespace) -> int:
     if path.exists() and not args.force:
         raise WorkflowError(f"workflow manifest already exists: {STATE_DIR_NAME}/{MANIFEST_NAME}; use --force to replace it")
     write_manifest(path, initial_manifest())
-    print(f"Initialized {STATE_DIR_NAME}/{MANIFEST_NAME}.")
+    write_state_yaml(project, BRIEF_NAME, initial_brief())
+    write_state_yaml(project, EVIDENCE_LEDGER_NAME, initial_evidence_ledger())
+    print(f"Initialized {STATE_DIR_NAME}/{MANIFEST_NAME}, {BRIEF_NAME}, and {EVIDENCE_LEDGER_NAME}.")
     return 0
 
 
@@ -591,6 +626,68 @@ def command_status(args: argparse.Namespace) -> int:
     return 1 if args.strict and issues else 0
 
 
+def project_directory(project: Path, raw_path: str) -> Path:
+    if not is_safe_relative_path(raw_path):
+        raise WorkflowError(f"path must be a safe relative directory: {raw_path}")
+    candidate = project.joinpath(*raw_path.split("/"))
+    try:
+        resolved = candidate.resolve(strict=True)
+        resolved.relative_to(project)
+    except (FileNotFoundError, ValueError) as exc:
+        raise WorkflowError(f"path does not resolve inside the project: {raw_path}") from exc
+    if not resolved.is_dir():
+        raise WorkflowError(f"path is not a directory: {raw_path}")
+    return resolved
+
+
+def preflight_report(checks: list[dict[str, Any]], strict: bool, fmt: str) -> str:
+    if fmt == "json":
+        return json.dumps({"strict": strict, "checks": checks, "warning_count": sum(item["status"] == "warning" for item in checks)}, ensure_ascii=False, indent=2) + "\n"
+    lines = ["# Top CS Paper preflight", "", f"- Mode: {'strict' if strict else 'advisory'}", "", "| Check | Status | Detail |", "| --- | --- | --- |"]
+    lines.extend(f"| {item['name']} | {item['status']} | {item['detail']} |" for item in checks)
+    lines.extend(["", "`passed` checks only cover the explicitly supplied paths; this report never declares a paper submission-ready.", ""])
+    return "\n".join(lines)
+
+
+def command_preflight(args: argparse.Namespace) -> int:
+    project = resolve_project(args.project)
+    _, manifest = load_manifest(project)
+    checks: list[dict[str, Any]] = []
+    issues = status_issues(manifest)
+    checks.append({"name": "workflow-links", "status": "passed" if not issues else "warning", "detail": "complete" if not issues else f"{len(issues)} workflow warning(s)"})
+    skills = Path(__file__).resolve().parents[2]
+    if args.bib is None:
+        checks.append({"name": "citation-metadata", "status": "not-run", "detail": "no --bib supplied"})
+    elif not args.online:
+        project_file(project, args.bib)
+        checks.append({"name": "citation-metadata", "status": "not-run", "detail": "online lookup requires explicit --online"})
+    else:
+        bib, _ = project_file(project, args.bib)
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "citations.json"
+            completed = subprocess.run([sys.executable, str(skills / "_shared" / "scripts" / "verify_citations.py"), "--bib", str(bib), "--output", str(output), "--format", "json"], capture_output=True, text=True, check=False)
+            checks.append({"name": "citation-metadata", "status": "passed" if completed.returncode == 0 else "warning", "detail": "metadata check completed" if completed.returncode == 0 else "metadata conflicts or lookup errors"})
+    if args.latex_project is None:
+        checks.append({"name": "latex-project", "status": "not-run", "detail": "no --latex-project supplied"})
+    else:
+        latex_project = project_directory(project, args.latex_project)
+        command = [sys.executable, str(skills / "top-cs-polishing" / "scripts" / "check_latex_project.py"), "--project", str(latex_project), "--format", "json"]
+        if args.latex_root:
+            command.extend(["--root", args.latex_root])
+        completed = subprocess.run(command, capture_output=True, text=True, check=False)
+        checks.append({"name": "latex-project", "status": "passed" if completed.returncode == 0 else "warning", "detail": "isolated LaTeX check completed" if completed.returncode == 0 else "compile or structural check needs attention"})
+    if args.figure_base is None:
+        checks.append({"name": "figure-bundle", "status": "not-run", "detail": "no --figure-base supplied"})
+    else:
+        svg, relative = project_file(project, f"{args.figure_base}.svg")
+        base = svg.with_suffix("")
+        completed = subprocess.run([sys.executable, str(skills / "top-cs-figure" / "scripts" / "check_figure_bundle.py"), "--base", str(base), "--format", "json"], capture_output=True, text=True, check=False)
+        checks.append({"name": "figure-bundle", "status": "passed" if completed.returncode == 0 else "warning", "detail": f"checked {relative}" if completed.returncode == 0 else "figure bundle needs attention"})
+    report = preflight_report(checks, args.strict, args.format)
+    print(report, end="")
+    return 1 if args.strict and any(item["status"] == "warning" for item in checks) else 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Maintain metadata-only Top CS paper workflow state.")
     subcommands = parser.add_subparsers(dest="command", required=True)
@@ -610,6 +707,17 @@ def build_parser() -> argparse.ArgumentParser:
     status_parser.add_argument("--format", choices=("markdown", "json"), default="markdown")
     status_parser.add_argument("--strict", action="store_true", help="return non-zero when warnings remain")
     status_parser.set_defaults(handler=command_status)
+
+    preflight_parser = subcommands.add_parser("preflight", help="run explicit, advisory project checks without declaring submission readiness")
+    preflight_parser.add_argument("--project", required=True, help="user-selected paper project root")
+    preflight_parser.add_argument("--bib", help="safe project-relative BibTeX path")
+    preflight_parser.add_argument("--online", action="store_true", help="explicitly authorize public citation metadata lookup")
+    preflight_parser.add_argument("--latex-project", help="safe project-relative LaTeX directory")
+    preflight_parser.add_argument("--latex-root", help="optional root TeX file relative to --latex-project")
+    preflight_parser.add_argument("--figure-base", help="safe project-relative figure base path without extension")
+    preflight_parser.add_argument("--format", choices=("markdown", "json"), default="markdown")
+    preflight_parser.add_argument("--strict", action="store_true", help="return non-zero when an executed or workflow check warns")
+    preflight_parser.set_defaults(handler=command_preflight)
     return parser
 
 

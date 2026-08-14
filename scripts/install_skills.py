@@ -28,6 +28,7 @@ SKILLS = (
     "top-cs-reviewer",
     "top-cs-response",
     "top-cs-figure",
+    "top-cs-evidence",
 )
 WORKFLOW_SKILL = "top-cs-paper-workflow"
 UNITS = ("_shared", *SKILLS)
@@ -338,7 +339,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--workflow",
         action="store_true",
-        help="Install the optional workflow coordinator and all five core skills",
+        help="Install the optional workflow coordinator and all six core skills",
     )
     parser.add_argument("--check", action="store_true", help="Verify without copying")
     parser.add_argument("--prune", action="store_true", help="Prune unchanged stale files owned by this host")

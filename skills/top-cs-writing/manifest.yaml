@@ -18,6 +18,9 @@ axes:
       www: ../_shared/venues/www.md
       iclr: ../_shared/venues/iclr.md
       icml: ../_shared/venues/icml.md
+      neurips: ../_shared/venues/neurips.md
+      cvpr: ../_shared/venues/cvpr.md
+      acl: ../_shared/venues/acl.md
       generic: ../_shared/venues/generic.md
     default: generic
     multi: false
@@ -111,6 +114,7 @@ output_contract: "route, argument graph, claim-evidence table, outline, English 
 reference_routes:
   rhetorical-moves: [../_shared/references/rhetorical-moves.md]
   citation-verification: [../_shared/references/citation-verification.md, ../_shared/contracts/citation-record.schema.yaml, ../_shared/scripts/verify_citations.py]
+  evidence-handoff: [../_shared/contracts/claim-evidence-map.schema.yaml]
   figure-handoff: [../_shared/references/figure-handoff.md, ../_shared/contracts/figure-brief.schema.yaml]
   full-section-corpus: [../_shared/references/full-section-corpus-patterns.md]
   full-paper: [references/full-paper-coherence.md]
@@ -129,3 +133,8 @@ reference_routes:
   rejection-risk: [references/rejection-risks.md]
   official-policy: [../_shared/venue-policies.yaml]
   source-basis: [references/source-basis.md, ../_shared/rule-provenance.yaml]
+interface:
+  inputs: [author contribution and result notes, target venue or generic mode, requested section, optional citations and figure brief]
+  outputs: [argument graph, claim-evidence table, outline or draft, explicit missing-input list]
+  verification: [claim-evidence boundary, venue-freshness notice, citation metadata route when requested]
+  handoff: [claim-evidence-map, figure-brief, revision-ledger]

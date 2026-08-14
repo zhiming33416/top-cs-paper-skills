@@ -2,7 +2,7 @@
 
 [中文首页](../../README.md) · [English home](../../README_EN.md) · [完整工作流](../../docs/WORKFLOW.md)
 
-This directory is a fully synthetic, redistributable tutorial for the optional full-paper workflow. It contains no manuscript text, dataset, PDF, reviewer correspondence, experiment result, or venue policy. The identifiers show how five specialist skills can hand work to one another without turning a status manifest into evidence.
+This directory is a fully synthetic, redistributable tutorial for the optional full-paper workflow. It contains no manuscript text, dataset, PDF, reviewer correspondence, experiment result, or venue policy. The identifiers show how six specialist skills can hand work to one another without turning a status manifest into evidence.
 
 | File | Handoff purpose |
 | --- | --- |
