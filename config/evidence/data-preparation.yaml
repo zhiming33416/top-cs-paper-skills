@@ -6,10 +6,32 @@ scope:
     - {venue: www, track: Research, year: 2026}
     - {venue: iclr, track: Conference, year: 2026}
     - {venue: icml, track: Main, year: 2026}
+    - {venue: neurips, track: Main, year: 2026}
+    - {venue: cvpr, track: Main, year: 2026}
+    - {venue: acl, track: Main, year: 2026}
     - {venue: generic, track: null, year: null}
   unsupported_route: generic
   unsupported_behavior: list-missing-policy-categories
   future_policy_rule: "Add a year only after its official guides are public and a policy diff has been reviewed."
+
+# These profiles are routed from skills/_shared/venue-policies.yaml. They are
+# intentionally not part of the 90-paper corpus or the visual-style corpus.
+venue_profiles:
+  neurips:
+    coverage: official-profile-only
+    official_source: https://neurips.cc/Conferences/2026/MainTrackHandbook
+    verified_on: "2026-07-16"
+    fallback: generic
+  cvpr:
+    coverage: official-profile-only
+    official_source: https://cvpr.thecvf.com/Conferences/2026/AuthorGuidelines
+    verified_on: "2026-07-16"
+    fallback: generic
+  acl:
+    coverage: official-profile-only
+    official_source: https://2026.aclweb.org/calls/main_conference_papers/
+    verified_on: "2026-07-16"
+    fallback: generic
 
 storage_policy:
   raw_public_material: external-corpus-only

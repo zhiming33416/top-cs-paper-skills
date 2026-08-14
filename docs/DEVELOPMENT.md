@@ -41,7 +41,7 @@ python scripts/install_skills.py --host codex --target <temporary-skills-dir>
 python scripts/install_skills.py --host codex --target <temporary-skills-dir> --check
 python scripts/install_skills.py --workflow --host claude --target <temporary-skills-dir>
 python scripts/install_skills.py --workflow --host claude --target <temporary-skills-dir> --check
-python -m ruff check --select E9,F --ignore E402 scripts/install_skills.py scripts/route_skill.py skills/top-cs-paper-workflow tests/test_public_release.py
+python -m ruff check --select E9,F --ignore E402 scripts/install_skills.py scripts/route_skill.py skills/top-cs-evidence skills/top-cs-paper-workflow tests/test_public_release.py tests/test_paper_evidence.py
 ```
 
 For the project-state tool, use a disposable, synthetic project root. Verify `init`, explicit relative-path `inventory`, advisory `status`, strict warnings, traversal rejection, and no-copy behavior. Do not run it against a contributor's home directory or a real manuscript in CI.

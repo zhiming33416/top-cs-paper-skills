@@ -4,7 +4,7 @@
 
 ## 中文
 
-`top-cs-paper-workflow` 是可选协调包，用于一篇论文需要跨越写作、图件、预审、回复和修订多个阶段的情况。单个段落润色、一张图或一次预审，仍应直接使用对应的五个专项技能。
+`top-cs-paper-workflow` 是可选协调包，用于一篇论文需要跨越写作、来源证据、图件、预审、回复和修订多个阶段的情况。单个段落润色、一张图、一次证据核验或一次预审，仍应直接使用对应的六个专项技能。
 
 它在用户明确选择的 `<project-root>/.top-cs-paper/workflow.yaml` 中保存可恢复的状态。manifest 只记录 venue/year、论文类型、投稿阶段、相对路径、可选哈希与交接 ID；不会复制、上传或推断稿件、数据、PDF、review 内容或凭证。
 
@@ -16,6 +16,7 @@
 python skills/top-cs-paper-workflow/scripts/paper_workflow.py init --project <project-root>
 python skills/top-cs-paper-workflow/scripts/paper_workflow.py inventory --project <project-root> --include manuscript/main.tex
 python skills/top-cs-paper-workflow/scripts/paper_workflow.py status --project <project-root> --format markdown
+python skills/top-cs-paper-workflow/scripts/paper_workflow.py preflight --project <project-root> --bib references.bib --online
 ```
 
 安装后，将脚本位置替换为 `<skills-root>/top-cs-paper-workflow/scripts/paper_workflow.py`。`<skills-root>` 是通过安装器选择的 Codex 或 Claude Code skills 根目录，不是仓库路径。
@@ -26,7 +27,7 @@ python skills/top-cs-paper-workflow/scripts/paper_workflow.py status --project <
 python skills/top-cs-paper-workflow/scripts/paper_workflow.py status --project <project-root> --strict
 ```
 
-严格模式会因“已声明 ready、但交接链未闭环”返回非零状态。它不会替作者确认实验、结论、引用、审稿立场或会议政策。
+严格模式会因“已声明 ready、但交接链未闭环”返回非零状态。`preflight` 只检查显式路径并报告 `passed`、`warning` 或 `not-run`，绝不替作者确认实验、结论、引用、审稿立场、会议政策或“可投稿”。
 
 ### 六个检查点与交接
 
@@ -42,8 +43,8 @@ python skills/top-cs-paper-workflow/scripts/paper_workflow.py status --project <
 工作顺序为：
 
 ```text
-贡献与论证 → 证据与主图 → 稿件与润色 → 投稿前预审 → 回复与修订
- top-cs-writing    top-cs-figure    top-cs-polishing     top-cs-reviewer   top-cs-response
+贡献与论证 → 来源与证据 → 主图 → 稿件与润色 → 投稿前预审 → 回复与修订
+ top-cs-writing    top-cs-evidence  top-cs-figure  top-cs-polishing  top-cs-reviewer  top-cs-response
 ```
 
 `top-cs-figure` 可在写作阶段产出主图，在预审阶段检查可读性和证据一致性，并在回复阶段制作补充或修订图。协调包只验证交接是否可追溯；各专项技能仍拥有各自的工作流和边界。
@@ -59,7 +60,7 @@ python skills/top-cs-paper-workflow/scripts/paper_workflow.py status --project <
 
 ## English
 
-`top-cs-paper-workflow` is an optional coordinator for a paper that crosses drafting, figures, review, response, and revision. For one paragraph, one figure, or one audit, invoke the relevant specialist skill directly.
+`top-cs-paper-workflow` is an optional coordinator for a paper that crosses drafting, source evidence, figures, review, response, and revision. For one paragraph, one figure, one evidence check, or one audit, invoke the relevant specialist skill directly.
 
 It keeps resumable state in `<project-root>/.top-cs-paper/workflow.yaml`, under a project root explicitly selected by the user. The manifest records venue/year, paper type, submission stage, relative paths, optional hashes, and handoff IDs only. It does not copy, upload, or infer manuscript text, data, PDFs, review content, or credentials.
 
@@ -71,6 +72,7 @@ From a repository clone:
 python skills/top-cs-paper-workflow/scripts/paper_workflow.py init --project <project-root>
 python skills/top-cs-paper-workflow/scripts/paper_workflow.py inventory --project <project-root> --include manuscript/main.tex
 python skills/top-cs-paper-workflow/scripts/paper_workflow.py status --project <project-root> --format markdown
+python skills/top-cs-paper-workflow/scripts/paper_workflow.py preflight --project <project-root> --bib references.bib --online
 ```
 
 After installation, replace the script path with `<skills-root>/top-cs-paper-workflow/scripts/paper_workflow.py`. `<skills-root>` is the Codex or Claude Code skills root selected by the installer, not a repository path.
@@ -81,7 +83,7 @@ Status is advisory by default. Use strict mode only when a stage is being declar
 python skills/top-cs-paper-workflow/scripts/paper_workflow.py status --project <project-root> --strict
 ```
 
-Strict mode returns nonzero when a stage is declared ready but its handoff chain is incomplete. It never confirms experiments, conclusions, citations, reviewer positions, or venue policy for the author.
+Strict mode returns nonzero when a stage is declared ready but its handoff chain is incomplete. `preflight` checks explicit paths only and reports `passed`, `warning`, or `not-run`; it never declares a paper submission-ready or confirms experiments, conclusions, citations, reviewer positions, or venue policy.
 
 ### Six checkpoints and handoffs
 
@@ -97,8 +99,8 @@ Strict mode returns nonzero when a stage is declared ready but its handoff chain
 The intended sequence is:
 
 ```text
-Contribution and argument → Evidence and principal figures → Manuscript and polish → Pre-submission review → Response and revision
-     top-cs-writing            top-cs-figure              top-cs-polishing        top-cs-reviewer       top-cs-response
+Contribution and argument → Sources and evidence → Principal figures → Manuscript and polish → Pre-submission review → Response and revision
+     top-cs-writing              top-cs-evidence          top-cs-figure       top-cs-polishing      top-cs-reviewer       top-cs-response
 ```
 
 `top-cs-figure` can produce principal figures during drafting, check readability and evidence consistency during review, and create supplemental or revision figures during response. The coordinator validates traceable handoffs only; each specialist keeps its own workflow and boundaries.

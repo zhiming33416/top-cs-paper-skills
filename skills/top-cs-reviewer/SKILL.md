@@ -1,6 +1,6 @@
 ---
 name: top-cs-reviewer
-description: Perform a confidential pre-submission audit of a computer-science manuscript against WWW, ICLR, ICML, or generic top-conference expectations. Use for reviewer-style assessment, rejection-risk analysis, claim verification, experimental and reproducibility audits, venue or track fit, anonymity checks, paper readiness, and actionable revision priorities. This is an author-side simulation, not an official review and not a substitute for domain experts.
+description: Perform a confidential pre-submission audit of a computer-science manuscript against WWW, ICLR, ICML, NeurIPS, CVPR, ACL, or generic top-conference expectations. Use for reviewer-style assessment, rejection-risk analysis, claim verification, experimental and reproducibility audits, venue or track fit, anonymity checks, paper readiness, and actionable revision priorities. This is an author-side simulation, not an official review and not a substitute for domain experts.
 ---
 
 # Top CS Paper Reviewer

@@ -4,6 +4,8 @@ import re
 import unittest
 from pathlib import Path
 
+import yaml
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CORE_SKILLS = (
@@ -12,6 +14,7 @@ CORE_SKILLS = (
     "top-cs-reviewer",
     "top-cs-response",
     "top-cs-figure",
+    "top-cs-evidence",
 )
 WORKFLOW_SKILL = "top-cs-paper-workflow"
 PUBLIC_TEXT_DIRECTORIES = (
@@ -112,41 +115,41 @@ class PublicReleaseTests(unittest.TestCase):
         self.assertIn("[English](README_EN.md)", chinese)
         self.assertIn("[中文说明](README.md)", english)
         self.assertIn("optional", english.lower())
-        self.assertIn("five", english.lower())
+        self.assertIn("six", english.lower())
 
         chinese_home = read_text(ROOT / "README.md")
         english_home = read_text(ROOT / "README_EN.md")
         self.assertIn(WORKFLOW_SKILL, chinese_home)
         self.assertIn(WORKFLOW_SKILL, english_home)
-        self.assertIn("五个", chinese_home)
-        self.assertIn("five", english_home.lower())
+        self.assertIn("六个", chinese_home)
+        self.assertIn("six", english_home.lower())
 
     def test_root_readme_pair_has_required_landing_sections_and_consistent_navigation(self):
         chinese = read_text(ROOT / "README.md")
         english = read_text(ROOT / "README_EN.md")
         required_chinese = (
-            "## 适用范围与边界",
-            "## 快速开始",
+            "## 为什么可信",
+            "## 10 分钟开始",
             "## 选择技能",
-            "## 技能索引",
-            "## 可选完整论文工作流",
-            "## 项目结构与安装边界",
-            "## 文档导航",
+            "## Golden Task Board",
+            "## 图件能力",
+            "## 隐私、证据与安装边界",
+            "## 仓库结构",
         )
         required_english = (
-            "## Scope and Boundaries",
-            "## Quick Start",
-            "## Choose a Skill",
-            "## Skill Index",
-            "## Optional Full-paper Workflow",
-            "## Repository Layout and Installation Boundary",
-            "## Documentation",
+            "## Why trust this workflow?",
+            "## Start in 10 minutes",
+            "## Choose a skill",
+            "## Golden Task Board",
+            "## Figure capability",
+            "## Privacy, evidence, and installation boundary",
+            "## Repository map",
         )
         for heading in required_chinese:
             self.assertIn(heading, chinese)
         for heading in required_english:
             self.assertIn(heading, english)
-        for target in ("INSTALL.md", "docs/WORKFLOW.md", "docs/HOSTS.md", "docs/README.md"):
+        for target in ("INSTALL.md", "docs/WORKFLOW.md", "docs/HOSTS.md", "docs/QUALITY.md", "docs/README.md"):
             self.assertIn(target, chinese)
             self.assertIn(target, english)
 
@@ -169,6 +172,7 @@ class PublicReleaseTests(unittest.TestCase):
             "--host codex",
             "--host claude",
             "--skill top-cs-writing",
+            "--skill top-cs-evidence",
             "--workflow",
             "--check",
             "--prune",
@@ -210,6 +214,7 @@ class PublicReleaseTests(unittest.TestCase):
             ROOT / "config" / "evidence" / "public-sources.yaml",
             ROOT / "docs" / "README.md",
             ROOT / "docs" / "WORKFLOW.md",
+            ROOT / "docs" / "QUALITY.md",
             ROOT / "docs" / "HOSTS.md",
             ROOT / "tests" / "README.md",
             ROOT / "tests" / "cases" / "acceptance-cases.yaml",
@@ -226,6 +231,24 @@ class PublicReleaseTests(unittest.TestCase):
     def test_root_has_no_maintenance_yaml(self):
         self.assertEqual(list(ROOT.glob("*.yaml")), [])
         self.assertFalse((ROOT / "corpus-sources.yaml").exists())
+
+    def test_golden_task_board_is_synthetic_and_covers_the_six_specialists_plus_workflow(self):
+        board = ROOT / "examples" / "golden-tasks" / "board.yaml"
+        self.assertTrue(board.is_file())
+        document = yaml.safe_load(read_text(board))
+        cases = document["tasks"]
+        self.assertEqual(len(cases), 7)
+        self.assertEqual({case["skill"] for case in cases}, {*CORE_SKILLS, WORKFLOW_SKILL})
+        self.assertTrue(all(case["material_class"] == "synthetic" for case in cases))
+
+    def test_golden_task_assertions_resolve_to_existing_test_modules(self):
+        board = ROOT / "examples" / "golden-tasks" / "board.yaml"
+        document = yaml.safe_load(read_text(board))
+        for case in document["tasks"]:
+            verified_by = case.get("verified_by", [])
+            self.assertTrue(verified_by, f"{case['id']} must name at least one verifying test module")
+            for module in verified_by:
+                self.assertTrue((ROOT / module).is_file(), f"{case['id']} references missing test module {module}")
 
 
 if __name__ == "__main__":

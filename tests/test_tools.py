@@ -177,7 +177,7 @@ class InstallTests(unittest.TestCase):
                 0,
             )
 
-    def test_default_install_keeps_five_core_skills_not_optional_workflow(self):
+    def test_default_install_keeps_six_core_skills_not_optional_workflow(self):
         with tempfile.TemporaryDirectory() as tmp:
             target = Path(tmp) / "skills"
             self.assertEqual(install_mod.main(["--target", str(target)]), 0)
@@ -185,6 +185,7 @@ class InstallTests(unittest.TestCase):
                 {path.name for path in target.iterdir() if path.is_dir()},
                 set(install_mod.UNITS),
             )
+            self.assertTrue((target / "top-cs-evidence" / "SKILL.md").is_file())
             self.assertFalse((target / install_mod.WORKFLOW_SKILL).exists())
 
     def test_workflow_install_expands_to_all_dependencies(self):

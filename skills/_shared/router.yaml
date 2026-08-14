@@ -1,7 +1,7 @@
 schema_version: 3
 purpose: "Shared routing vocabulary and invariants. Each skill manifest activates only the axes appropriate to that task."
 common_values:
-  venue: [www, iclr, icml, generic]
+  venue: [www, iclr, icml, neurips, cvpr, acl, generic]
   year: [2026]
   paper_type: [empirical, algorithmic, theoretical, systems, dataset-benchmark]
   section: [title, abstract, introduction, related-work, method, experiments, discussion, limitations, conclusion]
@@ -21,4 +21,6 @@ activation:
   top-cs-polishing: [venue, paper_type, section, language]
   top-cs-reviewer: [venue]
   top-cs-response: []
-note: "Runtime parameters do not create content axes. top-cs-response remains a linear state machine."
+  top-cs-evidence: []
+  top-cs-figure: [venue, paper_type, visual_family]
+note: "Runtime parameters do not create content axes. top-cs-response and top-cs-evidence remain linear state machines. visual_family is a figure-only axis defined in skills/top-cs-figure/manifest.yaml."

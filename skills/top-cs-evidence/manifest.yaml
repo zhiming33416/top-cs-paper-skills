@@ -1,0 +1,44 @@
+name: top-cs-evidence
+version: 1.0.0
+description: "Author-controlled citation and claim-evidence routing for conference papers."
+always_load:
+  - static/core/stance.md
+  - static/core/workflow.md
+  - static/core/output-format.md
+  - ../_shared/core/evidence-discipline.md
+  - ../_shared/core/claim-evidence-boundary.md
+  - ../_shared/core/anonymity.md
+  - references/evidence-ledger.md
+  - references/source-boundaries.md
+runtime_parameters:
+  task_mode:
+    values: [plan, verify-metadata, map-claims, handoff]
+    default: plan
+  source_access:
+    values: [offline, author-approved-online]
+    default: offline
+  source_text_state:
+    values: [provided, partial, missing]
+    default: missing
+  venue:
+    values: [www, iclr, icml, neurips, cvpr, acl, generic]
+    default: generic
+references:
+  on_demand:
+    - condition: "needs public bibliographic metadata verification"
+      path: ../_shared/references/citation-verification.md
+    - condition: "needs a machine-readable citation record or claim-evidence map"
+      path: ../_shared/contracts/citation-record.schema.yaml
+    - condition: "needs current official venue policy context"
+      path: ../_shared/venue-policies.yaml
+reference_routes:
+  citation-verification: [../_shared/references/citation-verification.md, ../_shared/contracts/citation-record.schema.yaml, ../_shared/scripts/verify_citations.py]
+  claim-evidence-map: [../_shared/contracts/claim-evidence-map.schema.yaml, references/evidence-ledger.md, scripts/paper_evidence.py]
+  official-policy: [../_shared/venue-policies.yaml]
+  source-basis: [references/source-boundaries.md, ../_shared/rule-provenance.yaml]
+output_contract: "claim list, source plan, citation metadata ledger, claim-to-source map, unresolved evidence gaps, and specialist handoff"
+interface:
+  inputs: [claim list, author-provided BibTeX or DOI, optional author-reviewed excerpts or notes]
+  outputs: [source plan, citation metadata ledger, claim-to-source map, needs-source-text gaps]
+  verification: [offline-by-default metadata check, explicit online authorization, metadata-entailment separation]
+  handoff: [claim-evidence-map, citation-record, revision-ledger]

@@ -9,7 +9,7 @@ The repository separates official venue policy, corpus-derived observations, aut
 - 25 historical public ICLR processes providing 94 reviews and 32 discussion threads for review and response behavior patterns.
 - 30 verified independent visual-style sources for each of WWW Research, ICLR, and ICML in the 2026-07-13 snapshot.
 
-These counts describe the checked-in snapshot. They do not promise that a future venue edition uses the same policy, format, or style.
+These counts describe the checked-in deep corpus for WWW, ICLR, and ICML. NeurIPS, CVPR, and ACL have current official-policy profiles, but no checked-in paper or visual-style corpus; their figure routes therefore use `unified-family`, not a claimed conference style. No profile promises that a future venue edition uses the same policy, format, or style.
 
 ## What is stored
 
@@ -45,3 +45,5 @@ Visual-style evidence records aggregate color, layout, and co-occurrence statist
 ## Privacy and integrity
 
 Citation verification checks public metadata but does not treat metadata existence as proof that a source entails a manuscript claim. Review and response workflows do not invent reviewer identities, experiments, results, edits, or promises. Workflow status does not establish that an experiment ran, a figure is valid, a citation entails a claim, or a venue policy is current. Private regression runs emit only aggregate identifiers, hashes, geometry, perceptual distance, scores, and error categories.
+
+`top-cs-evidence` makes this distinction executable. It works offline by default, uses Crossref/arXiv/DBLP only after explicit `--online`, and records bibliographic metadata separately from author-provided excerpts or notes. Without such source text, a claim map remains `needs-source-text`; the skill does not download full text, rewrite a bibliography, or infer entailment.

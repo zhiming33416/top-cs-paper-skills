@@ -1,6 +1,6 @@
 ---
 name: top-cs-response
-description: Prepare, audit, or revise evidence-grounded author responses, rebuttals, discussion replies, decision-email triage, cover letters, revision packages, and LaTeX response templates for WWW, ICLR, ICML, or a generic computer-science venue. Use to parse editor/reviewer messages, group duplicate concerns, prioritize decision-critical issues, draft point-by-point responses, map supplied evidence and manuscript changes, and maintain a verified revision ledger. Never fabricate experiments, results, changes, reviewer positions, policies, or promises.
+description: Prepare, audit, or revise evidence-grounded author responses, rebuttals, discussion replies, decision-email triage, cover letters, revision packages, and LaTeX response templates for WWW, ICLR, ICML, NeurIPS, CVPR, ACL, or a generic computer-science venue. Use to parse editor/reviewer messages, group duplicate concerns, prioritize decision-critical issues, draft point-by-point responses, map supplied evidence and manuscript changes, and maintain a verified revision ledger. Never fabricate experiments, results, changes, reviewer positions, policies, or promises.
 ---
 
 # Top CS Paper Response

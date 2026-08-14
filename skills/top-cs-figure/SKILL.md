@@ -1,6 +1,6 @@
 ---
 name: top-cs-figure
-description: Create, revise, audit, render, and export publication-ready computer-science paper figures using a Python-first, corpus-calibrated workflow. Use for manuscript figures, multi-panel experimental charts, comparison plots, scaling curves, heatmaps, embeddings, network diagrams, method schematics, executable YAML/CSV figure render specs, figure-brief handoffs, caption/callout alignment, SVG/PDF/PNG/TIFF export bundles, venue-style evidence checks, and visual QA for WWW, ICLR, ICML, or generic top-CS submissions. Prefer an existing top-cs figure brief or render spec when provided; otherwise build a compact figure contract before plotting. Do not use for interactive dashboards, Plotly/Altair/web apps, Illustrator/Figma-first layout, AI-generated graphical abstracts, or result-table writing.
+description: Create, revise, audit, render, and export publication-ready computer-science paper figures using a Python-first, corpus-calibrated workflow. Use for manuscript figures, multi-panel experimental charts, comparison plots, scaling curves, heatmaps, embeddings, network diagrams, method schematics, executable YAML/CSV figure render specs, figure-brief handoffs, caption/callout alignment, SVG/PDF/PNG/TIFF export bundles, and visual QA for WWW, ICLR, ICML, NeurIPS, CVPR, ACL, or generic top-CS submissions. Do not use for interactive dashboards, Plotly/Altair/web apps, Illustrator/Figma-first layout, AI-generated graphical abstracts, or result-table writing.
 ---
 
 # Top CS Figure
@@ -18,7 +18,7 @@ Use the skill's static/dynamic layers; do not reconstruct visual grammar or expo
 
 ## Execute
 
-1. Prefer the shared `figure-brief` contract when present. Preserve `figure_id`, `claim_ids`, research question, evidence status, panel jobs, caption draft, and manuscript callout.
+1. Prefer an existing top-cs figure brief or render spec when provided; otherwise build a compact figure contract before plotting. Prefer the shared `figure-brief` contract when present. Preserve `figure_id`, `claim_ids`, research question, evidence status, panel jobs, caption draft, and manuscript callout.
 2. If no brief exists, create a minimal figure contract before code: claim, data source, panel map, visual family, metric direction, final size, export formats, and unresolved inputs.
 3. Treat data availability as binding. Use supplied data for results; when data are missing, return missing-inputs or a clearly labeled layout mockup without invented values.
 4. Use `scripts/render_from_figure_spec.py` when a YAML render spec and CSV/image source can make the figure repeatable. Prefer strict v3 specs; migrate v1/v2 inputs explicitly and record the migration.

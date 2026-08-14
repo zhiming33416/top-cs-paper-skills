@@ -100,6 +100,19 @@ class CollectionConfigTests(unittest.TestCase):
 
 
 class RoutingTests(unittest.TestCase):
+    def test_profile_only_venues_route_current_policy_without_claiming_style_evidence(self):
+        evidence = router.resolve("top-cs-evidence", {"venue": "cvpr", "task_mode": "verify-metadata"})
+        self.assertEqual(evidence["runtime_parameters"]["venue"], "cvpr")
+        self.assertEqual(evidence["policy_freshness"], {"status": "current", "last_verified": "2026-07-16", "year": 2026})
+        self.assertIn("official-policy", evidence["automatic_needs"])
+
+        figure = router.resolve("top-cs-figure", {
+            "venue": "neurips", "paper_type": "empirical", "visual_family": "comparison",
+        })
+        self.assertEqual(figure["route"]["venue"], "neurips")
+        self.assertTrue(any(path.endswith("static/fragments/venue-style/generic.md") for path in figure["load_files"]))
+        self.assertFalse(any(path.endswith("venue-style/neurips.md") for path in figure["load_files"]))
+
     def test_writing_route_resolves_static_and_runtime_inputs(self):
         result = router.resolve("top-cs-writing", {
             "venue": "iclr", "paper_type": "theoretical", "section": ["introduction", "method"],

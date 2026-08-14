@@ -1,0 +1,30 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "top-cs-paper-skills/claim-evidence-map.schema.yaml"
+title: Claim to source evidence map
+type: object
+required: [schema_version, claims, sources, boundary]
+properties:
+  schema_version: {const: 1}
+  boundary:
+    const: "Metadata verification and claim entailment are separate; source support requires author-provided text or notes."
+  claims:
+    type: array
+    items:
+      type: object
+      required: [claim_id, statement, source_ids]
+      properties:
+        claim_id: {type: string, minLength: 1}
+        statement: {type: string, minLength: 1}
+        source_ids: {type: array, items: {type: string, minLength: 1}, uniqueItems: true}
+  sources:
+    type: array
+    items:
+      type: object
+      required: [source_id, citation_key, bibliographic_status, claim_entailment_status, claim_ids]
+      properties:
+        source_id: {type: string, minLength: 1}
+        citation_key: {type: string, minLength: 1}
+        bibliographic_status: {enum: [needed, candidate, verified, partial, conflicting, not-found, error]}
+        claim_entailment_status: {enum: [not-checked, needs-source-text, supported, partial, contradicted, not-applicable]}
+        claim_ids: {type: array, items: {type: string, minLength: 1}, uniqueItems: true}
+        note_path: {type: [string, "null"]}

@@ -17,6 +17,9 @@ axes:
       www: static/fragments/venue/www.md
       iclr: static/fragments/venue/iclr.md
       icml: static/fragments/venue/icml.md
+      neurips: static/fragments/venue/neurips.md
+      cvpr: static/fragments/venue/cvpr.md
+      acl: static/fragments/venue/acl.md
       generic: static/fragments/venue/generic.md
     default: generic
     multi: false
@@ -84,6 +87,7 @@ references:
 output_contract: "summary, strengths, anchored issues, venue-specific audit, prioritized risks, decision-relevant questions, revision plan"
 reference_routes:
   citation-verification: [../_shared/references/citation-verification.md, ../_shared/contracts/citation-record.schema.yaml, ../_shared/scripts/verify_citations.py]
+  evidence-handoff: [../_shared/contracts/claim-evidence-map.schema.yaml]
   figure-handoff: [../_shared/references/figure-handoff.md, ../_shared/contracts/figure-brief.schema.yaml]
   full-section-corpus: [../_shared/references/full-section-corpus-patterns.md]
   official-policy: [references/official-review-forms.md, ../_shared/venue-policies.yaml]
@@ -100,3 +104,8 @@ reference_routes:
   source-basis: [references/source-basis.md, ../_shared/rule-provenance.yaml]
   issue-contract: [references/issue-contract.md]
   partial-manuscript: [references/partial-manuscript-protocol.md]
+interface:
+  inputs: [author-provided manuscript scope, figures or appendix when available, target venue or generic mode]
+  outputs: [anchored issue board, consequence-based risks, confidence labels, revision plan]
+  verification: [partial-manuscript boundary, official-policy route, claim and figure handoff checks]
+  handoff: [response-issue, revision-ledger, claim-evidence-map]

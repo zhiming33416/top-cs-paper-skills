@@ -1,6 +1,6 @@
 name: top-cs-paper-workflow
 version: 1.0.0
-description: "Optional project-level coordinator for the five Top CS paper skills."
+description: "Optional project-level coordinator for the six Top CS paper skills."
 always_load:
   - ../_shared/core/evidence-discipline.md
   - ../_shared/core/claim-evidence-boundary.md

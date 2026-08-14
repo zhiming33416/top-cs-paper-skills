@@ -41,6 +41,39 @@ venues:
     appendix_location: "after references in the same PDF"
     double_blind: true
     response_protocol: "one response per official review with limited follow-up; no revised-paper upload during author feedback"
+  neurips:
+    year: 2026
+    expires_after: 2026
+    status: active
+    last_verified: "2026-07-16"
+    source: "https://neurips.cc/Conferences/2026/MainTrackHandbook"
+    template: "official NeurIPS 2026 LaTeX style"
+    main_pages: 9
+    pdf_size_mb: 50
+    references_excluded_from_main: true
+    appendix_location: "after references in the single submission PDF"
+    double_blind: true
+    response_protocol: "check the current Main Track Handbook and OpenReview schedule before responding"
+  cvpr:
+    year: 2026
+    expires_after: 2026
+    status: active
+    last_verified: "2026-07-16"
+    source: "https://cvpr.thecvf.com/Conferences/2026/AuthorGuidelines"
+    template: "official CVPR 2026 submission template"
+    main_pages: 8
+    references_excluded_from_main: true
+    double_blind: true
+    response_protocol: "one-page rebuttal policy is current-edition specific; verify before use"
+  acl:
+    year: 2026
+    expires_after: 2026
+    status: active
+    last_verified: "2026-07-16"
+    source: "https://2026.aclweb.org/calls/main_conference_papers/"
+    template: "official ACL 2026 formatting requirements"
+    double_blind: true
+    response_protocol: "submission and response flow depend on the current ACL/ARR instructions; verify before use"
   generic:
     year: null
     expires_after: null

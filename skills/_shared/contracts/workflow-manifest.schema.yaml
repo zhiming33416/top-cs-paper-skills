@@ -23,7 +23,7 @@ properties:
     required: [title, venue, year, paper_type, submission_stage, author_confirmation]
     properties:
       title: {type: string, minLength: 1}
-      venue: {enum: [www, iclr, icml, generic, other]}
+      venue: {enum: [www, iclr, icml, neurips, cvpr, acl, generic, other]}
       year: {type: [integer, "null"], minimum: 2000, maximum: 2100}
       paper_type: {enum: [empirical, algorithmic, theoretical, systems, dataset-benchmark, other]}
       submission_stage: {enum: [planning, draft, pre-submission, review, response, camera-ready]}

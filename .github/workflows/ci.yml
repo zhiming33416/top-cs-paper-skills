@@ -58,7 +58,7 @@ jobs:
         run: python -m pip install -r requirements.txt -r requirements-dev.txt
 
       - name: Lint maintained public Python surface
-        run: python -m ruff check --select E9,F --ignore E402 scripts/install_skills.py scripts/route_skill.py skills/top-cs-paper-workflow tests/test_public_release.py
+        run: python -m ruff check --select E9,F --ignore E402 scripts/install_skills.py scripts/route_skill.py skills/top-cs-evidence skills/top-cs-paper-workflow tests/test_public_release.py tests/test_paper_evidence.py
 
       - name: Validate public documentation, links, and path boundary
         run: python -m unittest tests.test_public_release
@@ -92,7 +92,9 @@ jobs:
           python scripts/install_skills.py --host claude --workflow --target "$RUNNER_TEMP/claude-skills" --check
 
       - name: Smoke-test deterministic route resolution
-        run: python scripts/route_skill.py --skill top-cs-writing --format json
+        run: |
+          python scripts/route_skill.py --skill top-cs-writing --format json
+          python scripts/route_skill.py --skill top-cs-evidence --venue cvpr --task-mode verify-metadata --format json
 
       - name: Validate public documentation, links, and path boundary
         run: python -m unittest tests.test_public_release

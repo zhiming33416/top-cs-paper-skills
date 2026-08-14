@@ -16,6 +16,9 @@ axes:
       www: ../_shared/venues/www.md
       iclr: ../_shared/venues/iclr.md
       icml: ../_shared/venues/icml.md
+      neurips: ../_shared/venues/neurips.md
+      cvpr: ../_shared/venues/cvpr.md
+      acl: ../_shared/venues/acl.md
       generic: ../_shared/venues/generic.md
     default: generic
     multi: false
@@ -108,6 +111,7 @@ output_contract: "revised prose, revision ledger, claim-strength changes, eviden
 reference_routes:
   rhetorical-moves: [../_shared/references/rhetorical-moves.md]
   citation-verification: [../_shared/references/citation-verification.md, ../_shared/contracts/citation-record.schema.yaml, ../_shared/scripts/verify_citations.py]
+  evidence-handoff: [../_shared/contracts/claim-evidence-map.schema.yaml, ../_shared/contracts/revision-ledger.schema.yaml]
   figure-handoff: [../_shared/references/figure-handoff.md, ../_shared/contracts/figure-brief.schema.yaml]
   full-section-corpus: [../_shared/references/full-section-corpus-patterns.md]
   full-paper: [references/cross-section-consistency.md]
@@ -124,3 +128,8 @@ reference_routes:
   compression: [references/compression-protocol.md]
   latex-layout: [references/latex-layout.md]
   source-basis: [references/source-basis.md, ../_shared/rule-provenance.yaml]
+interface:
+  inputs: [author-provided prose or LaTeX, revision constraints, optional claim and citation records]
+  outputs: [faithful revision, revision ledger, evidence warnings, unresolved-input list]
+  verification: [fact and citation-anchor preservation, LaTeX route when requested, conservative claim-strength check]
+  handoff: [revision-ledger, claim-evidence-map, figure-brief]

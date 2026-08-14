@@ -10,7 +10,7 @@ from collections import Counter
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ROOT / "skills"
 PAPER_SKILLS = ("top-cs-writing", "top-cs-polishing", "top-cs-reviewer", "top-cs-response")
-ALL_SKILLS = PAPER_SKILLS + ("top-cs-figure",)
+ALL_SKILLS = PAPER_SKILLS + ("top-cs-figure", "top-cs-evidence")
 OPTIONAL_WORKFLOW = "top-cs-paper-workflow"
 
 
@@ -72,7 +72,7 @@ class ArchitectureTests(unittest.TestCase):
         self.assertGreaterEqual(len(manifest["references"]["on_demand"]), 7)
 
     def test_each_skill_has_local_static_core(self):
-        for skill in ALL_SKILLS:
+        for skill in PAPER_SKILLS + ("top-cs-figure",):
             manifest, base = load_manifest(skill)
             local_core = [p for p in manifest["always_load"] if p.startswith("static/core/")]
             self.assertEqual(len(local_core), 3)
@@ -90,6 +90,7 @@ class ArchitectureTests(unittest.TestCase):
         self.assertEqual(
             skill_dirs,
             [
+                "top-cs-evidence",
                 "top-cs-figure",
                 "top-cs-paper-workflow",
                 "top-cs-polishing",
@@ -115,6 +116,19 @@ class ArchitectureTests(unittest.TestCase):
         forbidden_names = {"render_figure.py", "generate_figure.py", "figure_backend.py"}
         for skill in PAPER_SKILLS:
             self.assertFalse(any(path.name in forbidden_names for path in (SKILLS / skill).rglob("*.py")))
+
+        evidence, base = load_manifest("top-cs-evidence")
+        self.assertEqual(evidence["version"], "1.0.0")
+        self.assertIn("claim-evidence-map", evidence["reference_routes"])
+        self.assertIn("citation-verification", evidence["reference_routes"])
+        self.assertTrue((base / "scripts" / "paper_evidence.py").is_file())
+
+    def test_six_specialists_publish_inputs_outputs_checks_and_handoffs(self):
+        for skill in ALL_SKILLS:
+            manifest, _ = load_manifest(skill)
+            interface = manifest["interface"]
+            self.assertEqual(set(interface), {"inputs", "outputs", "verification", "handoff"})
+            self.assertTrue(all(interface[key] for key in interface), skill)
 
     def test_optional_workflow_has_a_valid_project_level_contract(self):
         manifest, base = load_manifest(OPTIONAL_WORKFLOW)

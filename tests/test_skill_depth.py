@@ -87,6 +87,25 @@ class SkillDepthTests(unittest.TestCase):
         stance = read("skills/top-cs-figure/static/core/stance.md")
         self.assertIn("Python/matplotlib", stance)
 
+    def test_evidence_skill_keeps_metadata_and_claim_support_separate(self):
+        routes = manifest("top-cs-evidence")["reference_routes"]
+        self.assertIn("citation-verification", routes)
+        self.assertIn("claim-evidence-map", routes)
+        script = read("skills/top-cs-evidence/scripts/paper_evidence.py")
+        self.assertIn("offline by default", script)
+        self.assertIn("claim entailment", script)
+
+    def test_evidence_skill_has_symmetric_core_layers(self):
+        always = set(manifest("top-cs-evidence")["always_load"])
+        for name in ("stance", "workflow", "output-format"):
+            self.assertIn(f"static/core/{name}.md", always)
+        stance = read("skills/top-cs-evidence/static/core/stance.md")
+        self.assertIn("never confirms that the source supports a claim", stance)
+        workflow = read("skills/top-cs-evidence/static/core/workflow.md")
+        self.assertIn("needs-source-text", workflow)
+        output_format = read("skills/top-cs-evidence/static/core/output-format.md")
+        self.assertIn("Unresolved evidence gaps", output_format)
+
 
 if __name__ == "__main__":
     unittest.main()
