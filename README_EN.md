@@ -5,30 +5,61 @@
 [![CI](https://github.com/zhiming33416/top-cs-paper-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/zhiming33416/top-cs-paper-skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![Specialist skills](https://img.shields.io/badge/specialist_skills-6-6f42c1)
-![Hosts](https://img.shields.io/badge/hosts-Codex%20%2B%20Claude-3776AB)
+![Hosts](https://img.shields.io/badge/hosts-Codex%20%2B%20Claude%20Code-3776AB)
 
 ![Top CS Paper Skills: evidence-grounded skills for leading CS conferences](assets/top-cs-paper-skills-banner.png)
 
-> Turn author-owned research materials into traceable top-CS submission artifacts — without inventing experiments, citations, or venue rules.
+> Turn author-owned research materials into traceable top-CS submission artifacts — writing, source evidence, figures, revision, pre-submission review, and reviewer response, without inventing experiments, citations, or venue rules.
 
-Six specialist skills cover paper argument, source evidence, faithful revision, author-side review, reviewer response, and reproducible figures. Their optional coordinator records only metadata in your selected paper project; it never uploads or copies your manuscript.
+Six specialist skills for Codex and Claude Code cover the paper lifecycle from "a pile of experiment notes" to "a point-by-point reviewer reply". Current official venue profiles cover WWW, ICLR, ICML, NeurIPS, CVPR, and ACL 2026.
 
-## Why trust this workflow?
+## See the output in 30 seconds
 
-| Principle | What it means in practice |
-| --- | --- |
-| Evidence lineage | Claims, figures, citations, review issues, and revisions have stable IDs and explicit gaps. Metadata identity is never presented as source-text support. |
-| Conservative expression | Missing results, source excerpts, venue rules, and author decisions remain visible placeholders rather than fluent inventions. |
-| Reproducible checks | Figures use editable Python-first render bundles and QA; LaTeX, citation metadata, workflow links, and installation have deterministic checks. |
+All samples are synthetic. Placeholders are part of the output format: missing evidence is marked explicitly instead of being hidden behind fluent prose.
 
-Current official venue profiles cover WWW, ICLR, ICML, NeurIPS, CVPR, and ACL 2026. A profile expires with its edition; unsupported venues use `generic` mode and require the author to re-check official instructions. `unified-family` figure styling is a reusable implementation choice, never an official venue palette.
+<details>
+<summary><b>Polishing before/after</b> (facts, citation anchors, and numbers preserved)</summary>
+
+**Before:**
+
+> It is generally the case that, in many situations, evaluation reports might potentially conflate things that have actually been measured with things that are merely planned to be measured at some point, which is a problem that could possibly be addressed by having some kind of explicit separation between different states of evidence [syn2026provenance], as illustrated conceptually in the workflow shown in FIG-001.
+
+**After:**
+
+> Evaluation reports often conflate measured results with planned measurements. Separating evidence into explicit states — measured, pending, and author-decided — makes this distinction auditable [syn2026provenance], as illustrated in the conceptual workflow of FIG-001.
+
+A revision ledger labels each change with its type and fact impact; citation and figure anchors are checked one by one. Full sample: [polishing-revision.md](examples/synthetic-paper/outputs/polishing-revision.md).
+
+</details>
+
+<details>
+<summary><b>Reviewer response draft</b> (no unverified promises, no invented experiments)</summary>
+
+> We thank the reviewer for identifying this ambiguity. Figure `FIG-001` is a conceptual workflow illustration, not an empirical result. We have updated the caption and the surrounding prose in Section [X] to state "conceptual workflow; no empirical result shown" (revision `REV-001`, status: `pending-author-confirmation`). We do not claim any measured outcome for this figure.
+
+The response explicitly lists what it deliberately does not do: promise new experiments or claim the revision is complete. Full sample: [response-draft.md](examples/synthetic-paper/outputs/response-draft.md).
+
+</details>
+
+<details>
+<summary><b>Introduction outline + claim–evidence boundary table</b> (missing citations stay explicit)</summary>
+
+| Claim | Evidence | Status | Boundary |
+| --- | --- | --- | --- |
+| `CLM-001` evidence-state separation | `EVD-001` planned evaluation record | `pending-author-input` | Workflow claim, not a performance result |
+
+The paragraph-job outline marks `[CITATION NEEDED: ...]` per paragraph, and the draft excerpt keeps its `PENDING-AUTHOR-INPUT` state. Full sample: [writing-claim-outline.md](examples/synthetic-paper/outputs/writing-claim-outline.md).
+
+</details>
+
+Complete input → output samples for all six skills (evidence ledger, reviewer issue board, figure contract) live in [examples/synthetic-paper](examples/synthetic-paper/README.md).
 
 ## Start in 10 minutes
 
 ```bash
 git clone https://github.com/zhiming33416/top-cs-paper-skills.git
 cd top-cs-paper-skills
-python scripts/install_skills.py --host codex
+python scripts/install_skills.py --host codex     # or --host claude
 python scripts/install_skills.py --host codex --check
 ```
 
@@ -61,9 +92,29 @@ Contribution and claims → Sources and evidence → Figures → Draft and revis
                                      └──────── top-cs-paper-workflow (optional) ────────┘
 ```
 
+## Why not just prompt an LLM directly?
+
+Three systematic risks of bare LLM sessions in paper work are exactly what these skills are designed around:
+
+| Bare-prompt risk | What these skills do instead |
+| --- | --- |
+| Invented citations; bibliographic matches presented as source support | Citation metadata verification and claim entailment are separate states; without an author excerpt the map is forced to `needs-source-text` |
+| Stale venue rules recited from memory | Venue policies come from dated, hash-snapshotted official sources; profiles expire per edition and fall back to `generic` |
+| Missing experiments and evidence hidden behind fluent prose | Placeholders (`[CITATION NEEDED]`, `PENDING-AUTHOR-INPUT`) are part of the output contract and protected by deterministic checks |
+
+## Why trust this workflow?
+
+| Principle | What it means in practice |
+| --- | --- |
+| Evidence lineage | Claims, figures, citations, review issues, and revisions have stable IDs and explicit gaps. Metadata identity is never presented as source-text support. |
+| Conservative expression | Missing results, source excerpts, venue rules, and author decisions remain visible placeholders rather than fluent inventions. |
+| Reproducible checks | Figures use editable Python-first render bundles and QA; LaTeX, citation metadata, workflow links, and installation have deterministic checks. |
+
+Current official venue profiles cover WWW, ICLR, ICML, NeurIPS, CVPR, and ACL 2026. A profile expires with its edition; unsupported venues use `generic` mode and require the author to re-check official instructions. `unified-family` figure styling is a reusable implementation choice, never an official venue palette.
+
 ## Golden Task Board
 
-The public board uses only synthetic materials. It proves that contracts, routes, deterministic helpers, and cross-skill handoffs work; it is not a benchmark claiming that one model writes better science than another.
+The public board uses only synthetic materials. It proves that contracts, routes, deterministic helpers, and cross-skill handoffs work; it is not a benchmark claiming that one model writes better science than another. Every task names the public test modules that verify its assertion in a `verified_by` field.
 
 | Synthetic task | Inspectable output | CI assertion |
 | --- | --- | --- |
@@ -79,7 +130,9 @@ Read the [Golden Task Board](examples/golden-tasks/README.md) and [quality bound
 
 ## Figure capability
 
-The figure specialist is deliberately deeper than a style prompt: 15 visual families, YAML/CSV render specs, Python-first rendering, SVG/PDF/PNG exports, palette provenance, caption/callout alignment, and visual QA.
+The figure specialist is deliberately deeper than a style prompt: 15 visual families, YAML/CSV render specs, Python-first rendering, SVG/PDF/PNG exports, palette provenance, caption/callout alignment, and visual QA. Every image below is generated deterministically by the in-repository render pipeline from synthetic inputs:
+
+![Multi-panel research figure collage generated by the render pipeline](assets/figure-gallery-collage.png)
 
 | Benchmark and ablation | Systems scaling | Venue-aware example |
 | --- | --- | --- |
@@ -98,6 +151,7 @@ The figure specialist is deliberately deeper than a style prompt: 15 visual fami
 skills/                 # six specialist packages, optional coordinator, and shared contracts
 evidence/derived/       # public aggregate evidence only
 examples/golden-tasks/  # synthetic contract demonstrations
+examples/synthetic-paper/ # complete synthetic example with inputs and output samples
 docs/                   # workflow, quality, evidence, architecture, and maintenance notes
 tests/                  # synthetic unit, acceptance, and figure-regression fixtures
 ```
